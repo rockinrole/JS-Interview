@@ -5,10 +5,10 @@
 
 ## Բովանդակություն
 
-| No. | Հարցեր                                                                                    |
-|-----|-------------------------------------------------------------------------------------------|
+| No. | Հարցեր                                                                                |
+|-----|---------------------------------------------------------------------------------------|
 | 1   | [Որոնք են JavaScript լեզվում Primitive տիպերը](#որոնք-են-javaScript-լեզվում-primitive-տիպերը) |
-| 2   | [Ինչ է "undefined" և "undeclared"](#ինչ-է-undefined-և-undeclared)                         |
+| 2   | [Ինչ է undefined և undeclared](#ինչ-է-undefined-և-undeclared)                         |
 
 1. ### Որոնք են JavaScript լեզվում Primitive տիպերը?
 
@@ -31,7 +31,7 @@
     typeof Symbol(); // symbol
     typeof 1n; // bigint
     ```
-2. ###  Ինչ է "undefined" և "undeclared" ?
+2. ###  Ինչ է undefined և undeclared?
    
     "undefined" նշանակում է, որ փոփոխականը հայտարարված է, բայց այն չունի արժեք:
 
