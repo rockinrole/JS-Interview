@@ -547,15 +547,299 @@
 
 8. ### Ինչ է Coercion և ինչպես կարող ենք այն օգտագործել
    
+   `Coercion`-ը JavaScript-ում վերաբերում է մեկ տիպի արժեքի ավտոմատ կամ ձեռքով փոխակերպմանը մյուս տիպի։ Սա սովորաբար կատարվում է, երբ JavaScript-ը պետք է աշխատի տարբեր տիպի արժեքների հետ՝ դրանք համապատասխանեցնելով։ Տարբերում են երկու հիմնական տեսակի `Coercion`՝ **Ավտոմատ (Implicit)** և **Ձեռքով (Explicit)**։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Coercion
+   
+   #### 1. Ավտոմատ (Implicit Coercion)
+   Ավտոմատ փոխակերպումը տեղի է ունենում, երբ JavaScript-ը ինքն է որոշում, որ անհրաժեշտ է փոխակերպել արժեքը՝ որոշակի գործողություն կատարելու համար։
+   
+   ```javascript
+   console.log(1 + "2");    // "12" (թիվը փոխակերպվեց տողի)
+   console.log("5" * 2);    // 10 (տողը փոխակերպվեց թվի)
+   console.log(false == 0);  // true (Boolean-ը փոխակերպվեց թվի)
+   ```
+   
+   #### 2. Ձեռքով (Explicit Coercion)
+   Ձեռքով փոխակերպումը տեղի է ունենում, երբ ծրագրավորողը օգտագործում է հատուկ ֆունկցիաներ կամ օպերատորներ՝ արժեքը փոխակերպելու համար։
+   
+   ```javascript
+   console.log(Number("123"));   // 123 (տողը փոխակերպվեց թվի)
+   console.log(String(123));      // "123" (թիվը փոխակերպվեց տողի)
+   console.log(Boolean(0));       // false (թիվը փոխակերպվեց Boolean-ի)
+   ```
+   
+   ---
+   
+   #### Օրինակներ
+   
+   #### Թվերի և տողերի փոխակերպում
+   
+   - **Ավտոմատ փոխակերպում**:
+     ```javascript
+     console.log("6" - 1); // 5 (տողը փոխակերպվեց թվի)
+     console.log("6" + 1); // "61" (թիվը փոխակերպվեց տողի)
+     ```
+   
+   - **Ձեռքով փոխակերպում**:
+     ```javascript
+     console.log(Number("6"));   // 6
+     console.log(String(6));      // "6"
+     ```
+   
+   #### Boolean-ի փոխակերպում
+   
+   - **Ավտոմատ փոխակերպում**:
+     ```javascript
+     if ("hello") {
+       console.log("Truthy");
+     }
+     // Output: Truthy
+   
+     if ("") {
+       console.log("Falsy");
+     } else {
+       console.log("Falsy value");
+     }
+     // Output: Falsy value
+     ```
+   
+   - **Ձեռքով փոխակերպում**:
+     ```javascript
+     console.log(Boolean("hello")); // true
+     console.log(Boolean(0));        // false
+     ```
+   
+   #### Օբյեկտների փոխակերպում
+   
+   JavaScript-ը փորձելու է օբյեկտը primitive արժեքի փոխակերպել՝ օգտագործելով նրա `toString()` կամ `valueOf()` մեթոդները։
+   
+   ```javascript
+   let obj = {
+     valueOf() {
+       return 42;
+     }
+   };
+   console.log(obj + 1); // 43 (օբյեկտը փոխակերպվեց թվի)
+   ```
+   
+   ---
+   
+   #### Կարևոր Նշումներ
+   
+   1. **Falsy և Truthy արժեքներ**
+      JavaScript-ում որոշ արժեքներ, ինչպիսիք են `0`, `""`, `null`, `undefined`, և `NaN`, համարվում են **Falsy**։ Մնացած բոլոր արժեքները համարվում են **Truthy**։
+   
+   2. **Օպերատորների ազդեցությունը**
+      Տարբեր օպերատորներ, օրինակ՝ `+`, `-`, և `==`, կարող են տարբեր կերպ ազդել փոխակերպումների վրա։
+   
+      ```javascript
+      console.log(1 + "1");  // "11" (տողային միացում)
+      console.log(1 - "1");  // 0 (թվային հանում)
+      console.log(1 == "1"); // true (ավտոմատ փոխակերպում)
+      ```
+   
+   3. **Խուսափեք անսպասելի ավտոմատ փոխակերպումներից**
+      Ավելի հստակություն ստանալու համար օգտագործեք === օպերատորը՝ տիպը և արժեքը համեմատելու համար։
+   
+      ```javascript
+      console.log(1 === "1"); // false (ոչ մի փոխակերպում չի կատարվում)
+      ```
+   
+   ---
+   
+   #### Ինչպես խուսափել սխալներից
+   
+   1. **Հստակորեն փոխակերպեք արժեքները**
+      Օգտագործեք `String()`, `Number()` կամ `Boolean()` ֆունկցիաները՝ ձեռքով փոխակերպումներ կատարելու համար։
+   
+      ```javascript
+      console.log(Number("123")); // 123
+      console.log(Boolean(""));  // false
+      ```
+   
+   2. **Գիտակցեք Truthy և Falsy արժեքները**
+      Գիտակցեք, թե որ արժեքները ավտոմատ կերպով կդառնան `true` կամ `false`:
+   
+      ```javascript
+      let values = [0, 1, "", "hello", null, undefined, [], {}];
+      values.forEach(value => console.log(Boolean(value)));
+      // Output: false, true, false, true, false, false, true, true
+      ```
+         
 
     **[⬆ Back to Top](#բովանդակություն)**
 
 9. ### Ինչ է boxing-ը
 
+   `Boxing`-ը JavaScript-ում այն գործընթացն է, որի միջոցով primitive (պարզագույն) արժեքը, ինչպիսիք են թվերը, տողերը կամ Boolean-ները, **փոխակերպվում են համապատասխան օբյեկտի տիպի**։ Սա թույլ է տալիս կիրառել օբյեկտներին բնորոշ մեթոդներ և հատկություններ primitive արժեքների վրա։
+   
+   JavaScript-ը իրականացնում է այս գործընթացը ավտոմատ կերպով, երբ primitive արժեքի վրա կիրառում եք մեթոդ կամ հատկություն, որը բնորոշ է օբյեկտներին։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Boxing-ը
+   
+   1. **Primitive արժեքի ավտոմատ փաթեթավորում**:
+      Երբ primitive արժեքի վրա կանչում եք մեթոդ կամ հատկություն, JavaScript-ը ստեղծում է համապատասխան օբյեկտի ժամանակավոր պատճեն (wrapper object):
+   
+      ```javascript
+      let str = "hello";
+      console.log(str.toUpperCase()); // "HELLO"
+      ```
+      Այստեղ `"hello"` տողը ավտոմատ կերպով «փաթեթավորվում» է `String` օբյեկտի մեջ, որպեսզի հնարավոր լինի կանչել `toUpperCase()` մեթոդը։
+   
+   2. **Ավարտից հետո օբյեկտի ոչնչացում**:
+      Երբ գործողությունը ավարտվում է, ժամանակավոր օբյեկտը ոչնչացվում է, և primitive արժեքը մնում է անփոփոխ։
+   
+      ```javascript
+      let num = 42;
+      console.log(num.toFixed(2)); // "42.00"
+      console.log(typeof num);    // "number"
+      ```
+   
+   ---
+   
+   #### Օրինակներ
+   
+   #### Տողի (String) Boxing
+   
+   ```javascript
+   let text = "JavaScript";
+   console.log(text.length);     // 10 (տողը փաթեթավորվում է String օբյեկտի մեջ)
+   console.log(text.charAt(4));  // "S"
+   ```
+   
+   #### Թվերի (Number) Boxing
+   
+   ```javascript
+   let number = 123.456;
+   console.log(number.toFixed(2)); // "123.46"
+   console.log(number.toExponential()); // "1.23456e+2"
+   ```
+   
+   #### Boolean Boxing
+   
+   ```javascript
+   let isTrue = true;
+   console.log(isTrue.toString()); // "true"
+   ```
+   
+   ---
+   
+   #### Unboxing
+   
+   **Unboxing**-ը հակառակ գործընթացն է, երբ օբյեկտը նորից վերածվում է primitive արժեքի։
+   
+   ```javascript
+   let numObj = new Number(42); // Number օբյեկտ
+   let primitiveNum = numObj.valueOf(); // Primitive թիվ
+   console.log(primitiveNum); // 42
+   console.log(typeof primitiveNum); // "number"
+   ```
+   
+   ---
+   
+   #### Կարևոր Նշումներ
+   
+   1. **Ավտոմատ Boxing-ը կարճատև է**
+      Primitive արժեքները փաթեթավորվում են միայն մեթոդի կանչի ընթացքում և անմիջապես ոչնչացվում են։ Primitive արժեքը միշտ մնում է անփոփոխ։
+   
+   2. **Մի օգտագործեք `new` օպերատորը primitive արժեքների համար**
+      Ցանկացած ժամանակ փորձեք աշխատել primitive արժեքների հետ առանց դրանք «հստակ փաթեթավորելու»:
+   
+      ```javascript
+      let str1 = "hello";          // Primitive տող
+      let str2 = new String("hello"); // String օբյեկտ
+   
+      console.log(typeof str1); // "string"
+      console.log(typeof str2); // "object"
+      ```
+   
+   3. **Primitive արժեքների և օբյեկտների համեմատում**
+      Primitive արժեքներն ու դրանց օբյեկտները կարող են տարբեր արդյունք տալ համեմատության դեպքում:
+   
+      ```javascript
+      let str1 = "hello";
+      let str2 = new String("hello");
+   
+      console.log(str1 == str2);  // true (տիպը փոխակերպվում է)
+      console.log(str1 === str2); // false (տիպերը տարբեր են)
+      ```
+
 
     **[⬆ Back to Top](#բովանդակություն)**
 
 10. ### Ինչ են double equal (==) և triple equal (===) օպերատորները
+   JavaScript-ում `==` (Double Equal) և `===` (Triple Equal) օպերատորները օգտագործվում են արժեքները համեմատելու համար։ Չնայած դրանք կարծես նման են, նրանք աշխատում են տարբեր կերպ։
+   
+   ---
+   
+   #### Տարբերությունը Double Equal (==) և Triple Equal (===) միջև
+   
+   #### 1. **Double Equal (`==`)**
+   Double Equal օպերատորը համեմատում է երկու արժեքները **միայն նրանց արժեքների** հիման վրա, անտեսելով տիպը։ Եթե արժեքների տիպերը տարբեր են, JavaScript-ը ավտոմատ կերպով փորձում է դրանք փոխակերպել նույն տիպի (type coercion)։
+   
+   Եթե երկու արժեքներն էլ նույն տիպի են, `==`-ը իրականացնում է նույն գործողությունը, ինչ `===`-ը՝ համեմատելով նրանց արժեքները առանց որևէ փոխակերպման։
+   
+   #### Օրինակներ
+   ```javascript
+   console.log(5 == "5");       // true ("5" տողը փոխակերպվում է թվի)
+   console.log(true == 1);       // true (true-ը փոխակերպվում է 1-ի)
+   console.log(null == undefined); // true (միայն այս դեպքերում դրանք հավասար են)
+   ```
+   
+   #### Կախվածությունը տիպի փոխակերպումից
+   Type coercion-ը կարող է բերել անսպասելի արդյունքների:
+   ```javascript
+   console.log("" == 0);  // true (դատարկ տողը փոխակերպվում է թվի)
+   console.log("\t\n" == 0); // true (սպիտակատողային սիմվոլները փոխակերպվում են թվի)
+   ```
+   
+   #### 2. **Triple Equal (`===`)**
+   Triple Equal օպերատորը համեմատում է երկու արժեքները **և նրանց արժեքների**, և նրանց տիպերի հիման վրա։ Եթե արժեքները տարբեր տիպերի են, դրանք համարվում են ոչ հավասար։
+   
+   #### Օրինակներ
+   ```javascript
+   console.log(5 === "5"); // false (տիպերը տարբեր են)
+   console.log(true === 1); // false (տիպերը տարբեր են)
+   console.log(null === undefined); // false (տիպերը տարբեր են)
+   ```
+   
+   #### Առանց տիպի փոխակերպման
+   Triple Equal-ը համեմատում է միայն այն, ինչ կա առանց որևէ փոխակերպման:
+   ```javascript
+   console.log("" === 0);  // false
+   console.log("5" === 5); // false
+   ```
+   
+   ---
+   
+   #### Երբ օգտագործել `==` և երբ `===`
+   
+   1. **Օգտագործեք `===`**
+      - Երբ ցանկանում եք խուսափել անսպասելի տիպի փոխակերպումներից։
+      - Երբ համեմատությունը պետք է լինի ավելի հստակ և կանխատեսելի։
+   
+   2. **Օգտագործեք `==` միայն այն դեպքում, եթե գիտեք, թե ինչպես է տիպի փոխակերպումը աշխատում**:
+      ```javascript
+      console.log(null == undefined); // true (սպեցիֆիկ դեպք)
+      ```
+   
+   ---
+   
+   #### ECMA-262 Սպեցիֆիկացիա
+   
+   Համեմատության օպերատորների աշխատանքը մանրամասն նկարագրված է [ECMAScript Language Specification, Equality Operators](https://tc39.es/ecma262/#sec-abstract-equality-comparison):
+   
+   - **Abstract Equality Comparison (`==`)**՝ նկարագրում է, թե ինչպես է տիպի փոխակերպումը կատարվում։
+   - **Strict Equality Comparison (`===`)**՝ նկարագրում է, թե ինչպես են համեմատվում արժեքներն առանց փոխակերպման։
+   
+   #### ECMAScript Specification:
+   - [Abstract Equality Comparison](https://tc39.es/ecma262/#sec-abstract-equality-comparison)
+   - [Strict Equality Comparison](https://tc39.es/ecma262/#sec-strict-equality-comparison)
 
 
     **[⬆ Back to Top](#բովանդակություն)**
