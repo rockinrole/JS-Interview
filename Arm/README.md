@@ -773,9 +773,9 @@
     **[⬆ Back to Top](#բովանդակություն)**
 
 10. ### Ինչ են double equal (==) և triple equal (===) օպերատորները
-   JavaScript-ում `==` (Double Equal) և `===` (Triple Equal) օպերատորները օգտագործվում են արժեքները համեմատելու համար։ Չնայած դրանք կարծես նման են, նրանք աշխատում են տարբեր կերպ։
-   
-   ---
+  
+ JavaScript-ում `==` (Double Equal) և `===` (Triple Equal) օպերատորները օգտագործվում են արժեքները համեմատելու համար։ Չնայած դրանք կարծես նման են, նրանք աշխատում են տարբեր կերպ։
+
    
    #### Տարբերությունը Double Equal (==) և Triple Equal (===) միջև
    
@@ -842,7 +842,1352 @@
    - [Strict Equality Comparison](https://tc39.es/ecma262/#sec-strict-equality-comparison)
 
 
-    **[⬆ Back to Top](#բովանդակություն)**
+   **[⬆ Back to Top](#բովանդակություն)**
+
+11. ### Ինչ է hoisting-ը JavaScript-ում?
+   **Hoisting**-ը JavaScript-ում այն մեխանիզմն է, որի միջոցով փոփոխականները, ֆունկցիաները և դասերը "բարձրացվում" են իրենց սահմանման տիրույթի վերև՝ դրանց հայտարարված լինելու մասին նախապես տեղեկացնելու նպատակով։ Սակայն միայն հայտարարված լինելը "բարձրացվում" է, ոչ թե նրանց արժեքի նշանակումը։
+   
+   Hoisting-ը կիրառվում է ինչպես գլոբալ, այնպես էլ ֆունկցիաների և բլոկների ներսում, ինչը նշանակում է, որ այն հիմնականում աշխատում է ցանկացած տիրույթում՝ համատեքստից կախված։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Hoisting-ը
+   
+   #### 1. Փոփոխականների Hoisting
+   
+   - **`var`-ի դեպքում**:
+     `var` փոփոխականները "բարձրացվում" են իրենց տիրույթի վերև, սակայն նրանց արժեքը մնում է անորոշ (`undefined`) մինչև ծրագրի ընթացքի ժամանակային պահը։ Այս հատկությունը կարող է առաջացնել սխալներ, քանի որ կարող եք փորձել մուտք գործել փոփոխականը նախքան նրա փաստացի արժեքի վերագրումը։
+   
+     ```javascript
+     console.log(x); // undefined
+     var x = 5;
+     console.log(x); // 5
+     ```
+   
+   - **`let` և `const`-ի դեպքում**:
+     Թեև դրանք նույնպես "բարձրացվում" են, բայց մնում են "Temporal Dead Zone"-ում (ժամանակավոր մեռյալ գոտի) մինչև նրանց փաստացի հայտարարված պահը։ Օգտագործելը նախքան հայտարարելը կհանգեցնի սխալի։
+   
+     ```javascript
+     console.log(y); // ReferenceError: Cannot access 'y' before initialization
+     let y = 10;
+     console.log(y); // 10
+     ```
+   
+     Այս մեխանիզմը օգնում է կանխել ոչ կանխատեսելի վարքագիծ՝ ստիպելով հայտարարված փոփոխականներն օգտագործել միայն նրանց տեսանելիության սահմաններում։
+   
+   #### 2. Ֆունկցիաների Hoisting
+   
+   - **Function Declaration**:
+     Ֆունկցիաների հայտարարումները ամբողջությամբ "բարձրացվում" են։ Սա նշանակում է, որ դուք կարող եք կանչել ֆունկցիան մինչև նրա սահմանումը։
+   
+     ```javascript
+     greet(); // Output: "Hello!"
+     function greet() {
+       console.log("Hello!");
+     }
+     ```
+   
+   Սա հնարավոր է, քանի որ ֆունկցիայի ամբողջ սահմանումը, ներառյալ մարմինը, "բարձրացվում" է։
+   
+   - **Function Expressions**:
+     Ֆունկցիաները, որոնք հայտարարված են որպես փոփոխականի արժեք, "բարձրացվում" են միայն որպես փոփոխական (`undefined`)։ Այսինքն՝ ֆունկցիայի փաստացի սահմանումը հասանելի չէ նախքան հայտարարված պահը։
+   
+     ```javascript
+     sayHi(); // TypeError: sayHi is not a function
+     var sayHi = function() {
+       console.log("Hi!");
+     };
+     ```
+   
+   #### 3. Դասերի Hoisting
+   
+   Դասերը նույնպես "բարձրացվում" են, բայց մնում են "Temporal Dead Zone"-ում մինչև նրանց փաստացի հայտարարումը։ Սա նշանակում է, որ դրանք հասանելի չեն նախքան իրական հայտարարված պահը։
+   
+   ```javascript
+   let obj = new MyClass(); // ReferenceError: Cannot access 'MyClass' before initialization
+   class MyClass {
+     constructor() {
+       console.log("Instance created");
+     }
+   }
+   ```
+   
+   Ի տարբերություն ֆունկցիաների, դասերը չեն կարող օգտագործվել իրենց սահմանումից առաջ, քանի որ դրանց բարձրացումը գործում է միայն որպես սինթաքսային ստուգում։
+   
+   ---
+   
+   #### Կարևոր Նշումներ
+   
+   1. **`var`-ը խորհուրդ չի տրվում օգտագործել:**
+      - `var`-ի Hoisting-ը և արժեքի `undefined` դառնալու հատկությունը կարող են հանգեցնել բարդ սխալների։
+      - Փոխարենը օգտագործեք `let` կամ `const`։
+   
+   2. **Function Expressions-ն ավելի կանխատեսելի է:**
+      - Ֆունկցիաները, որոնք հայտարարված են որպես փոփոխականի արժեք, ավելի հստակ վերահսկում են իրենց հասանելիությունը։
+   
+   3. **Temporal Dead Zone (TDZ):**
+      - `let`, `const`, և դասերը "բարձրացվում" են, բայց մնում են TDZ-ում մինչև իրական հայտարարումը։ TDZ-ն սկսվում է տիրույթի սկզբից և ավարտվում է փոփոխականի փաստացի հայտարարությամբ։
+   
+   4. **Հիմնված ECMAScript Սպեցիֆիկացիայի վրա:**
+      - Hoisting-ի մեխանիզմի մանրամասները նկարագրված են [ECMAScript Language Specification](https://tc39.es/ecma262/#sec-variable-statement):
+   
+   ECMAScript Specification:
+   - [Variable Statement](https://tc39.es/ecma262/#sec-variable-statement)
+   - [Function Declaration Instantiation](https://tc39.es/ecma262/#sec-function-definitions-runtime-semantics-instantiatefunctionobject)
+   - [Class Definitions](https://tc39.es/ecma262/#sec-class-definitions-runtime-semantics-classdefinitionevaluation)
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+12. ### Ինչ տարբերություն կա let, const և var միջև?
+   JavaScript-ում փոփոխականները կարելի է հայտարարել երեք հիմնական բանալի բառերով՝ `var`, `let` և `const`։ Թեև դրանք կարող են թվալ նման, դրանք ունեն տարբեր վարքագծեր և սահմանափակումներ, որոնք ազդում են դրանց օգտագործման վրա։
+
+   
+   #### Տարբերություններ
+   
+   #### 1. `var`
+   
+   - **Տիրույթ (Scope):**
+     `var`-ով հայտարարված փոփոխականները ունեն ֆունկցիոնալ կամ գլոբալ տիրույթ, ինչը նշանակում է, որ դրանք տեսանելի են ամբողջ ֆունկցիայի կամ սկրիպտի ընթացքում, նույնիսկ եթե հայտարարված են բլոկի ներսում։
+   
+     ```javascript
+     if (true) {
+       var x = 10;
+     }
+     console.log(x); // 10
+     ```
+   
+   - **Hoisting:**
+     `var`-ով հայտարարված փոփոխականները "բարձրացվում" են իրենց տիրույթի վերև և ստանում են արժեք `undefined` մինչև դրանց փաստացի հայտարարված լինելը։
+   
+     ```javascript
+     console.log(a); // undefined
+     var a = 5;
+     ```
+   
+   - **Կրկնակի հայտարարում:**
+     Նույն տիրույթում հնարավոր է կրկնակի հայտարարել փոփոխական `var`-ով՝ առանց սխալի։
+   
+     ```javascript
+     var b = 10;
+     var b = 20;
+     console.log(b); // 20
+     ```
+   
+   #### 2. `let`
+   
+   - **Տիրույթ (Scope):**
+     `let`-ով հայտարարված փոփոխականները ունեն բլոկային տիրույթ (block scope), ինչը նշանակում է, որ դրանք տեսանելի են միայն իրենց բլոկի ներսում։
+   
+     ```javascript
+     if (true) {
+       let y = 10;
+     }
+     console.log(y); // ReferenceError: y is not defined
+     ```
+   
+   - **Hoisting:**
+     Թեև `let`-ով փոփոխականները նույնպես "բարձրացվում" են, դրանք մնում են Temporal Dead Zone (TDZ)-ում մինչև իրական հայտարարված պահը։ Օգտագործելը նախքան հայտարարումը կհանգեցնի ReferenceError-ի։
+   
+     ```javascript
+     console.log(z); // ReferenceError: Cannot access 'z' before initialization
+     let z = 15;
+     ```
+   
+   - **Կրկնակի հայտարարում:**
+     Նույն տիրույթում `let`-ով փոփոխականները կրկնակի հայտարարել հնարավոր չէ։
+   
+     ```javascript
+     let c = 5;
+     let c = 10; // SyntaxError: Identifier 'c' has already been declared
+     ```
+   
+   #### 3. `const`
+   
+   - **Տիրույթ (Scope):**
+     `const`-ով հայտարարված փոփոխականները նույնպես ունեն բլոկային տիրույթ (block scope)։
+   
+     ```javascript
+     if (true) {
+       const d = 30;
+     }
+     console.log(d); // ReferenceError: d is not defined
+     ```
+   
+   - **Hoisting:**
+     `const`-ը նույնպես բարձրացվում է, բայց մնում է Temporal Dead Zone (TDZ)-ում մինչև դրա փաստացի հայտարարումը։ Օգտագործումը մինչև հայտարարումը կհանգեցնի ReferenceError-ի։
+   
+     ```javascript
+     console.log(e); // ReferenceError: Cannot access 'e' before initialization
+     const e = 25;
+     ```
+   
+   - **Կրկնակի հայտարարում:**
+     Նույն տիրույթում `const`-ով փոփոխականները կրկնակի հայտարարել հնարավոր չէ։
+   
+     ```javascript
+     const f = 50;
+     const f = 60; // SyntaxError: Identifier 'f' has already been declared
+     ```
+   
+   - **Փոփոխություն:**
+     `const`-ով փոփոխականները չեն կարող վերագրվել նոր արժեք։ Սակայն, եթե դրանք օբյեկտ կամ զանգված են, դրանց պարունակությունը կարելի է փոխել։
+   
+     ```javascript
+     const g = 100;
+     g = 200; // TypeError: Assignment to constant variable.
+   
+     const obj = { name: "John" };
+     obj.name = "Jane"; // Նորմալ է
+     console.log(obj.name); // "Jane"
+     ```
+   
+   ---
+   
+   ## Ընդհանուր Համեմատություն
+   
+   | Բանալի Բառ | Տիրույթ | Hoisting | Կրկնակի Հայտարարում | Վերագրման Հնարավորություն |
+   |------------|---------|----------|---------------------|---------------------------|
+   | `var`      | Ֆունկցիոնալ կամ գլոբալ | Այո, `undefined` արժեքով | Թույլատրվում է          | Թույլատրվում է           |
+   | `let`      | Բլոկային              | Այո, բայց TDZ-ում է       | Արգելվում է             | Թույլատրվում է           |
+   | `const`    | Բլոկային              | Այո, բայց TDZ-ում է       | Արգելվում է             | Արգելվում է (բացառությամբ օբյեկտների և զանգվածների պարունակության) |
+   
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+13. ### Ինչ է closure-ը JavaScript-ում?
+   
+   **Closure**-ը JavaScript-ի առանձնահատկություն է, որի միջոցով ֆունկցիան "հիշում" է այն տիրույթը (scope), որտեղ այն ստեղծվել է։ Closure-ը թույլ է տալիս ֆունկցիային մուտք գործել և պահպանել իր արտաքին ֆունկցիայի փոփոխականները, նույնիսկ եթե արտաքին ֆունկցիան ավարտել է իր աշխատանքը։
+   
+   Closure-ները կարևոր դեր ունեն JavaScript-ում և լայնորեն կիրառվում են օրինակ գաղտնի տվյալներ պահպանելու, կարգաբերման (encapsulation) և callback-ների համար։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Closure-ը
+   
+   Closure ստեղծվում է այն ժամանակ, երբ ներքին ֆունկցիան մուտք է գործում արտաքին ֆունկցիայի փոփոխականներին։
+   
+   #### Օրինակ 1. Հիմնական Closure
+   
+   ```javascript
+   function outerFunction(outerVariable) {
+     return function innerFunction(innerVariable) {
+       console.log(`Outer Variable: ${outerVariable}`);
+       console.log(`Inner Variable: ${innerVariable}`);
+     };
+   }
+   
+   const newFunction = outerFunction("outside");
+   newFunction("inside");
+   // Output:
+   // Outer Variable: outside
+   // Inner Variable: inside
+   ```
+   
+   Այս օրինակում `innerFunction`-ը մուտք ունի `outerFunction`-ի փոփոխական `outerVariable`-ին, նույնիսկ եթե `outerFunction`-ն ավարտել է իր աշխատանքը։
+   
+   ---
+   
+   #### Օրինակ 2. Գաղտնի տվյալների պահպանում
+   
+   Closure-ները կարող են օգտագործվել անձնական (private) տվյալներ ստեղծելու համար։
+   
+   ```javascript
+   function secretKeeper(secret) {
+     return {
+       getSecret: function() {
+         return secret;
+       },
+       setSecret: function(newSecret) {
+         secret = newSecret;
+       }
+     };
+   }
+   
+   const mySecret = secretKeeper("Initial Secret");
+   console.log(mySecret.getSecret()); // "Initial Secret"
+   mySecret.setSecret("New Secret");
+   console.log(mySecret.getSecret()); // "New Secret"
+   ```
+   
+   Այստեղ `secret` փոփոխականը "պաշտպանված" է և հասանելի է միայն `getSecret` և `setSecret` մեթոդների միջոցով։
+   
+   ---
+   
+   #### Օրինակ 3. Ցիկլերի և Closure-ների խնդիր
+   
+   Closure-ները կարող են առաջացնել չնախատեսված վարքագիծ ցիկլերում։
+   
+   ```javascript
+   for (var i = 0; i < 3; i++) {
+     setTimeout(function() {
+       console.log(i);
+     }, 1000);
+   }
+   // Output:
+   // 3
+   // 3
+   // 3
+   ```
+   
+   Այս խնդիրն առաջանում է, քանի որ `var`-ը չի ստեղծում բլոկային տիրույթ, և բոլոր ֆունկցիաները "հիշում" են նույն փոփոխականը։ Այս խնդիրն ուղղելու համար կարելի է օգտագործել `let` կամ IIFE։
+   
+   #### `let` լուծում
+   ```javascript
+   for (let i = 0; i < 3; i++) {
+     setTimeout(function() {
+       console.log(i);
+     }, 1000);
+   }
+   // Output:
+   // 0
+   // 1
+   // 2
+   ```
+   
+   #### IIFE լուծում
+   ```javascript
+   for (var i = 0; i < 3; i++) {
+     (function(i) {
+       setTimeout(function() {
+         console.log(i);
+       }, 1000);
+     })(i);
+   }
+   // Output:
+   // 0
+   // 1
+   // 2
+   ```
+   
+   ---
+   
+   #### Closure-ների կարևորությունը
+   
+   1. **Տվյալների գաղտնիություն և անվտանգություն:**
+      Closure-ները թույլ են տալիս պաշտպանել փոփոխականները արտաքին միջավայրից, ստեղծելով վերահսկված հասանելիություն։
+   
+   2. **Կարգաբերում (Encapsulation):**
+      Օգտագործելով closure, դուք կարող եք կառուցել ֆունկցիաներ, որոնք մուտք ունեն միայն անհրաժեշտ տվյալներին՝ ավելորդ մուտքերը կանխելու համար։
+   
+   3. **Callback-ներ և ասինխրոն ծրագրավորում:**
+      Closure-ները կարևոր են callback-ներում և async գործողություններում, քանի որ դրանք թույլ են տալիս պահպանել կոնտեքստը։
+   
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+14. ### Ինչպես է աշխատում "this" բառը JavaScript-ում?
+   
+   `this` բառը JavaScript-ում ներկայացնում է ֆունկցիայի կատարման համատեքստը (execution context): Այն մատնանշում է այն օբյեկտը, որին ֆունկցիան կապված է։ `this`-ի արժեքը կարող է փոփոխվել՝ կախված այն բանից, թե ինչպես է ֆունկցիան կանչվում։
+   
+   ---
+   
+   #### Ինչպես է որոշվում `this`-ի արժեքը
+   
+   #### 1. Գլոբալ տիրույթում (`global context`)
+   
+   Գլոբալ տիրույթում `this`-ը մատնանշում է գլոբալ օբյեկտը։
+   
+   - **Բրաուզերում** `this`-ը մատնանշում է `window` օբյեկտը։
+   - **Node.js-ում** `this`-ը մատնանշում է `global` օբյեկտը։
+   
+   ```javascript
+   console.log(this); // Բրաուզերում -> window, Node.js-ում -> global
+   ```
+   
+   #### 2. Օբյեկտի մեթոդում
+   
+   Մեթոդի ներսում `this`-ը մատնանշում է այն օբյեկտը, որի մաս է մեթոդը։
+   
+   ```javascript
+   const obj = {
+     name: "John",
+     greet() {
+       console.log(this.name);
+     }
+   };
+   obj.greet(); // "John"
+   ```
+   
+   #### 3. Ֆունկցիայի ներսում
+   
+   Սովորական ֆունկցիայի ներսում (ոչ strict mode-ով)`this`-ը մատնանշում է գլոբալ օբյեկտը։
+   
+   ```javascript
+   function showThis() {
+     console.log(this);
+   }
+   showThis(); // Բրաուզերում -> window, Node.js-ում -> global
+   ```
+   
+   **Strict Mode**-ում `this`-ը կլինի `undefined`։
+   
+   ```javascript
+   'use strict';
+   function showThis() {
+     console.log(this);
+   }
+   showThis(); // undefined
+   ```
+   
+   #### 4. Arrow Function-ի ներսում
+   
+   Arrow ֆունկցիաները **չունեն իրենց սեփական `this` արժեքը**։ Դրանք "ժառանգում" են `this`-ը իրենց արտաքին տիրույթից։
+   
+   ```javascript
+   const obj = {
+     name: "Alice",
+     greet() {
+       const arrowFunc = () => {
+         console.log(this.name);
+       };
+       arrowFunc();
+     }
+   };
+   obj.greet(); // "Alice"
+   ```
+   
+   #### 5. Կառուցիչ Ֆունկցիայում (Constructor Function)
+   
+   Կառուցիչ ֆունկցիայի ներսում `this`-ը մատնանշում է նոր ստեղծված օբյեկտը։
+   
+   ```javascript
+   function Person(name) {
+     this.name = name;
+   }
+   const person = new Person("Jane");
+   console.log(person.name); // "Jane"
+   ```
+   
+   #### 6. Event Listener-ներում
+   
+   Event Listener-ի ներսում `this`-ը մատնանշում է այն HTML տարրը, որը ակտիվացրել է իրադարձությունը։
+   
+   ```javascript
+   document.querySelector("button").addEventListener("click", function() {
+     console.log(this); // Մատնանշում է սեղմված կոճակը
+   });
+   ```
+   
+   Arrow ֆունկցիաների դեպքում `this`-ը կլինի արտաքին տիրույթից։
+   
+   ```javascript
+   document.querySelector("button").addEventListener("click", () => {
+     console.log(this); // Մատնանշում է արտաքին տիրույթը (օրինակ՝ window)
+   });
+   ```
+   
+   ---
+   
+   #### `this`-ի վերահսկում (Binding)
+   
+   #### 1. `call()` և `apply()` մեթոդներ
+   
+   Դուք կարող եք ձեռքով սահմանել `this`-ի արժեքը `call()` կամ `apply()` մեթոդների միջոցով։
+   
+   ```javascript
+   function greet(greeting) {
+     console.log(`${greeting}, ${this.name}`);
+   }
+   const user = { name: "John" };
+   
+   greet.call(user, "Hello"); // "Hello, John"
+   greet.apply(user, ["Hi"]); // "Hi, John"
+   ```
+   
+   #### 2. `bind()` մեթոդ
+   
+   `bind()` մեթոդը ստեղծում է նոր ֆունկցիա՝ կապված ձեր սահմանած `this`-ի արժեքին։
+   
+   ```javascript
+   const user = { name: "Jane" };
+   function greet() {
+     console.log(this.name);
+   }
+   
+   const boundGreet = greet.bind(user);
+   boundGreet(); // "Jane"
+   ```
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+15. ### Ինչ է Event Loop-ը JavaScript-ում?
+   **Event Loop**-ը JavaScript-ի կարևոր մեխանիզմներից է, որը կառավարում է, թե ինչպես է լեզուն կատարում բազմաբնույթ գործողություններ (tasks), վերլուծում ասինխրոն կոդը և ապահովում ֆունկցիաների ճիշտ հերթական կատարումը։ Այն հանդիսանում է JavaScript-ի **Single-Threaded, Non-Blocking** բնույթի հիմքը։
+   
+   Event Loop-ը թույլ է տալիս JavaScript-ին աշխատել ասինխրոն կերպով՝ չընդհատելով հիմնական թելի (main thread) աշխատանքը։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Event Loop-ը
+   
+   #### 1. Call Stack (Call Stack)
+   
+   Call Stack-ը JavaScript-ի կառուցվածք է, որը հետևում է այն ֆունկցիաներին, որոնք սպասում են իրենց կատարումը։ Երբ ֆունկցիա կանչվում է, այն ավելացվում է stack-ի վերևում, իսկ երբ ավարտվում է, հանվում է stack-ից։
+   
+   ```javascript
+   function first() {
+     console.log("First");
+   }
+   function second() {
+     first();
+     console.log("Second");
+   }
+   second();
+   // Output:
+   // First
+   // Second
+   ```
+   
+   #### 2. Web API-ներ և Task Queue
+   
+   Բրաուզերը կամ Node.js-ն ապահովում են **Web API**-ներ (օրինակ՝ `setTimeout`, `fetch`), որոնք աշխատում են Call Stack-ից դուրս։ Web API-ներն են՝
+   
+   - `setTimeout` և `setInterval` - նախատեսված են ժամանակի վրա հիմնված գործառույթների համար։
+   - `XMLHttpRequest` և `fetch` - աշխատում են HTTP հարցումների հետ։
+   - DOM իրադարձությունները (օրինակ՝ click, input)։
+   
+   Երբ Web API-ները ակտիվանում են (օրինակ՝ timer-ը ավարտվում է կամ հարցման պատասխանը ստացվում է), դրանք ավարտված առաջադրանքը տեղափոխում են Task Queue (կամ Microtask Queue՝ կախված տիպից)։
+   
+   ```javascript
+   console.log("Start");
+   setTimeout(() => {
+     console.log("Timeout");
+   }, 1000);
+   console.log("End");
+   // Output:
+   // Start
+   // End
+   // Timeout
+   ```
+   
+   #### 3. Event Loop-ի դերը
+   
+   Event Loop-ը հետևում է Call Stack-ին և Task Queue-ին։ Երբ Call Stack-ը դատարկ է, Event Loop-ը վերցնում է Task Queue-ի առաջին առաջադրանքը և ավելացնում է այն Call Stack-ի մեջ՝ կատարելու համար։
+   
+   ---
+   
+   #### Միկրոտասկեր և Մակրոտասկեր
+   
+   JavaScript-ի ասինխրոն առաջադրանքները բաժանվում են երկու կատեգորիայի՝ **Microtasks** և **Macrotasks**։
+   
+   #### 1. Մակրոտասկեր (Macrotasks)
+   
+   Մակրոտասկերը ներառում են մեծածավալ աշխատանքներ, որոնք բրաուզերն ավելացնում է Task Queue-ի մեջ։ Դրանք ներառում են՝
+   - `setTimeout`
+   - `setInterval`
+   - `setImmediate` (հասանելի է Node.js-ում)
+   - DOM իրադարձությունները (օրինակ՝ click, input)
+   
+   Macrotask-ը տեղափոխվում է Task Queue և սպասում է, մինչ Call Stack-ը դատարկ կլինի։
+   
+   #### 2. Միկրոտասկեր (Microtasks)
+   
+   Միկրոտասկերը փոքր առաջադրանքներ են, որոնք կատարում են ավելի բարձր առաջնահերթությամբ՝ նախքան Macrotask-երը։ Դրանք ներառում են՝
+   - `Promises` (կամ `Promise.then`)
+   - `MutationObserver`
+   - `queueMicrotask` (օգտագործվում է ուղղակի միկրոտասկ ստեղծելու համար)
+   
+   Միկրոտասկերն ավելացվում են Microtask Queue-ում և կատարվում են հենց որ Call Stack-ը դատարկ է՝ նախքան հաջորդ Macrotask-ի մեկնարկը։
+   
+   ```javascript
+   console.log("Start");
+   setTimeout(() => console.log("Macrotask"), 0);
+   Promise.resolve().then(() => console.log("Microtask"));
+   console.log("End");
+   // Output:
+   // Start
+   // End
+   // Microtask
+   // Macrotask
+   ```
+   
+   ---
+   
+   #### Web API-ների աշխատանքի մանրամասները
+   
+   1. **Timer (setTimeout, setInterval):**
+      - Timer-ը սկսում է աշխատել Web API-ում։ Երբ ժամանակը լրանում է, callback-ը տեղափոխվում է Macrotask Queue։
+   
+   2. **Promises:**
+      - Promise-ի արդյունքը (`.then`, `.catch`, `.finally`) ուղարկվում է Microtask Queue։
+   
+   3. **DOM իրադարձություններ:**
+      - Սկսած click-ից մինչև input իրադարձություններ, դրանք տեղադրվում են Macrotask Queue-ում։
+   
+   4. **Network Requests (fetch, XMLHttpRequest):**
+      - Երբ հարցման պատասխանը ստացվում է, callback-ը տեղափոխվում է Macrotask Queue։
+   
+   ---
+   
+   #### Հոսքի գործընթաց
+   
+   1. Call Stack-ում սինխրոն կոդի կատարում։
+   2. Ասինխրոն գործողությունները (օրինակ՝ `setTimeout`, `fetch`) տեղափոխվում են Web API-ներ։
+   3. Արդյունքները վերադարձվում են Task Queue կամ Microtask Queue։
+   4. Event Loop-ը ստուգում է Microtask Queue-ը։ Եթե այն դատարկ չէ, կատարում է Microtask-երը։
+   5. Եթե Microtask Queue-ը դատարկ է, Event Loop-ը անցնում է Task Queue-ին։
 
 
+**[⬆ Back to Top](#բովանդակություն)**
+16. ### Ինչ է debounce-ը և throttle-ը JavaScript-ում?
+   `debounce` և `throttle` տեխնիկաները օգտագործվում են JavaScript-ում բարձր հաճախականությամբ իրադարձությունների (high-frequency events) օպտիմալացման համար։ Դրանք կարևոր են այն դեպքերում, երբ իրադարձությունները կարող են կանչվել շատ հաճախ և հանգեցնել կատարողականության անկման։
+   
+   - **Debounce**: Կատարման հաճախականությունը սահմանափակելու մեթոդ, որը թույլ է տալիս ֆունկցիան կանչվել միայն այն ժամանակ, երբ որոշակի ժամանակահատվածում այլ կանչ չի եղել։
+   - **Throttle**: Կատարման հաճախականությունը սահմանափակելու մեթոդ, որը թույլ է տալիս ֆունկցիան կանչվել ֆիքսված միջակայքով՝ անկախ իրադարձությունների հաճախականությունից։
+   
+   ---
+   
+   #### Debounce-ի աշխատանքը
+   
+   **Debounce**-ը երաշխավորում է, որ ֆունկցիան կկատարվի միայն այն դեպքում, եթե իրադարձությունը որոշակի ժամանակահատվածում կրկին չկատարվի։
+   
+   #### Օրինակ:
+   Երբեմն անհրաժեշտ է ֆունկցիան կանչել միայն այն ժամանակ, երբ օգտատերը դադարում է մուտքագրումը:
+   
+   ```javascript
+   function debounce(func, delay) {
+     let timer;
+     return function(...args) {
+       clearTimeout(timer);
+       timer = setTimeout(() => func.apply(this, args), delay);
+     };
+   }
+   
+   const logMessage = debounce(() => {
+     console.log("Input stopped");
+   }, 300);
+   
+   document.getElementById("input").addEventListener("keyup", logMessage);
+   ```
+   
+   - **Ինչպես է աշխատում:**
+   - Ամեն անգամ, երբ իրադարձությունը կանչվում է, նախորդ `setTimeout`-ը մաքրվում է (clearTimeout):
+   - Եթե ժամանակային միջակայքում այլ կանչ չի լինում, ֆունկցիան կատարվում է։
+   
+   #### Օգտագործման դեպքեր:
+   - Input դաշտում մուտքագրման հետ կապված իրադարձություններ։
+   - Window-ի չափսի փոփոխման (resize) իրադարձություններ։
+   
+   ---
+   
+   #### Throttle-ի աշխատանքը
+   
+   **Throttle**-ը երաշխավորում է, որ ֆունկցիան կկատարվի ֆիքսված ժամանակահատվածում մեկ անգամ՝ անկախ իրադարձության հաճախականությունից։
+   
+   #### Օրինակ:
+   Անհրաժեշտ է վերահսկել window-ի scroll իրադարձությունը՝ առանց ֆունկցիան հաճախ կանչելու:
+   
+   ```javascript
+   function throttle(func, interval) {
+     let lastCall = 0;
+     return function(...args) {
+       const now = Date.now();
+       if (now - lastCall >= interval) {
+         lastCall = now;
+         func.apply(this, args);
+       }
+     };
+   }
+   
+   const logScroll = throttle(() => {
+     console.log("Scrolled");
+   }, 1000);
+   
+   window.addEventListener("scroll", logScroll);
+   ```
+   
+   - **Ինչպես է աշխատում:**
+   - Ֆունկցիան կատարում է միայն այն դեպքում, երբ ֆիքսված ժամանակահատվածն անցել է նախորդ կանչից։
+   
+   #### Օգտագործման դեպքեր:
+   - Scroll իրադարձություններ։
+   - Button-ի հաճախակի սեղմումների վերահսկում։
+   
+   ---
+   
+   #### Տարբերությունը `debounce`-ի և `throttle`-ի միջև
+   
+   | **Նկարագրություն**            | **Debounce**                                   | **Throttle**                       |
+   |--------------------------------|-----------------------------------------------|-------------------------------------|
+   | **Նպատակ**                    | Կատարել ֆունկցիան միայն իրադարձության դադարից հետո։| Կատարել ֆունկցիան ֆիքսված միջակայքով։ |
+   | **Կիրառման դեպքեր**            | Input դաշտի իրադարձություններ։                | Scroll կամ resize իրադարձություններ։ |
+   | **Կատարում հաճախականությամբ**  | Փոքր հաճախականությամբ։                         | Ֆիքսված ժամանակային միջակայքով։      |
+   
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+17. ### Ինչ է Promise-ը և ինչպես է այն աշխատում?
+   
+   **Promise**-ը JavaScript-ում օբյեկտ է, որը ներկայացնում է ապագայում կատարվող կամ չկատարվող գործողություն։ Այն կարևոր գործիք է ասինխրոն ծրագրավորման համար և թույլ է տալիս մշակել գործողությունների հաջորդականությունը՝ առանց callback-ների խառնաշփոթի (callback hell):
+   
+   Promise-ը կարող է ունենալ երեք վիճակ՝
+   1. **Pending (սպասող):** Սկզբնական վիճակ, երբ գործողությունը դեռ չի ավարտվել։
+   2. **Fulfilled (կատարված):** Գործողությունը հաջողությամբ ավարտվել է, և արդյունքն հասանելի է։
+   3. **Rejected (մերժված):** Գործողությունը ձախողվել է, և սխալի պատճառը հասանելի է։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Promise-ը
+   
+   #### 1. Ստեղծում և կառուցվածք
+   
+   Promise-ը ստեղծվում է `Promise` կոնստրուկտորի միջոցով, որը որպես արգումենտ ընդունում է **executor** ֆունկցիա։ Այս ֆունկցիան ունի երկու պարամետր՝ `resolve` և `reject`, որոնք օգտագործվում են արդյունքը վերադարձնելու կամ սխալը նշելու համար։
+   
+   ```javascript
+   const myPromise = new Promise((resolve, reject) => {
+     let success = true;
+   
+     if (success) {
+       resolve("Task completed successfully");
+     } else {
+       reject("Task failed");
+     }
+   });
+   ```
+   
+   #### 2. `then`, `catch` և `finally` մեթոդներ
+   
+   Promise-ը ունի հետևյալ մեթոդները՝
+   
+   - **`then`:** Կատարվում է, երբ Promise-ը `fulfilled` վիճակում է։
+   - **`catch`:** Կատարվում է, երբ Promise-ը `rejected` վիճակում է։
+   - **`finally`:** Կատարվում է անկախ արդյունքից։
+   
+   ```javascript
+   myPromise
+     .then(result => {
+       console.log(result); // "Task completed successfully"
+     })
+     .catch(error => {
+       console.log(error); // "Task failed"
+     })
+     .finally(() => {
+       console.log("Promise settled");
+     });
+   ```
+   
+   #### 3. Ասինխրոն գործողություններ
+   
+   Promise-ը հաճախ օգտագործվում է ասինխրոն գործողությունների համար, օրինակ՝ API հարցումներ:
+   
+   ```javascript
+   const fetchData = new Promise((resolve, reject) => {
+     setTimeout(() => {
+       const data = { id: 1, name: "John" };
+       resolve(data);
+     }, 2000);
+   });
+   
+   fetchData
+     .then(response => {
+       console.log(response); // { id: 1, name: "John" }
+     })
+     .catch(error => {
+       console.log(error);
+     });
+   ```
+   
+   ---
+   
+   #### Promise-ի շղթայականություն (Chaining)
+   
+   Promise-ների շղթայականությունը թույլ է տալիս կատարել հաջորդական գործողություններ՝ օգտագործելով `then` մեթոդը:
+   
+   ```javascript
+   fetchData
+     .then(response => {
+       console.log(response.name); // "John"
+       return response.id;
+     })
+     .then(id => {
+       console.log(`ID is ${id}`); // "ID is 1"
+     })
+     .catch(error => {
+       console.log(error);
+     });
+   ```
+   
+   ---
+   
+   #### Promise.all, Promise.race և Promise.allSettled
+   
+   #### 1. **`Promise.all`**
+   
+   `Promise.all` մեթոդը կատարում է մի քանի Promise-ներ զուգահեռ և վերադարձնում է արդյունքները, երբ բոլորն ավարտվել են։ Եթե որևէ մեկը ձախողվի, ամբողջը մերժվում է։
+   
+   ```javascript
+   const p1 = Promise.resolve(1);
+   const p2 = Promise.resolve(2);
+   const p3 = Promise.resolve(3);
+   
+   Promise.all([p1, p2, p3])
+     .then(results => {
+       console.log(results); // [1, 2, 3]
+     })
+     .catch(error => {
+       console.log(error);
+     });
+   ```
+   
+   #### 2. **`Promise.race`**
+   
+   `Promise.race` մեթոդը վերադարձնում է առաջին ավարտված Promise-ի արդյունքը։
+   
+   ```javascript
+   const p1 = new Promise(resolve => setTimeout(() => resolve("P1"), 1000));
+   const p2 = new Promise(resolve => setTimeout(() => resolve("P2"), 500));
+   
+   Promise.race([p1, p2])
+     .then(result => {
+       console.log(result); // "P2"
+     });
+   ```
+   
+   #### 3. **`Promise.allSettled`**
+   
+   `Promise.allSettled` մեթոդը սպասում է, որ բոլոր Promise-ները ավարտվեն, անկախ դրանց վիճակից։
+   
+   ```javascript
+   const p1 = Promise.resolve("Success");
+   const p2 = Promise.reject("Error");
+   
+   Promise.allSettled([p1, p2])
+     .then(results => {
+       console.log(results);
+       // [
+       //   { status: "fulfilled", value: "Success" },
+       //   { status: "rejected", reason: "Error" }
+       // ]
+     });
+   ```
+   
+   ---
+   
+   #### Promise-ի առավելությունները
+   
+   1. **Callback Hell-ի նվազեցում:**
+      Promise-ները թույլ են տալիս կառավարել callback-ների բարդությունը՝ օգտագործելով շղթայականություն։
+   
+   2. **Կոդի ընթեռնելիություն:**
+      Promise-ները ավելի ընթեռնելի և կանխատեսելի են դարձնում ասինխրոն կոդը։
+   
+   3. **Զուգահեռ գործողություններ:**
+      Promise-ները թույլ են տալիս հեշտությամբ աշխատել միաժամանակ մի քանի ասինխրոն գործողությունների հետ։
+   
+   ---
+
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+18. ### Ինչպես է աշխատում async/await-ը JavaScript-ում?
+**`async/await`**-ը JavaScript-ի կառուցվածք է, որը տրամադրում է ավելի ընթեռնելի սինտաքս Promise-ների հետ աշխատելու համար։ Այն թույլ է տալիս գրել ասինխրոն կոդ, որը կարդացվում է ինչպես սինխրոն կոդ։
+   
+   - **`async` ֆունկցիան**: Վերադարձնում է `Promise`։
+   - **`await` օպերատորը**: Օգտագործվում է `Promise`-ների լուծման (`resolve`) արդյունքը սպասելու համար։
+   
+   ---
+   
+   #### Ինչպես է աշխատում async/await-ը
+   
+   #### 1. `async`-ի աշխատանքը
+   
+   Ֆունկցիան, որը հայտարարվում է `async` բառով, ավտոմատ կերպով վերադարձնում է `Promise`։
+   
+   ```javascript
+   async function greet() {
+     return "Hello, World!";
+   }
+   
+   greet().then(message => console.log(message)); // "Hello, World!"
+   ```
+   
+   Եթե `async` ֆունկցիայի ներսում սխալ է նետվում (`throw`), այդ սխալը փոխանցվում է որպես մերժված (rejected) `Promise`:
+   
+   ```javascript
+   async function throwError() {
+     throw new Error("Something went wrong!");
+   }
+   
+   throwError().catch(error => console.log(error.message)); // "Something went wrong!"
+   ```
+   
+   #### 2. `await`-ի աշխատանքը
+   
+   `await`-ը ստիպում է `async` ֆունկցիային սպասել `Promise`-ի լուծմանը։
+   
+   ```javascript
+   async function fetchData() {
+     const data = await new Promise(resolve => {
+       setTimeout(() => resolve("Data received!"), 2000);
+     });
+     console.log(data);
+   }
+   
+   fetchData();
+   // Output (2 վայրկյանից հետո):
+   // "Data received!"
+   ```
+   
+   ---
+   
+   #### Օրինակ՝ API հարցման հետ
+   
+   ```javascript
+   async function getUserData() {
+     try {
+       const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+       const data = await response.json();
+       console.log(data);
+     } catch (error) {
+       console.error("Error fetching data:", error);
+     }
+   }
+   
+   getUserData();
+   ```
+   
+   ---
+   
+   #### Generators և Async/Await-ի կապը
+   
+   **Generators**-ը JavaScript-ի ֆունկցիաներ են, որոնք կարող են դադարեցնել իրենց կատարումը (`yield`) և շարունակել այն՝ ապահովելով ասինխրոն ծրագրավորման հիմքը։
+   
+   `async/await`-ը կառուցվել է Generators-ի գաղափարի վրա, բայց տալիս է ավելի պարզ սինտաքս։
+   
+   #### Generators-ի աշխատանքը
+   
+   ```javascript
+   function* generatorFunction() {
+     yield "Step 1";
+     yield "Step 2";
+     return "Step 3";
+   }
+   
+   const generator = generatorFunction();
+   console.log(generator.next()); // { value: "Step 1", done: false }
+   console.log(generator.next()); // { value: "Step 2", done: false }
+   console.log(generator.next()); // { value: "Step 3", done: true }
+   ```
+   
+   Generators-ը թույլ է տալիս ստեղծել ֆունկցիաներ, որոնք կարող են դադարեցնել իրենց ընթացքը՝ ասինխրոն տրամաբանության կառավարումը հեշտացնելու համար։
+   
+   ```javascript
+   function* asyncGenerator() {
+     const data = yield fetch("https://jsonplaceholder.typicode.com/users/1");
+     console.log(data);
+   }
+   
+   const gen = asyncGenerator();
+   const promise = gen.next().value;
+   promise
+     .then(response => response.json())
+     .then(data => gen.next(data));
+   ```
+   
+   ---
+   
+   #### Async/Await-ի առավելությունները
+   
+   1. **Կոդի ընթեռնելիություն**:
+      - `async/await`-ը ավելի ընթեռնելի է և հեշտ է հասկանալ, քան Promise-ների շղթայականությունը։
+   
+   2. **Սխալի կառավարում**:
+      - `try/catch` բլոկները հեշտացնում են սխալների կառավարումը։
+   
+   3. **Generational գաղափարների պարզեցում**:
+      - `async/await`-ը փոխարինում է Generators-ի բարդ սինտաքսը։
+   
+
+**[⬆ Back to Top](#բովանդակություն)**
+19. ### Ինչ է DOM-ը և ինչ տարբերություն կա HTML-ի և DOM-ի միջև?
+**DOM (Document Object Model)**-ը ծրագրային ինտերֆեյս է, որը ներկայացնում է HTML կամ XML փաստաթղթի կառուցվածքը ծառի տեսքով։ DOM-ը հնարավորություն է տալիս ծրագրավորողներին փոխել, ավելացնել կամ հեռացնել փաստաթղթի տարրերը ծրագրային մակարդակում։
+   
+   HTML-ը փաստաթղթի նշագրման լեզուն է, մինչդեռ DOM-ը դրա ծրագրային ներկայացումն է։
+   
+   ---
+   
+   #### Ինչ է DOM-ը
+   
+   1. **Ծառի կառուցվածք:**
+      DOM-ը փաստաթղթի ամբողջական կառուցվածքը ներկայացնում է որպես ծառ՝ բաղկացած **ծնող (parent)**, **զավակ (child)** և **եղբայր (sibling)** հարաբերություններով։
+   
+   2. **Փոխազդեցություն:**
+      DOM-ը թույլ է տալիս JavaScript-ին փոխազդել HTML-ի հետ՝ փոփոխելով տարրերը, ստիլերը, կամ իրադարձությունները։
+   
+   3. **Կենդանի ներկայացում:**
+      DOM-ը "կենդանի" է, ինչը նշանակում է, որ ցանկացած փոփոխություն HTML փաստաթղթում անմիջապես անդրադառնում է DOM-ի վրա և հակառակը։
+   
+   ```html
+   <!DOCTYPE html>
+   <html>
+     <head>
+       <title>DOM Example</title>
+     </head>
+     <body>
+       <h1>Hello, World!</h1>
+       <p>This is a paragraph.</p>
+     </body>
+   </html>
+   ```
+   
+   DOM-ը վերածում է վերևի HTML փաստաթղթին հետևյալ ծառի:
+   
+   ```
+   <html>
+   ├── <head>
+   │   ├── <title> "DOM Example"
+   ├── <body>
+       ├── <h1> "Hello, World!"
+       ├── <p> "This is a paragraph."
+   ```
+   
+   ---
+   
+   #### HTML-ի և DOM-ի տարբերությունները
+   
+   | **Հատկանիշ**               | **HTML**                                           | **DOM**                                      |
+   |-----------------------------|----------------------------------------------------|---------------------------------------------|
+   | **Սահմանում**               | Թեգերի և բովանդակության նշագրման լեզու։           | HTML-ի ծրագրային ներկայացումը։              |
+   | **Նպատակ**                 | Բրաուզերի համար կառուցվածքի ստեղծում։             | Ծրագրերի համար փաստաթղթի կառավարման միջոց։ |
+   | **Կառուցվածք**              | Տեքստային ձևով։                                  | Ծառի կառուցվածք։                            |
+   | **Փոփոխություն**            | Փոփոխվում է միայն տեքստային ֆայլում։              | Կարող է փոփոխվել JavaScript-ի միջոցով։     |
+   | **Տեսանելիություն**          | Փաստաթուղթը բրաուզերում։                         | Փաստաթուղթը ծրագրային մակարդակում։          |
+   
+   ---
+   
+   #### Ինչպես է աշխատում DOM-ը
+   
+   #### 1. **Տարբեր մակարդակներ**
+   
+   DOM-ը բաղկացած է երեք հիմնական մակարդակներից՝
+   
+   - **Element Level (Տարրային մակարդակ):** HTML թեգերը, օրինակ՝ `<div>`, `<p>`։
+   - **Attribute Level (Ատրիբուտային մակարդակ):** HTML թեգերի ատրիբուտները, օրինակ՝ `class`, `id`։
+   - **Text Level (Տեքստային մակարդակ):** Տեքստը, որը տեղակայված է թեգերի ներսում։
+   
+   ```javascript
+   const element = document.querySelector("h1");
+   console.log(element.textContent); // "Hello, World!"
+   ```
+   
+   #### 2. **Փոփոխություն DOM-ում**
+   
+   JavaScript-ը կարող է օգտագործվել DOM-ի տարրերը փոխելու համար՝ ավելացնելով, հեռացնելով կամ փոփոխելով դրանք։
+   
+   ```javascript
+   // Փոխել տեքստը
+   const heading = document.querySelector("h1");
+   heading.textContent = "Hello, DOM!";
+   
+   // Ավելացնել նոր տարր
+   const paragraph = document.createElement("p");
+   paragraph.textContent = "This is a new paragraph.";
+   document.body.appendChild(paragraph);
+   
+   // Հեռացնել տարր
+   const oldParagraph = document.querySelector("p");
+   document.body.removeChild(oldParagraph);
+   ```
+   
+   #### 3. **Իրադարձություններ (Events):**
+   
+   DOM-ը նաև աջակցում է իրադարձությունների կառավարմանը, օրինակ՝ սեղմումներ, շարժումներ և այլն։
+   
+   ```javascript
+   const button = document.querySelector("button");
+   button.addEventListener("click", () => {
+     alert("Button clicked!");
+   });
+   ```
+   
+   ---
+   
+   #### DOM-ի առավելություններ
+   
+   1. **Դինամիկ բովանդակություն:**
+      Թույլ է տալիս դինամիկ փոխել փաստաթուղթը՝ առանց այն վերալցելու։
+   
+   2. **Իրադարձությունների կառավարում:**
+      Թույլ է տալիս հեշտությամբ կառավարել իրադարձությունները բրաուզերի մեջ։
+   
+   3. **Ավտոմատ թարմացում:**
+      Փոփոխությունները անմիջապես արտացոլվում են փաստաթղթում։
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+20. ### Ինչ է ES6 մոդուլը և ինչպես է այն աշխատում?
+**ES6 մոդուլները** (Modules) JavaScript-ում ներկայացնում են կոդի վերաօգտագործման (reuse) և կոդի կառուցվածքի (organization) արդիական մեխանիզմ։ Մոդուլները թույլ են տալիս բաժանել կոդը տարբեր ֆայլերի և վերահսկել, թե որոնք են ներմուծվում և արտահանվում։
+   
+   ES6 մոդուլները հանդիսանում են JavaScript-ի ստանդարտ մասը ECMAScript 2015 (ES6)-ից սկսած և ապահովում են հստակ կառուցվածք մեծ ծրագրերում։
+
+---
+   
+   #### Ինչպես են աշխատում ES6 մոդուլները
+   
+   #### 1. Մոդուլի արտահանում (`export`)
+   
+   `export` բանալի բառը օգտագործվում է մոդուլի ներսում փոփոխականներ, ֆունկցիաներ կամ դասեր արտահանելու համար։ Կան երկու հիմնական տեսակ՝ **Named Export** և **Default Export**։
+   
+   #### Named Export
+   
+   Named Export-ը թույլ է տալիս արտահանել մի քանի փոփոխականներ կամ ֆունկցիաներ նույն ֆայլից։
+   
+   ```javascript
+   // math.js
+   export const add = (a, b) => a + b;
+   export const subtract = (a, b) => a - b;
+   ```
+   
+   #### Default Export
+   
+   Default Export-ը թույլ է տալիս արտահանել մեկ հիմնական արժեք։
+   
+   ```javascript
+   // message.js
+   export default function greet(name) {
+     return `Hello, ${name}!`;
+   }
+   ```
+   
+   #### 2. Մոդուլի ներմուծում (`import`)
+   
+   `import` բանալի բառը օգտագործվում է մեկ այլ մոդուլից արտահանված արժեքները ներմուծելու համար։
+   
+   #### Named Import
+   
+   ```javascript
+   // main.js
+   import { add, subtract } from './math.js';
+   
+   console.log(add(5, 3)); // 8
+   console.log(subtract(5, 3)); // 2
+   ```
+   
+   #### Default Import
+   
+   ```javascript
+   // main.js
+   import greet from './message.js';
+   
+   console.log(greet("John")); // "Hello, John!"
+   ```
+   
+   #### Named և Default համակցված Import
+   
+   ```javascript
+   // main.js
+   import greet, { add } from './math.js';
+   
+   console.log(greet("John"));
+   console.log(add(10, 5));
+   ```
+   
+   #### 3. Import Everything
+   
+   Եթե անհրաժեշտ է ներմուծել մոդուլի բոլոր արտահանված արժեքները, կարող եք օգտագործել `* as` սինտաքսը։
+   
+   ```javascript
+   // main.js
+   import * as math from './math.js';
+   
+   console.log(math.add(5, 3)); // 8
+   console.log(math.subtract(5, 3)); // 2
+   ```
+   
+   ---
+   
+   #### ES6 մոդուլների առանձնահատկությունները
+   
+   1. **Մեկուսացված տիրույթ (Scope):**
+      Մոդուլում հայտարարված բոլոր փոփոխականները և ֆունկցիաները մեկուսացված են և հասանելի չեն գլոբալ տիրույթում։
+   
+   2. **Կոդի լազերային բեռնավորում (Lazy Loading):**
+      Մոդուլները բեռնվում են միայն այն ժամանակ, երբ անհրաժեշտ է։
+   
+   3. **Statically Analyzable:**
+      ES6 մոդուլները թույլ են տալիս տրանսպիլյատորներին և գործիքներին հեշտությամբ վերլուծել կախվածությունները։
+   
+   4. **Մեկ մոդուլ, մեկ ֆայլ:**
+      Ամեն մոդուլ սովորաբար գտնվում է առանձին ֆայլում, ինչը հեշտացնում է կոդի կազմակերպումը։
+   
+   ---
+   
+   #### Browser Support
+   
+   ES6 մոդուլները աջակցվում են ժամանակակից բրաուզերներում՝ առանց տրանսպիլյացիայի։ Դուք կարող եք օգտագործել `<script type="module">` թեգը՝ բրաուզերում մոդուլներ բեռնելու համար։
+   
+   ```html
+   <script type="module">
+     import { add } from './math.js';
+     console.log(add(5, 5));
+   </script>
+   ```
+
+---
+   
+   #### CommonJS vs ES6 Modules
+   
+   | **Հատկանիշ**               | **CommonJS (Node.js)**                        | **ES6 Modules**                      |
+   |-----------------------------|-----------------------------------------------|---------------------------------------|
+   | **Սինտաքս**                | `require`, `module.exports`                  | `import`, `export`                   |
+   | **Բեռնավորում**            | Սինխրոն                                      | Ասինխրոն                             |
+   | **Բրաուզերային աջակցություն** | Չի աջակցվում                                  | Աջակցվում է                           |
+   | **Statically Analyzable**   | Ոչ                                           | Այո                                   |
+
+---
+   
+   #### Օրինակ՝ կիրառություն
+   
+   #### math.js
+   ```javascript
+   export const multiply = (a, b) => a * b;
+   export const divide = (a, b) => a / b;
+   ```
+   
+   #### main.js
+   ```javascript
+   import { multiply, divide } from './math.js';
+   
+   console.log(multiply(6, 3)); // 18
+   console.log(divide(6, 3));   // 2
+   ```
+
+**[⬆ Back to Top](#բովանդակություն)**
+21. ### Ինչ է JavaScript-ում call, apply, bind մեթոդները?
+   
+`call`, `apply` և `bind` մեթոդները JavaScript-ի ֆունկցիոնալ մեթոդներ են, որոնք թույլ են տալիս կառավարել, թե ինչպես է ֆունկցիան կատարում իր **`this`** կոնտեքստը։ Դրանք բոլորն էլ թույլ են տալիս փոխել ֆունկցիայի կանչի համատեքստը՝ վերահսկելով, թե որ օբյեկտը պետք է դառնա `this`։
+
+---
+   
+   #### 1. `call()`
+   
+   `call` մեթոդը անմիջապես կանչում է ֆունկցիան և թույլ է տալիս առաջին արգումենտով սահմանել `this`-ի արժեքը։ Հաջորդ արգումենտները փոխանցվում են ֆունկցիային որպես առանձին արժեքներ։
+   
+   #### Օրինակ
+   
+   ```javascript
+   function greet(greeting, punctuation) {
+     console.log(`${greeting}, ${this.name}${punctuation}`);
+   }
+   
+   const user = { name: "John" };
+   
+   greet.call(user, "Hello", "!");
+   // Output: "Hello, John!"
+   ```
+   
+   #### Գործառույթներ
+   - Կանչում է ֆունկցիան անմիջապես։
+   - Արգումենտները փոխանցվում են առանձին-առանձին։
+   
+   ---
+   
+   #### 2. `apply()`
+   
+   `apply` մեթոդը նույնպես անմիջապես կանչում է ֆունկցիան, բայց արգումենտները փոխանցվում են որպես զանգված։
+   
+   #### Օրինակ
+   
+   ```javascript
+   function greet(greeting, punctuation) {
+     console.log(`${greeting}, ${this.name}${punctuation}`);
+   }
+   
+   const user = { name: "Jane" };
+   
+   greet.apply(user, ["Hi", "!"]);
+   // Output: "Hi, Jane!"
+   ```
+   
+   #### Գործառույթներ
+   - Կանչում է ֆունկցիան անմիջապես։
+   - Արգումենտները փոխանցվում են զանգվածի տեսքով։
+   
+   ---
+   
+   #### 3. `bind()`
+   
+   `bind` մեթոդը չի կանչում ֆունկցիան անմիջապես։ Այն վերադարձնում է նոր ֆունկցիա, որի `this`-ը կապված է տրված արժեքին։
+   
+   #### Օրինակ
+   
+   ```javascript
+   function greet(greeting, punctuation) {
+     console.log(`${greeting}, ${this.name}${punctuation}`);
+   }
+   
+   const user = { name: "Alice" };
+   
+   const boundGreet = greet.bind(user);
+   boundGreet("Hey", "...");
+   // Output: "Hey, Alice..."
+   ```
+   
+   #### Գործառույթներ
+   - Վերադարձնում է նոր ֆունկցիա՝ կապված նոր `this`-ով։
+   - Կարելի է կանչել երբ ուզեք։
+   
+   ---
+   
+   #### Տարբերությունները
+   
+   | **Հատկանիշ**               | **`call`**                               | **`apply`**                              | **`bind`**                                |
+   |-----------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|
+   | **Կանչում է ֆունկցիան**    | Այո                                      | Այո                                      | Ոչ                                       |
+   | **Արգումենտների ձևը**      | Առանձին-առանձին                          | Զանգվածով                                | Առանձին-առանձին (կապված ֆունկցիայում)    |
+   | **Վերադարձնում է**          | Ֆունկցիայի արդյունքը                      | Ֆունկցիայի արդյունքը                      | Նոր ֆունկցիա                              |
+   
+   ---
+   
+   #### Ինչպես են դրանք կապված միմյանց հետ
+   
+   - **`call`-ը** և **`apply`-ը** շատ նման են։ Տարբերությունն այն է, որ `call`-ը արգումենտները փոխանցում է առանձին-առանձին, իսկ `apply`-ը՝ զանգվածի տեսքով։
+   - **`bind`-ը** տարբերվում է նրանով, որ ֆունկցիան անմիջապես չի կանչում, այլ վերադարձնում է նոր ֆունկցիա։
+   
+   ---
+   
+   #### Օգտագործման դեպքեր
+   
+   1. **Կոնտեքստի կառավարում:**
+   
+   ```javascript
+   const obj = {
+     x: 42,
+     getX: function() {
+       return this.x;
+     }
+   };
+   
+   const getX = obj.getX;
+   console.log(getX()); // undefined (կոնտեքստը կորցված է)
+   
+   const boundGetX = getX.bind(obj);
+   console.log(boundGetX()); // 42
+   ```
+   
+   2. **Վերաօգտագործում տարբեր օբյեկտների համար:**
+   
+   ```javascript
+   function introduce() {
+     console.log(`My name is ${this.name}`);
+   }
+   
+   const user1 = { name: "Alice" };
+   const user2 = { name: "Bob" };
+   
+   introduce.call(user1); // "My name is Alice"
+   introduce.call(user2); // "My name is Bob"
+   ```
+   
+   3. **Մաթեմատիկական հաշվարկներ (apply):**
+   
+   ```javascript
+   const numbers = [5, 6, 2, 3, 7];
+   
+   console.log(Math.max.apply(null, numbers)); // 7
+   console.log(Math.min.apply(null, numbers)); // 2
+   ```
+
+**[⬆ Back to Top](#բովանդակություն)**
 
