@@ -2173,11 +2173,11 @@
      console.log(`My name is ${this.name}`);
    }
    
-   const user1 = { name: "Alice" };
-   const user2 = { name: "Bob" };
+   const userOne = { name: "Alice" };
+   const userTwo = { name: "Bob" };
    
-   introduce.call(user1); // "My name is Alice"
-   introduce.call(user2); // "My name is Bob"
+   introduce.call(userOne); // "My name is Alice"
+   introduce.call(userTwo); // "My name is Bob"
    ```
    
    3. **Մաթեմատիկական հաշվարկներ (apply):**
