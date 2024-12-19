@@ -2450,6 +2450,9 @@
    - **Shallow Copy**-ն հարմար է այն դեպքերի համար, երբ օբյեկտը կամ զանգվածը չունի nested կառուցվածքներ կամ երբ դուք չեք ցանկանում դրանք փոփոխել։
    - **Deep Copy**-ն անհրաժեշտ է, երբ պահանջվում է ամբողջական, անկախ պատճեն՝ ներառյալ խորը կառուցվածքները։
 
+**[⬆ Back to Top](#բովանդակություն)**
+
+
 24. ### Ինչ է Prototype-ը JavaScript-ում?
 
    
@@ -2617,4 +2620,311 @@
       Prototype-ը թույլ է տալիս ստեղծել ժառանգական կառուցվածքներ։
    
    ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+
+25. ### Ինչ է Event Bubbling-ը և Event Capturing-ը JavaScript-ում
+   
+   JavaScript-ում իրադարձությունները (events) տարածվում են փաստաթղթում երկու տարբեր ձևերով՝ **Event Bubbling** (իրադարձության բաբլինգ) և **Event Capturing** (իրադարձության կպչում): Այս մեխանիզմները կառավարում են, թե ինչպես է իրադարձությունը շարժվում DOM ծառով՝ տարրերից դեպի վեր կամ ներքև։
+
+   ---
+   
+   #### Event Bubbling
+   
+   **Event Bubbling**-ը այն մեխանիզմն է, որտեղ իրադարձությունը սկսվում է իր նպատակային տարրից (target element) և տարածվում դեպի իր ծնող տարրերը՝ հասնելով մինչև արմատային տարրը (usually `document`)։
+   
+   #### Ինչպես է աշխատում
+   
+   Եթե իրադարձությունը կապված է որևէ DOM տարրի հետ, այդ իրադարձությունը կկատարվի ոչ միայն այդ տարրի, այլև նրա բոլոր ծնողների վրա։
+   
+   ```html
+   <div id="parent">
+     <button id="child">Click Me</button>
+   </div>
+   ```
+   
+   ```javascript
+   const parent = document.getElementById("parent");
+   const child = document.getElementById("child");
+   
+   parent.addEventListener("click", () => {
+     console.log("Parent clicked");
+   });
+   
+   child.addEventListener("click", () => {
+     console.log("Child clicked");
+   });
+   
+   // Երբ սեղմում ենք "Click Me" կոճակը, ելքը կլինի:
+   // "Child clicked"
+   // "Parent clicked"
+   ```
+
+   #### Հատկանիշներ
+   - Իրադարձությունը սկսվում է նպատակային տարրից և շարժվում դեպի վեր՝ դեպի նրա ծնողներն ու արմատային տարրը։
+   - Բաբլինգը հարմար է իրադարձությունների համապարփակ վերահսկման համար։
+
+   ---
+
+   #### Event Capturing (aka Event Trickling)
+
+   **Event Capturing**-ը այն մեխանիզմն է, որտեղ իրադարձությունը սկսվում է արմատային տարրից (`document`) և շարժվում դեպի իր նպատակային տարրը։
+   
+   #### Ինչպես է աշխատում
+   
+   Capturing-ը տեղի է ունենում նախքան բաբլինգը, և դուք կարող եք օգտագործել այն, որպեսզի սկզբում ծածկեք իրադարձությունները։
+   
+   ```html
+   <div id="parent">
+     <button id="child">Click Me</button>
+   </div>
+   ```
+   
+   ```javascript
+   const parent = document.getElementById("parent");
+   const child = document.getElementById("child");
+   
+   parent.addEventListener("click", () => {
+     console.log("Parent clicked during capturing phase");
+   }, true); 
+   
+   child.addEventListener("click", () => {
+     console.log("Child clicked");
+   });
+   
+   // Երբ սեղմում ենք "Click Me" կոճակը, ելքը կլինի:
+   // "Parent clicked during capturing phase"
+   // "Child clicked"
+   ```
+   
+   #### Հատկանիշներ
+   - Իրադարձությունը սկսվում է արմատային տարրից և շարժվում ներքև՝ նպատակային տարրի ուղղությամբ։
+   - Capturing-ը հնարավոր է ակտիվացնել, երբ `addEventListener`-ում փոխանցվում է `true` որպես երրորդ պարամետր։
+   
+   ---
+   
+   #### Event Propagation Phases
+   
+   DOM իրադարձությունների տարածումը բաղկացած է երեք փուլից՝
+   
+   1. **Capturing Phase:** Իրադարձությունը սկսվում է արմատից և շարժվում ներքև՝ դեպի նպատակային տարր։
+   2. **Target Phase:** Իրադարձությունը հասնում է նպատակային տարրին։
+   3. **Bubbling Phase:** Իրադարձությունը սկսվում է նպատակային տարրից և շարժվում դեպի վեր՝ դեպի ծնողներ։
+   
+   ```javascript
+   const parent = document.getElementById("parent");
+   const child = document.getElementById("child");
+   
+   parent.addEventListener("click", () => {
+     console.log("Parent (Bubbling Phase)");
+   });
+   
+   parent.addEventListener("click", () => {
+     console.log("Parent (Capturing Phase)");
+   }, true);
+   
+   child.addEventListener("click", () => {
+     console.log("Child (Target Phase)");
+   });
+   
+   // Երբ սեղմում ենք "Click Me" կոճակը, ելքը կլինի:
+   // "Parent (Capturing Phase)"
+   // "Child (Target Phase)"
+   // "Parent (Bubbling Phase)"
+   ```
+
+   ---
+   
+   #### Preventing Event Propagation
+   
+   Իրադարձությունների տարածումը կարելի է կանգնեցնել՝ օգտագործելով `stopPropagation` մեթոդը։
+   
+   #### Օրինակ
+   
+   ```javascript
+   child.addEventListener("click", (event) => {
+     console.log("Child clicked");
+     event.stopPropagation();
+   });
+   
+   parent.addEventListener("click", () => {
+     console.log("Parent clicked");
+   });
+   
+   // Երբ սեղմում ենք "Click Me", ելքը կլինի:
+   // "Child clicked"
+   ```
+
+   ---
+   
+   #### Event Delegation
+   
+   **Event Delegation**-ը տեխնիկա է, որտեղ իրադարձությունը կցվում է ծնող տարրին, և այն մշակում է իրադարձությունները նրա զավակների համար՝ օգտագործելով բաբլինգի մեխանիզմը։
+   
+   #### Օրինակ
+   
+   ```html
+   <ul id="list">
+     <li>Item 1</li>
+     <li>Item 2</li>
+     <li>Item 3</li>
+   </ul>
+   ```
+   
+   ```javascript
+   const list = document.getElementById("list");
+   
+   list.addEventListener("click", (event) => {
+     if (event.target.tagName === "LI") {
+       console.log(`Clicked on ${event.target.textContent}`);
+     }
+   });
+   ```
+
+   ---
+   
+   #### Եզրակացություն
+   
+   - **Event Bubbling**: Իրադարձությունը տարածվում է ներքևից վեր։
+   - **Event Capturing**: Իրադարձությունը տարածվում է վերևից ներքև։
+
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+
+26. ### Ինչ է IIFE (Immediately Invoked Function Expression)?
+   
+   **IIFE (Immediately Invoked Function Expression)**-ը JavaScript-ում հատուկ ֆունկցիոնալ արտահայտություն է, որը ստեղծվում և անմիջապես կանչվում է։ IIFE-ի հիմնական նպատակը տիրույթի (scope) մեկուսացումն է և գլոբալ տիրույթում փոփոխականների հետ հակասություններից խուսափելը։
+   
+   IIFE-ն սինտաքսորեն կառուցվում է որպես ֆունկցիա, որը շրջապատված է փակագծերով և անմիջապես կանչվում է փակագծերով։
+   
+   ```javascript
+   (function() {
+     console.log("This is an IIFE!");
+   })();
+   // Output: "This is an IIFE!"
+   ```
+
+   ---
+   
+   #### Ինչպես է աշխատում IIFE-ն
+   
+   #### Սինտաքս
+   
+   IIFE-ն կառուցվում է երկու հիմնական մասից՝
+   
+   1. **Ֆունկցիոնալ արտահայտություն (Function Expression):**
+      Ֆունկցիան փաթեթավորվում է փակագծերով՝ ստիպելով JavaScript-ին դիտարկել այն որպես արտահայտություն։
+   
+      ```javascript
+      (function() {
+        // ֆունկցիայի մարմին
+      });
+      ```
+   
+   2. **Կանչման գործողություն (Invocation):**
+      Ֆունկցիան անմիջապես կանչվում է փակագծերով՝
+   
+      ```javascript
+      (function() {
+        // ֆունկցիայի մարմին
+      })();
+      ```
+   
+   #### Օրինակ
+   
+   ```javascript
+   (function(name) {
+     console.log(`Hello, ${name}!`);
+   })("John");
+   // Output: "Hello, John!"
+   ```
+
+   ---
+   
+   #### Օգտագործման դեպքեր
+   
+   #### 1. Տիրույթի մեկուսացում
+   
+   IIFE-ն հաճախ օգտագործվում է տիրույթի մեկուսացման համար, որպեսզի կանխվեն փոփոխականների բախումները։
+   
+   ```javascript
+   (function() {
+     const privateVariable = "This is private";
+     console.log(privateVariable);
+   })();
+   
+   console.log(typeof privateVariable); // "undefined"
+   ```
+   
+   #### 2. Մոդուլային կոդ
+   
+   IIFE-ն կարող է օգտագործվել մոդուլային կառուցվածք ապահովելու համար։
+   
+   ```javascript
+   const Module = (function() {
+     const privateVar = "I am private";
+   
+     return {
+       getPrivateVar: function() {
+         return privateVar;
+       }
+     };
+   })();
+   
+   console.log(Module.getPrivateVar()); // "I am private"
+   ```
+   
+   #### 3. Առանց գլոբալ տիրույթի աղտոտման
+   
+   IIFE-ն ապահովում է, որ ձեր կոդը չաղտոտի գլոբալ տիրույթը, հատկապես երբ աշխատում եք բրաուզերի միջավայրում։
+   
+   ```javascript
+   (function() {
+     const a = 10;
+     const b = 20;
+     console.log(a + b); // 30
+   })();
+   
+   console.log(typeof a); // "undefined"
+   ```
+
+   ---
+   
+   #### Սինտաքսի տարբերակներ
+   
+   #### 1. Անվանյալ ֆունկցիա (Named Function)
+   
+   ```javascript
+   (function namedIIFE() {
+     console.log("IIFE with a name");
+   })();
+   ```
+   
+   #### 2. Արյունահոսող սինտաքս (Arrow Function IIFE)
+   
+   ```javascript
+   (() => {
+     console.log("Arrow Function IIFE");
+   })();
+   ```
+
+   ---
+   
+   ### Առավելություններ
+   
+   1. **Տիրույթի մեկուսացում:**
+      IIFE-ն թույլ է տալիս սահմանել լոկալ փոփոխականներ առանց գլոբալ տիրույթում խառնաշփոթ առաջացնելու։
+   
+   2. **Կոդի պարզություն և անվտանգություն:**
+      Բարդ ծրագրերում IIFE-ն թույլ է տալիս վերահսկել փոփոխականների հասանելիությունը։
+   
+   3. **Անմիջական կատարում:**
+      IIFE-ն ապահովում է ֆունկցիայի անմիջապես կատարումը՝ չսպասելով հետագա կանչերին։
+
+
+
+**[⬆ Back to Top](#բովանդակություն)**
+
 
