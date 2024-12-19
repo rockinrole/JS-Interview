@@ -2902,7 +2902,7 @@
    })();
    ```
    
-   #### 2. Արյունահոսող սինտաքս (Arrow Function IIFE)
+   #### 2. Arrow Function սինտաքս (Arrow Function IIFE)
    
    ```javascript
    (() => {
