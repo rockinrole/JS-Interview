@@ -2449,3 +2449,172 @@
    
    - **Shallow Copy**-ն հարմար է այն դեպքերի համար, երբ օբյեկտը կամ զանգվածը չունի nested կառուցվածքներ կամ երբ դուք չեք ցանկանում դրանք փոփոխել։
    - **Deep Copy**-ն անհրաժեշտ է, երբ պահանջվում է ամբողջական, անկախ պատճեն՝ ներառյալ խորը կառուցվածքները։
+
+24. ### Ինչ է Prototype-ը JavaScript-ում?
+
+   
+   **Prototype**-ը JavaScript-ի օբյեկտների հիմքում ընկած մեխանիզմ է, որը թույլ է տալիս օբյեկտներին ժառանգել հատկություններ և մեթոդներ այլ օբյեկտներից։ Prototype-ը հանդիսանում է JavaScript-ի `prototype-based` բնույթի հիմքը և կարևոր դեր է խաղում ծրագրի կառուցվածքում։
+   
+   JavaScript-ի յուրաքանչյուր օբյեկտ ունի թաքնված հատկություն, որը մատչելի է `[[Prototype]]` անունով։ Այս հատկությունը մատնանշում է մեկ այլ օբյեկտ, որը կոչվում է **Prototype**։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Prototype-ը
+   
+   #### 1. Prototype շղթա
+   
+   Եթե օբյեկտի վրա կանչվում է հատկություն կամ մեթոդ, և այն բացակայում է այդ օբյեկտում, JavaScript-ը որոնում է այդ հատկությունը օբյեկտի `[[Prototype]]`-ում։ Այս գործընթացը շարունակվում է մինչև հասնի շղթայի վերջ։ Եթե հատկությունը չի գտնվում ոչ մի մակարդակում, վերադարձվում է `undefined`։
+   
+   ```javascript
+   const parent = {
+     greet: function() {
+       console.log("Hello from parent!");
+     }
+   };
+   
+   const child = Object.create(parent);
+   
+   child.greet(); // "Hello from parent!"
+   ```
+   
+   #### 2. Օբյեկտի ստեղծում և Prototype-ի կապ
+   
+   Օբյեկտ ստեղծելու ժամանակ նրա `[[Prototype]]`-ը սահմանվում է նրա կոնստրուկտորի `prototype` հատկությանը։
+   
+   ```javascript
+   function Person(name) {
+     this.name = name;
+   }
+   
+   Person.prototype.sayHello = function() {
+     console.log(`Hello, my name is ${this.name}`);
+   };
+   
+   const john = new Person("John");
+   
+   john.sayHello(); // "Hello, my name is John"
+   console.log(john.__proto__ === Person.prototype); // true
+   ```
+   
+   ---
+   
+   #### Prototype-ների հիմնական հատկությունները
+   
+   1. **`prototype` հատկությունը կոնստրուկտոր ֆունկցիաների համար:**
+      - Ամեն ֆունկցիա (որը որպես կոնստրուկտոր օգտագործվում է) ունի հատուկ հատկություն՝ `prototype`, որը հանդիսանում է ստեղծված օբյեկտների հիմքը։
+   
+      ```javascript
+      function Animal(type) {
+        this.type = type;
+      }
+   
+      console.log(Animal.prototype); // {constructor: ƒ}
+      ```
+   
+   2. **`__proto__` հատկությունը օբյեկտների համար:**
+      - Ամեն օբյեկտ ունի թաքնված `__proto__` հատկություն, որը մատնանշում է նրա `[[Prototype]]`։
+   
+      ```javascript
+      const obj = {};
+      console.log(obj.__proto__ === Object.prototype); // true
+      ```
+   
+   3. **Prototype շղթայի վերջը:**
+      - `Object.prototype` հանդիսանում է Prototype շղթայի վերջնակետը։
+      - Եթե հատկությունը հասանելի չէ, JavaScript-ը որոնումը դադարեցնում է այնտեղ։
+   
+      ```javascript
+      console.log(Object.prototype.__proto__); // null
+      ```
+   
+   ---
+   
+   #### Օգտագործման դեպքեր
+   
+   #### 1. Հատկություններ և մեթոդներ կիսելու համար
+   
+   Prototype-ը թույլ է տալիս ընդհանուր հատկություններ և մեթոդներ կիսել օբյեկտների միջև՝ նվազեցնելով հիշողության օգտագործումը։
+   
+   ```javascript
+   function Car(make, model) {
+     this.make = make;
+     this.model = model;
+   }
+   
+   Car.prototype.getDetails = function() {
+     return `${this.make} ${this.model}`;
+   };
+   
+   const car1 = new Car("Toyota", "Corolla");
+   const car2 = new Car("Honda", "Civic");
+   
+   console.log(car1.getDetails()); // "Toyota Corolla"
+   console.log(car2.getDetails()); // "Honda Civic"
+   ```
+   
+   #### 2. ժառանգում (Inheritance)
+   
+   Prototype-ը հիմնական մեթոդ է ժառանգում իրականացնելու համար։
+   
+   ```javascript
+   function Animal(name) {
+     this.name = name;
+   }
+   
+   Animal.prototype.speak = function() {
+     console.log(`${this.name} makes a noise.`);
+   };
+   
+   function Dog(name, breed) {
+     Animal.call(this, name);
+     this.breed = breed;
+   }
+   
+   Dog.prototype = Object.create(Animal.prototype);
+   Dog.prototype.constructor = Dog;
+   
+   Dog.prototype.speak = function() {
+     console.log(`${this.name} barks.`);
+   };
+   
+   const dog = new Dog("Buddy", "Golden Retriever");
+   dog.speak(); // "Buddy barks."
+   ```
+   
+   ---
+   
+   #### ES6 դասեր և Prototype
+   
+   ES6 դասերը կառուցված են Prototype-ի վրա։ Դասի մեթոդները ավտոմատ ավելացվում են դրա `prototype`-ում։
+   
+   ```javascript
+   class Person {
+     constructor(name) {
+       this.name = name;
+     }
+   
+     sayHello() {
+       console.log(`Hello, my name is ${this.name}`);
+     }
+   }
+   
+   const alice = new Person("Alice");
+   alice.sayHello(); // "Hello, my name is Alice"
+   console.log(Object.getPrototypeOf(alice) === Person.prototype); // true
+   ```
+   
+   ---
+   
+   #### Prototype-ի առավելություններ
+   
+   1. **Հիշողության օպտիմալացում:**
+      Հատկությունները և մեթոդները պահպանվում են մեկ անգամ `prototype`-ում, ինչը նվազեցնում է հիշողության օգտագործումը։
+   
+   2. **Կոդի վերաօգտագործում:**
+      Prototype-ը թույլ է տալիս կիսել ընդհանուր մեթոդներ և հատկություններ բազմակի օբյեկտների միջև։
+   
+   3. **Ժառանգում (Inheritance):**
+      Prototype-ը թույլ է տալիս ստեղծել ժառանգական կառուցվածքներ։
+   
+   ---
+
