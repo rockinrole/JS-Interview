@@ -2340,3 +2340,112 @@
    - **`reduce`:** Օգտագործեք տվյալները կուտակելու համար մեկ արժեքի մեջ։
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+23. ### Ինչ է տարբերությունը Shallow Copy-ի և Deep Copy-ի միջև?
+   
+   **Shallow Copy**-ն և **Deep Copy**-ն օբյեկտի կամ զանգվածի պատճեններ ստեղծելու երկու մեթոդներ են։ Տարբերությունը կայանում է նրանում, թե ինչպես են նրանք պատճենում տվյալների կառուցվածքը՝ հատկապես բարդ (nested) օբյեկտների դեպքում։
+   
+   ---
+   
+   #### Shallow Copy (Մակերեսային պատճեն)
+   
+   **Shallow Copy**-ն ստեղծում է նոր օբյեկտ կամ զանգված, որը պարունակում է միայն առաջին մակարդակի արժեքների պատճեն։ Եթե օբյեկտը կամ զանգվածը պարունակում են այլ օբյեկտներ կամ զանգվածներ, դրանք պատճենվում են միայն որպես հղում (reference), այլ ոչ թե արժեք։
+   
+   #### Օրինակ
+   
+   ```javascript
+   const original = { name: "John", address: { city: "New York" } };
+   const shallowCopy = { ...original };
+   
+   shallowCopy.name = "Alice";
+   shallowCopy.address.city = "Los Angeles";
+   
+   console.log(original.name); // "John" (անփոփոխ է)
+   console.log(original.address.city); // "Los Angeles" (փոխվել է)
+   ```
+   
+   #### Նկարագրություն
+   - **Primitive արժեքները** պատճենվում են որպես արժեք։
+   - **Հղումային տիպերը** (օբյեկտներ, զանգվածներ) պատճենվում են որպես հղում։
+   
+   #### Օգտագործվող մեթոդներ
+   - Spread օպերատոր (`...`):
+     ```javascript
+     const shallowCopy = { ...original };
+     const shallowArrayCopy = [...array];
+     ```
+   - `Object.assign`:
+     ```javascript
+     const shallowCopy = Object.assign({}, original);
+     ```
+   
+   ---
+   
+   #### Deep Copy (Խոր պատճեն)
+   
+   **Deep Copy**-ն ստեղծում է նոր օբյեկտ կամ զանգված՝ ռեկուրսիվ կերպով պատճենելով բոլոր մակարդակները։ Բոլոր հղումային տիպերը պատճենվում են որպես անկախ նոր օբյեկտներ կամ զանգվածներ։
+   
+   #### Օրինակ
+   
+   ```javascript
+   const original = { name: "John", address: { city: "New York" } };
+   
+   const deepCopy = JSON.parse(JSON.stringify(original));
+   
+   deepCopy.name = "Alice";
+   deepCopy.address.city = "Los Angeles";
+   
+   console.log(original.name); // "John" (անփոփոխ է)
+   console.log(original.address.city); // "New York" (անփոփոխ է)
+   ```
+   
+   ### Նկարագրություն
+   - Բոլոր մակարդակները պատճենվում են որպես անկախ արժեքներ։
+   - Հիմնական արժեքները և բարդ կառուցվածքները փոխկապակցված չեն մնում։
+   
+   #### Օգտագործվող մեթոդներ
+   - **`JSON.parse(JSON.stringify())`:** Հեշտ մեթոդ է, բայց չի աջակցում ֆունկցիաներ կամ `undefined` արժեքներ։
+     ```javascript
+     const deepCopy = JSON.parse(JSON.stringify(original));
+     ```
+   - **Ռեկուրսիա:** Մանրակրկիտ մոտեցում, որը հարմարեցված է բարդ կառուցվածքների համար։
+     ```javascript
+     function deepClone(obj) {
+       if (obj === null || typeof obj !== "object") {
+         return obj;
+       }
+   
+       const copy = Array.isArray(obj) ? [] : {};
+       for (let key in obj) {
+         if (obj.hasOwnProperty(key)) {
+           copy[key] = deepClone(obj[key]);
+         }
+       }
+       return copy;
+     }
+   
+     const deepCopy = deepClone(original);
+     ```
+   - **Լիբրարիաներ (e.g., Lodash):**
+     ```javascript
+     const _ = require('lodash');
+     const deepCopy = _.cloneDeep(original);
+     ```
+   
+   ---
+   
+   ## Տարբերությունները
+   
+   | **Հատկանիշ**           | **Shallow Copy**                             | **Deep Copy**                                |
+   |-------------------------|-----------------------------------------------|---------------------------------------------|
+   | **Մակարդակ**           | Պատճենում է միայն առաջին մակարդակը          | Պատճենում է բոլոր մակարդակները              |
+   | **Հղումներ**           | Խոր կառուցվածքների հղումները պահպանվում են   | Խոր կառուցվածքները լիովին պատճենվում են     |
+   | **Արագություն**         | Ավելի արագ                                  | Ավելի դանդաղ (ռեկուրսիվ ընթացքը)            |
+   | **Օգտագործման դեպքեր** | Հեշտ և մակերեսային փոփոխությունների համար   | Բարդ և խորը կառուցվածքների պատճենման համար |
+   
+   ---
+   
+   ## Եզրակացություն
+   
+   - **Shallow Copy**-ն հարմար է այն դեպքերի համար, երբ օբյեկտը կամ զանգվածը չունի nested կառուցվածքներ կամ երբ դուք չեք ցանկանում դրանք փոփոխել։
+   - **Deep Copy**-ն անհրաժեշտ է, երբ պահանջվում է ամբողջական, անկախ պատճեն՝ ներառյալ խորը կառուցվածքները։
