@@ -2624,7 +2624,7 @@
 **[⬆ Back to Top](#բովանդակություն)**
 
 
-25. ### Ինչ է Event Bubbling-ը և Event Capturing-ը JavaScript-ում
+25. ### Ինչ է JavaScript-ում event bubbling-ը և event capturing-ը 
    
    JavaScript-ում իրադարձությունները (events) տարածվում են փաստաթղթում երկու տարբեր ձևերով՝ **Event Bubbling** (իրադարձության բաբլինգ) և **Event Capturing** (իրադարձության կպչում): Այս մեխանիզմները կառավարում են, թե ինչպես է իրադարձությունը շարժվում DOM ծառով՝ տարրերից դեպի վեր կամ ներքև։
 
@@ -2912,7 +2912,7 @@
 
    ---
    
-   ### Առավելություններ
+   #### Առավելություններ
    
    1. **Տիրույթի մեկուսացում:**
       IIFE-ն թույլ է տալիս սահմանել լոկալ փոփոխականներ առանց գլոբալ տիրույթում խառնաշփոթ առաջացնելու։
@@ -2928,3 +2928,710 @@
 **[⬆ Back to Top](#բովանդակություն)**
 
 
+27. ### Ինչ է JavaScript-ում WeakMap-ը և WeakSet-ը?
+
+   **WeakMap**-ը և **WeakSet**-ը JavaScript-ում հատուկ տեսակների տվյալների կառուցվածքներ են, որոնք թույլ են տալիս պահել օբյեկտների հղումներ, առանց դրանց վրա պահել հիշողության կառավարման պատասխանատվությունը։ Դրանք նախագծված են այնպես, որ **garbage collection**-ը (հիշողության ավտոմատ մաքրում) կարողանա ճիշտ աշխատել՝ հանելով այն օբյեկտները, որոնք այլևս օգտագործման մեջ չեն։
+
+   ---
+   
+   #### WeakMap
+   
+   #### Ինչ է WeakMap-ը?
+   
+   **WeakMap**-ը հանդիսանում է տվյալների կառուցվածք, որը թույլ է տալիս պահել "key-value" զույգեր, որտեղ **key**-երը պարտադիր պետք է լինեն օբյեկտներ։
+   
+   #### Հիմնական հատկանիշներ
+   
+   1. **Անվտանգ հղումներ (Weak References):**
+      - `WeakMap`-ի մեջ պահվող օբյեկտները թույլ են կապվում։ Եթե ոչ մի այլ հղում չկա այդ օբյեկտի վրա, ապա այն կհեռացվի **garbage collector**-ի կողմից։
+   
+   2. **Անհասանելի հատկանիշներ:**
+      - `WeakMap`-ի բովանդակությունը անհասանելի է և չի կարող իտերացիայի ենթարկվել։
+   
+   3. **Հասանելիություն միայն մեթոդներով:**
+      - `WeakMap`-ում կարող եք մուտք գործել միայն նրա առաջարկվող մեթոդներով։
+   
+   #### Օգտագործվող մեթոդներ
+   
+   - **`set(key, value)`**: Ավելացնում է "key-value" զույգ։
+   - **`get(key)`**: Վերադարձնում է `key`-ին համապատասխան արժեքը։
+   - **`delete(key)`**: Հեռացնում է "key-value" զույգը։
+   - **`has(key)`**: Վերադարձնում է `true`, եթե `key`-ը առկա է։
+   
+   #### Օրինակ
+   
+   ```javascript
+   let weakMap = new WeakMap();
+   let obj = { name: "John" };
+   
+   weakMap.set(obj, "Developer");
+   
+   console.log(weakMap.get(obj)); // "Developer"
+   console.log(weakMap.has(obj)); // true
+   
+   obj = null; // Հղումը հանվեց
+   
+   // Garbage collector-ը կհեռացնի obj-ը WeakMap-ից։
+   console.log(weakMap.has(obj)); // false
+   ```
+
+   ---
+   
+   #### WeakSet
+   
+   #### Ինչ է WeakSet-ը?
+   
+   **WeakSet**-ը տվյալների կառուցվածք է, որը թույլ է տալիս պահել միայն օբյեկտների հղումներ։
+   
+   #### Հիմնական հատկանիշներ
+   
+   1. **Անվտանգ հղումներ (Weak References):**
+      - WeakSet-ի մեջ պահվող օբյեկտները թույլ են կապվում։ Եթե ոչ մի այլ հղում չկա այդ օբյեկտի վրա, ապա այն կհեռացվի **garbage collector**-ի կողմից։
+   
+   2. **Անհասանելի բովանդակություն:**
+      - WeakSet-ի բովանդակությունը անհասանելի է և չի կարող իտերացիայի ենթարկվել։
+   
+   3. **Կրկնվող արժեքներ:**
+      - WeakSet-ը չի թույլատրում կրկնվող օբյեկտներ։
+   
+   #### Օգտագործվող մեթոդներ
+   
+   - **`add(value)`**: Ավելացնում է նոր արժեք։
+   - **`delete(value)`**: Հեռացնում է արժեքը։
+   - **`has(value)`**: Վերադարձնում է `true`, եթե արժեքը առկա է։
+   
+   #### Օրինակ
+   
+   ```javascript
+   let weakSet = new WeakSet();
+   let obj1 = { id: 1 };
+   let obj2 = { id: 2 };
+   
+   weakSet.add(obj1);
+   weakSet.add(obj2);
+   
+   console.log(weakSet.has(obj1)); // true
+   
+   obj1 = null; // Հղումը հանվեց
+   
+   // Garbage collector-ը կհեռացնի obj1-ը WeakSet-ից։
+   console.log(weakSet.has(obj1)); // false
+   ```
+
+   ---
+   
+   #### WeakMap և WeakSet-ի տարբերությունները Map-ի և Set-ի հետ
+   
+   | **Հատկանիշ**            | **Map**                          | **WeakMap**                      | **Set**                          | **WeakSet**                      |
+   |--------------------------|-----------------------------------|-----------------------------------|-----------------------------------|-----------------------------------|
+   | **Կանոն key-երի համար** | Կարող է լինել ցանկացած արժեք      | Միայն օբյեկտ                    | Կարող է լինել ցանկացած արժեք      | Միայն օբյեկտ                    |
+   | **Garbage Collection**   | Չի աջակցում                      | Աջակցում է                      | Չի աջակցում                      | Աջակցում է                      |
+   | **Իտերացիա**            | Այո                              | Ոչ                               | Այո                              | Ոչ                               |
+   | **Հատկանիշների հասանելիություն** | Բաց (Iterable)                  | Փակ (Non-Iterable)               | Բաց (Iterable)                  | Փակ (Non-Iterable)               |
+
+   ---
+   
+   #### Օգտագործման դեպքեր
+   
+   #### WeakMap-ի Օգտագործում
+   
+   1. **Օբյեկտների Մասնավոր Տվյալների Կառավարում:**
+      WeakMap-ը հաճախ օգտագործվում է օբյեկտների մասնավոր տվյալների պահպանման համար։
+   
+   ```javascript
+   const privateData = new WeakMap();
+   
+   class User {
+     constructor(name) {
+       privateData.set(this, { name });
+     }
+   
+     getName() {
+       return privateData.get(this).name;
+     }
+   }
+   
+   const user = new User("Alice");
+   console.log(user.getName()); // "Alice"
+   ```
+   
+   #### WeakSet-ի Օգտագործում
+   
+   1. **Օբյեկտների Թույլ Հղումների Կառավարում:**
+      WeakSet-ը կարող է օգտագործվել օբյեկտների եզակի հավաքածուներ պահպանելու համար։
+   
+   ```javascript
+   let activeUsers = new WeakSet();
+   
+   let user1 = { id: 1 };
+   let user2 = { id: 2 };
+   
+   activeUsers.add(user1);
+   activeUsers.add(user2);
+   
+   console.log(activeUsers.has(user1)); // true
+   
+   user1 = null;
+   // Garbage collector-ը կհեռացնի user1-ը WeakSet-ից։
+   ```
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+
+28. ### Ինչ է Execution Context-ը JavaScript-ում?
+   
+   **Execution Context**-ը (Կատարման Կոնտեքստ) JavaScript-ի մեխանիզմ է, որը սահմանում է այն միջավայրը, որտեղ կոդը կատարվում է։ Այն ներառում է բոլոր անհրաժեշտ տվյալները, որոնք անհրաժեշտ են կոդի ճիշտ կատարման համար։
+   
+   JavaScript-ում Execution Context-ը հանդիսանում է մի քանի մակարդակով կառավարվող գործընթաց, որը ներառում է փոփոխականների, ֆունկցիաների, և օբյեկտների տիրույթի սահմանումը։
+
+   ---
+   
+   #### Execution Context-ի տեսակները
+   
+   #### 1. Գլոբալ Execution Context (Գլոբալ Կատարման Կոնտեքստ)
+   
+   Սա այն միջավայրն է, որտեղ JavaScript-ի կոդը սկսում է իր կատարման գործընթացը։
+   
+   - Գլոբալ Execution Context-ը ստեղծվում է ծրագրի սկիզբում։
+   - Այն ներառում է գլոբալ տիրույթում հայտարարված փոփոխականները, ֆունկցիաները և `this`-ը։
+   
+   ```javascript
+   var globalVar = "I am global";
+   
+   function globalFunction() {
+     console.log(globalVar);
+   }
+   
+   globalFunction();
+   ```
+   
+   **Նկարագրություն:**
+   - Գլոբալ տիրույթում `this`-ը մատնանշում է `window` օբյեկտը (բրաուզերային միջավայրում) կամ `global` օբյեկտը (Node.js-ում)։
+   
+   #### 2. Ֆունկցիայի Execution Context
+   
+   Ամեն անգամ, երբ կանչվում է ֆունկցիա, ստեղծվում է նոր Execution Context։
+   
+   - Ֆունկցիայի Execution Context-ը ներառում է բոլոր ֆունկցիոնալ փոփոխականները և դրանց արժեքները։
+   - Այն սահմանում է `this`-ը, որը կախված է կանչի վայրից։
+   
+   ```javascript
+   function testFunction() {
+     var localVar = "I am local";
+     console.log(localVar);
+   }
+   
+   testFunction();
+   ```
+   
+   **Նկարագրություն:**
+   - Execution Context-ը ժամանակավոր միջավայր է, որը կոդի կատարման ավարտից հետո ջնջվում է։
+   
+   #### 3. ԵՎԵՍԻԿ Execution Context (Eval Execution Context)
+   
+   Երբ օգտագործվում է `eval()` ֆունկցիան, այն ստեղծում է իր սեփական Execution Context-ը։
+   
+   ```javascript
+   eval("var evalVar = 'I am eval';");
+   console.log(evalVar); // "I am eval"
+   ```
+
+   ---
+   
+   #### Execution Context-ի Կառուցվածքը
+   
+   Execution Context-ը բաղկացած է հետևյալ երեք հիմնական մասերից՝
+   
+   #### 1. Variable Environment (Փոփոխականների Միջավայր)
+   
+   Սա այն տարածքն է, որտեղ պահվում են փոփոխականները և ֆունկցիաները։
+   
+   - Գլոբալ փոփոխականները պահվում են գլոբալ տիրույթում։
+   - Լոկալ փոփոխականները պահվում են ֆունկցիայի տիրույթում։
+   
+   ```javascript
+   function demo() {
+     var x = 10;
+     let y = 20;
+     const z = 30;
+   }
+   ```
+   
+   #### 2. Lexical Environment (Լեքսիկական Միջավայր)
+   
+   Սա ներառում է բոլոր լեքսիկական տիրույթները, որտեղ հայտարարվել են փոփոխականները։
+   
+   ```javascript
+   function outer() {
+     var outerVar = "I am outer";
+   
+     function inner() {
+       console.log(outerVar); // "I am outer"
+     }
+   
+     inner();
+   }
+   
+   outer();
+   ```
+   
+   #### 3. `this` Binding
+   
+   `this`-ի արժեքը սահմանվում է կախված Execution Context-ի տեսակից։
+   
+   - Գլոբալ Execution Context-ում `this`-ը մատնանշում է գլոբալ օբյեկտը։
+     - Ֆունկցիայի Execution Context-ում `this`-ը կախված է կանչի վայրից։
+   
+   ```javascript
+   function showThis() {
+     console.log(this);
+   }
+   
+   showThis(); // Window (բրաուզերում)
+   ```
+
+   ---
+   
+   #### Execution Stack (Կատարման Ստեկ)
+   
+   Execution Context-ները կառավարվում են Execution Stack-ով (կատարման ստեկով):
+   
+   - Ամեն անգամ, երբ կանչվում է նոր ֆունկցիա, նրա Execution Context-ը ավելացվում է ստեկի գագաթին։
+     - Կատարման ավարտից հետո այն հեռացվում է ստեկից։
+   
+   ```javascript
+   function first() {
+     console.log("First function");
+     second();
+   }
+   
+   function second() {
+     console.log("Second function");
+   }
+   
+   first();
+   
+   // Execution Stack:
+   // 1. Գլոբալ Execution Context
+   // 2. first Execution Context
+   // 3. second Execution Context
+   ```
+
+   ---
+   
+   #### Hoisting-ը Execution Context-ում
+   
+   **Hoisting**-ը JavaScript-ի մեխանիզմ է, որտեղ փոփոխականներն ու ֆունկցիաները "տեղափոխվում" են իրենց տիրույթի վերև։
+   
+   ```javascript
+   console.log(a); // undefined
+   var a = 10;
+   
+   hoistedFunction(); // "I am hoisted"
+   
+   function hoistedFunction() {
+     console.log("I am hoisted");
+   }
+   ```
+   
+   ---
+   
+   #### Եզրակացություն
+   
+   Execution Context-ը JavaScript-ի հիմնարար մեխանիզմ է, որը պատասխանատու է կոդի կատարման միջավայրի սահմանման համար։
+   
+   - **Գլոբալ Execution Context:** Ստեղծվում է ծրագրի մեկնարկին և պարունակում է գլոբալ տիրույթը։
+   - **Ֆունկցիայի Execution Context:** Ստեղծվում է ամեն ֆունկցիայի կանչի ժամանակ։
+   - Execution Context-ները կառավարվում են Execution Stack-ի միջոցով։
+
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+
+29. ### Ինչ է Scope-ը և Scope Chain-ը JavaScript-ում?
+   
+   **Scope**-ը JavaScript-ում սահմանում է, թե որտեղից կարող են փոփոխականները, ֆունկցիաները և օբյեկտները հասանելի լինել ծրագրում։ Scope-ը կառավարվում է JavaScript-ի իրականացրած **lexical scoping**-ի միջոցով, որը նշանակում է, որ փոփոխականների հասանելիությունը որոշվում է կոդի կառուցվածքով։
+   
+   Scope-ը ապահովում է կոդի մաքրություն, սահմանափակում է փոփոխականների հասանելիությունը և կանխում է գլոբալ տիրույթի աղտոտումը։
+   
+   ---
+   
+   #### Scope-ի տեսակները JavaScript-ում
+   
+   #### 1. Գլոբալ Scope (Global Scope)
+   
+   Գլոբալ Scope-ում հայտարարված փոփոխականները հասանելի են ծրագրի ցանկացած կետից։
+   
+   - Եթե փոփոխականը հայտարարվում է տիրույթի սահմաններից դուրս, այն դառնում է գլոբալ։
+   - Գլոբալ փոփոխականները JavaScript-ում դառնում են `window` օբյեկտի հատկություն (բրաուզերային միջավայրում)։
+   
+   ```javascript
+   var globalVar = "I am global";
+   
+   function test() {
+     console.log(globalVar); // "I am global"
+   }
+   
+   test();
+   console.log(window.globalVar); // "I am global" (բրաուզերում)
+   ```
+   
+   **Նշում:** Խուսափեք շատ գլոբալ փոփոխականների օգտագործումից, քանի որ դրանք կարող են առաջացնել բախումներ։
+   
+   #### 2. Ֆունկցիայի Scope (Function Scope)
+   
+   Ֆունկցիայի Scope-ում հայտարարված փոփոխականները հասանելի են միայն տվյալ ֆունկցիայի ներսում։
+   
+   - `var`, `let`, և `const`-ով հայտարարված փոփոխականները, եթե գտնվում են ֆունկցիայի ներսում, ունեն լոկալ տիրույթ։
+   
+   ```javascript
+   function localScope() {
+     var localVar = "I am local";
+     console.log(localVar); // "I am local"
+   }
+   
+   localScope();
+   console.log(localVar); // ReferenceError: localVar is not defined
+   ```
+   
+   #### 3. Բլոկի Scope (Block Scope)
+   
+   Բլոկի տիրույթը վերաբերում է `{}` փակագծերով սահմանված ցանկացած բլոկի։
+   
+   - `let` և `const`-ով հայտարարված փոփոխականները ունեն բլոկային տիրույթ։
+   - `var`-ը չի ապահովում բլոկային տիրույթ։
+   
+   ```javascript
+   {
+     let blockScoped = "I am block scoped";
+     const anotherBlockScoped = "Me too";
+     console.log(blockScoped); // "I am block scoped"
+   }
+   
+   console.log(blockScoped); // ReferenceError: blockScoped is not defined
+   ```
+   
+   #### 4. Մոդուլի Scope (Module Scope)
+   
+   ES6 մոդուլներում փոփոխականները ունեն իրենց սեփական տիրույթը, և դրանք հասանելի չեն գլոբալ տիրույթում։
+   
+   ```javascript
+   // module.js
+   export const moduleScoped = "I am module scoped";
+   
+   // main.js
+   import { moduleScoped } from "./module.js";
+   console.log(moduleScoped); // "I am module scoped"
+   ```
+   
+   ---
+   
+   #### Scope Chain-ի նկարագրություն
+   
+   **Scope Chain**-ը սահմանում է, թե ինչպես է JavaScript-ը որոնում փոփոխականները։ Երբ ֆունկցիան կամ բլոկը փորձում է օգտագործել փոփոխական, JavaScript-ը ստուգում է հետևյալ հերթականությամբ՝
+   
+   1. Լոկալ (local) տիրույթում՝ ֆունկցիայի կամ բլոկի ներսում։
+   2. Ծնող ֆունկցիայի կամ բլոկի տիրույթում։
+   3. Գլոբալ տիրույթում։
+   
+   Եթե փոփոխականը չի գտնվում ոչ մի տիրույթում, ստացվում է ReferenceError։
+   
+   #### Օրինակ՝ Scope Chain-ի աշխատանք
+   
+   ```javascript
+   const globalVar = "I am global";
+   
+   function outerFunction() {
+     const outerVar = "I am outer";
+   
+     function innerFunction() {
+       const innerVar = "I am inner";
+       console.log(innerVar); // "I am inner"
+       console.log(outerVar); // "I am outer"
+       console.log(globalVar); // "I am global"
+     }
+   
+     innerFunction();
+   }
+   
+   outerFunction();
+   ```
+   
+   **Նկարագրություն:**
+   - `innerFunction`-ը որոնում է `innerVar` իր սեփական տիրույթում։
+   - Այնուհետև այն որոնում է `outerVar` ծնող ֆունկցիայի տիրույթում։
+   - Վերջում որոնվում է `globalVar` գլոբալ տիրույթում։
+   
+   ---
+   
+   #### Lexical Scope
+   
+   JavaScript-ը օգտագործում է **lexical scoping**, ինչը նշանակում է, որ ֆունկցիայի տիրույթը որոշվում է նրա հայտարարության վայրում, այլ ոչ թե կանչի վայրում։
+   
+   ```javascript
+   function outerFunction() {
+     const outerVar = "I am outer";
+   
+     function innerFunction() {
+       console.log(outerVar); // "I am outer"
+     }
+   
+     return innerFunction;
+   }
+   
+   const myFunction = outerFunction();
+   myFunction();
+   ```
+   
+   Lexical scoping-ի շնորհիվ `innerFunction`-ը միշտ կարող է հասանելի լինել `outerVar`-ին, անկախ նրանից, թե որտեղից է կանչվում։
+   
+   ---
+   
+   #### JavaScript-ի Scope-ի խնդիրները և լուծումները
+   
+   #### 1. Գլոբալ փոփոխականների բախում
+   
+   Գլոբալ փոփոխականները կարող են առաջացնել բախումներ, երբ տարբեր ծրագրավորողներ օգտագործում են նույն փոփոխական անունը։
+   
+   **Լուծում:**
+   - Օգտագործեք IIFE (Immediately Invoked Function Expression):
+   
+   ```javascript
+   (function() {
+     const localVar = "I am local";
+     console.log(localVar); // "I am local"
+   })();
+   
+   console.log(localVar); // ReferenceError: localVar is not defined
+   ```
+   
+   #### 2. `var`-ի խնդիրները բլոկային տիրույթում
+   
+   `var`-ը չունի բլոկային տիրույթ, ինչը կարող է առաջացնել անսպասելի վարքագիծ։
+   
+   **Լուծում:**
+   - Օգտագործեք `let` կամ `const`:
+   
+   ```javascript
+   for (let i = 0; i < 5; i++) {
+     setTimeout(() => console.log(i), 1000); // 0, 1, 2, 3, 4
+   }
+   ```
+   
+   ---
+   
+   #### Scope Chain-ի օպտիմալացում
+   
+  **Փոփոխականները սահմանեք այն տիրույթում, որտեղից դրանք օգտագործվում են ամենաշատը։**
+   
+      ```javascript
+      function optimizedFunction() {
+        const frequentlyUsed = 42;
+   
+        function inner() {
+          console.log(frequentlyUsed);
+        }
+   
+        inner();
+      }
+      ```
+
+
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+
+30. ### Ինչ է JavaScript-ի strict mode-ը?
+
+   **Strict Mode**-ը (Խիստ ռեժիմ) JavaScript-ում հատուկ գործող ռեժիմ է, որը ներկայացվեց ECMAScript 5-ում։ Այն նախատեսված է կոդի սխալների կանխարգելման և JavaScript-ի ավելի անվտանգ վարք ապահովելու համար։
+   
+   Strict Mode-ը սահմանում է խիստ կանոններ՝ արգելելով որոշ գործողություններ և ներկայացնելով լրացուցիչ ստուգումներ։
+   
+   ---
+   
+   #### Ինչպես ակտիվացնել Strict Mode-ը
+   
+   #### Գլոբալ մակարդակում
+   
+   Strict Mode-ը կարելի է ակտիվացնել ամբողջ սկրիպտի համար՝ հայտարարելով `'use strict';` անմիջապես սկրիպտի սկզբում։
+   
+   ```javascript
+   'use strict';
+   
+   x = 10; // ReferenceError: x is not defined
+   ```
+   
+   #### Ֆունկցիայի մակարդակում
+   
+   Strict Mode-ը կարող է կիրառվել միայն ֆունկցիայի ներսում՝ հայտարարելով `'use strict';` ֆունկցիայի մարմնի սկզբում։
+   
+   ```javascript
+   function myFunction() {
+     'use strict';
+     y = 20; // ReferenceError: y is not defined
+   }
+   
+   myFunction();
+   ```
+   
+   #### Մոդուլների մեջ
+   
+   ECMAScript 6 մոդուլները ավտոմատ աշխատում են Strict Mode-ով, այնպես որ անհրաժեշտ չէ այն հայտարել։
+   
+   ---
+   
+   #### Strict Mode-ի առանձնահատկությունները
+   
+   1. **Փոփոխականների հայտարումը պարտադիր է:**
+      Անհայտարարված փոփոխականներ օգտագործելու փորձը առաջացնում է ReferenceError։
+   
+      ```javascript
+      'use strict';
+   
+      myVar = 100; // ReferenceError: myVar is not defined
+      ```
+   
+   2. **Սխալ գրությունների կանխում:**
+      Strict Mode-ը օգնում է կանխել փոփոխականների անվանական սխալները։
+   
+      ```javascript
+      'use strict';
+   
+      const obj = { name: "John" };
+      Object.defineProperty(obj, "age", { writable: false, value: 30 });
+   
+      obj.age = 25; // TypeError: Cannot assign to read-only property 'age'
+      ```
+   
+   3. **Արգելված կրկնակի սեփական անուններ:**
+      Strict Mode-ը չի թույլատրում ֆունկցիաների պարամետրերի կամ օբյեկտների կրկնվող անուններ։
+   
+      ```javascript
+      'use strict';
+   
+      function myFunc(a, a) {
+        // SyntaxError: Duplicate parameter name not allowed in this context
+      }
+      ```
+   
+   4. **`this` արժեքի սահմանափակում:**
+      Strict Mode-ում `this`-ը անորոշ համատեքստերում (undefined) սահմանվում է որպես `undefined` և ոչ թե գլոբալ օբյեկտ։
+   
+      ```javascript
+      'use strict';
+   
+      function myFunc() {
+        console.log(this);
+      }
+   
+      myFunc(); // undefined
+      ```
+   
+   5. **Արգելում է `with` հայտարարությունը:**
+      `with` հայտարարությունը արգելված է, քանի որ այն բարդացնում է փոփոխականների որոնումը։
+   
+      ```javascript
+      'use strict';
+   
+      with (Math) {
+        // SyntaxError: Strict mode code may not include a with statement
+        x = cos(2);
+      }
+      ```
+   
+   6. **Արգելված է ֆունկցիաների հռչակումը բլոկի ներսում:**
+      Բլոկի ներսում ֆունկցիա հռչակելը strict mode-ում առաջացնում է սխալ։
+   
+      ```javascript
+      'use strict';
+   
+      if (true) {
+        function test() {} // SyntaxError
+      }
+      ```
+   
+   ---
+   
+   #### Strict Mode-ը նորագույն JavaScript տարբերակներում
+   
+   1. **ECMAScript 6 (ES6) և մոդուլներ:**
+      ES6-ից սկսած, բոլոր մոդուլները ավտոմատ աշխատում են Strict Mode-ով։ Այսինքն՝ դուք կարիք չունեք հայտարել `'use strict';` մոդուլի սկիզբում։
+   
+      ```javascript
+      // module.js (ES6 Module)
+      export function test() {
+        console.log(this); // undefined, because of strict mode
+      }
+      ```
+   
+   2. **Class-եր:**
+      ES6-ից սկսած բոլոր դասերը (classes) նույնպես աշխատում են Strict Mode-ով՝ անկախ նրանից, արդյոք դուք օգտագործում եք `'use strict';`։
+   
+      ```javascript
+      class Person {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+   
+      const person = new Person("John");
+      console.log(person.name); // "John"
+      ```
+   
+   ---
+   
+   #### Strict Mode-ը Framework-ներում
+   
+   1. **React:**
+      React-ում Strict Mode-ը օգտագործվում է `React.StrictMode` կոմպոնենտի միջոցով՝ ծրագրային սխալները հայտնաբերելու և դեպրեկացված մեթոդները կանխելու համար։
+   
+      ```javascript
+      import React from 'react';
+      import ReactDOM from 'react-dom';
+   
+      ReactDOM.render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+      );
+      ```
+   
+      React.StrictMode-ը չի ազդեցում արտադրական կոդի վրա։
+   
+   2. **Angular:**
+      Angular-ում strict mode-ը կարող է միացվել `ng new` հրամանի ժամանակ՝ ավելացնելով `--strict` դրոշակը։
+   
+      ```bash
+      ng new my-app --strict
+      ```
+   
+      Strict Mode-ը Angular-ում ավելացնում է լրացուցիչ ստուգումներ `TypeScript`-ի և Angular-ի կոնֆիգուրացիաներում։
+   
+   3. **Vue.js:**
+      Vue 3-ը աջակցում է ES6 մոդուլներին և ավտոմատ աշխատում է Strict Mode-ով, քանի որ այն կառուցված է մոդուլային կառուցվածքի վրա։
+   
+   ---
+   
+   #### Strict Mode-ի առավելություններ
+   
+   1. **Կոդի ընթեռնելիություն և կանխատեսելիություն:**
+      Strict Mode-ը օգնում է խուսափել չնախատեսված վարքագծից։
+   
+   2. **Կատարողականության բարելավում:**
+      Շատ բրաուզերներ օպտիմալացնում են Strict Mode-ի կոդը, քանի որ այն ապահովում է կանխատեսելի վարքագիծ։
+   
+   3. **Սխալների հայտնաբերում վաղ փուլում:**
+      Strict Mode-ը ներկայացնում է սինտաքսային և կատարման ստուգումներ, որոնք կանխում են սխալները։
+   
+   4. **Ավելի անվտանգ կոդ:**
+      Strict Mode-ը արգելում է վտանգավոր գործողությունները, ինչպիսիք են՝ անտեսանելի գլոբալ փոփոխականների ստեղծումը։
+   
+   ---
+   
+   #### Եզրակացություն
+   
+   Strict Mode-ը հզոր գործիք է, որը թույլ է տալիս JavaScript-ում գրել ավելի անվտանգ, ընթեռնելի և կանխատեսելի կոդ։ Այն հատկապես օգտակար է խոշոր նախագծերում, որտեղ սխալների հայտնաբերումն ու կառավարմանը մեծ դեր ունեն։ Ժամանակակից ֆրեյմվորքները և ES6+ մոդուլները ավտոմատ աշխատում են Strict Mode-ով՝ դարձնելով այն անբաժան JavaScript ծրագրավորման գործընթացից։
+
+
+**[⬆ Back to Top](#բովանդակություն)**
