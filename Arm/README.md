@@ -3635,3 +3635,398 @@
 
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+31. ### Ինչ է CORS-ը և ինչու է այն կարևոր?
+
+   **CORS** (Cross-Origin Resource Sharing)-ը մեխանիզմ է, որը թույլ է տալիս բրաուզերին ապահով կերպով օգտագործել ռեսուրսներ (օրինակ՝ տվյալներ, նկարներ, API) մի ծագման (origin) սերվերից, որը տարբերվում է այն սերվերից, որտեղից բեռնվել է կայքը։
+   
+   CORS-ը հիմնված է HTTP վերնագրերի վրա, որոնք սահմանում են, թե որ ծագումներն են թույլատրվում մուտք գործել սերվերի ռեսուրսներին և ինչպես։
+
+   ---
+   
+   #### Ինչու է CORS-ը կարևոր?
+   
+   CORS-ը շատ կարևոր է վեբ անվտանգության համար, քանի որ այն պաշտպանում է վեբ ծրագրերը չարտոնված մուտքերից։
+   
+   #### Առանց CORS-ի
+   Առանց CORS-ի, JavaScript-ը բրաուզերում չէր կարող օգտագործել այլ ծագման API-ներ։
+   
+   #### Օրինակ՝ խնդրի առաջացում
+   
+   Եթե ձեր կայքը բեռնվել է `https://example.com`-ից և փորձում է մուտք գործել API, որը գտնվում է `https://api.anotherdomain.com`-ում, բրաուզերը ավտոմատ կերպով արգելափակում է այդ հարցումը, եթե CORS կարգավորումները թույլ չեն տալիս։
+   
+   ```javascript
+   fetch('https://api.anotherdomain.com/data')
+     .then(response => response.json())
+     .then(data => console.log(data))
+     .catch(error => console.error('Error:', error));
+   ```
+   
+   #### Արդյունք՝ առանց CORS-ի
+   
+   ```plaintext
+   Access to fetch at 'https://api.anotherdomain.com/data' from origin 'https://example.com' has been blocked by CORS policy.
+   ```
+   
+   ---
+   
+   #### Ինչպես է աշխատում CORS-ը
+   
+   CORS-ը սահմանվում է սերվերի կողմից։ Երբ բրաուզերը ուղարկում է հարցում այլ ծագման, սերվերը պատասխանում է համապատասխան HTTP վերնագրերով, որոնք բրաուզերին ասում են՝ արդյոք թույլատրվում է մուտքը։
+   
+   #### HTTP վերնագրեր
+   
+   1. **`Access-Control-Allow-Origin`:**
+      Սահմանում է, թե որ ծագումները կարող են մուտք գործել ռեսուրսին։
+   
+      ```http
+      Access-Control-Allow-Origin: https://example.com
+      ```
+   
+   2. **`Access-Control-Allow-Methods`:**
+      Սահմանում է թույլատրելի HTTP մեթոդները՝ օրինակ `GET`, `POST`, `PUT`, և այլն։
+   
+      ```http
+      Access-Control-Allow-Methods: GET, POST
+      ```
+   
+   3. **`Access-Control-Allow-Headers`:**
+      Սահմանում է թույլատրելի մաքսային վերնագրերը։
+   
+      ```http
+      Access-Control-Allow-Headers: Content-Type, Authorization
+      ```
+   
+   4. **`Access-Control-Allow-Credentials`:**
+      Թույլ է տալիս ուղարկել հավաստագրեր (credentials), ինչպիսիք են `cookies`-երը։
+   
+      ```http
+      Access-Control-Allow-Credentials: true
+      ```
+   
+   ---
+   
+   #### Հիմնական գործընթաց
+   
+   #### 1. **Simple Requests (Պարզ հարցումներ)**
+   
+   Եթե հարցումը բրաուզերի կողմից համարվում է "պարզ", այն անմիջապես ուղարկվում է սերվերին։
+   
+   **Պարզ հարցումների պայմաններ:**
+   - HTTP մեթոդը `GET`, `POST`, կամ `HEAD` է։
+   - Բովանդակության տեսակը `text/plain`, `application/x-www-form-urlencoded`, կամ `multipart/form-data` է։
+   
+   #### 2. **Preflight Requests (Նախնական հարցումներ)**
+   
+   Եթե հարցումը պարունակում է մաքսային վերնագրեր կամ օգտագործում է ոչ "պարզ" մեթոդներ (օրինակ՝ `PUT`, `DELETE`), բրաուզերը նախ ուղարկում է "Preflight" հարցում։
+   
+   ```http
+   OPTIONS /data HTTP/1.1
+   Host: api.anotherdomain.com
+   Origin: https://example.com
+   Access-Control-Request-Method: POST
+   Access-Control-Request-Headers: Content-Type
+   ```
+   
+   Սերվերի պատասխան՝
+   
+   ```http
+   HTTP/1.1 200 OK
+   Access-Control-Allow-Origin: https://example.com
+   Access-Control-Allow-Methods: GET, POST
+   Access-Control-Allow-Headers: Content-Type
+   ```
+
+   ---
+   
+   #### Ինչպես կարգավորել CORS-ը
+   
+   CORS-ը սահմանվում է սերվերի կողմում։
+   
+   #### Օրինակ՝ Node.js + Express
+   
+   ```javascript
+   const express = require('express');
+   const cors = require('cors');
+   const app = express();
+   
+   // Թույլատրել բոլոր ծագումները
+   app.use(cors());
+   
+   // Կամ՝ սահմանափակել կոնկրետ ծագումներ
+   app.use(cors({ origin: 'https://example.com' }));
+   
+   app.get('/data', (req, res) => {
+     res.json({ message: 'This is CORS-enabled!' });
+   });
+   
+   app.listen(3000, () => console.log('Server running on port 3000'));
+   ```
+
+   ---
+   
+   #### CORS-ի առավելություններ
+   
+   1. **Անվտանգություն:**
+      - CORS-ը պաշտպանում է սերվերը չարտոնված ծագումներից։
+   
+   2. **Կառավարում:**
+      - Սերվերը կարող է վերահսկել, թե որ ծագումները կամ մեթոդները կարող են մուտք գործել ռեսուրսին։
+   
+   3. **Ճկունություն:**
+      - Թույլ է տալիս սահմանափակել կամ ընդլայնել մուտք գործելու հնարավորությունները՝ կախված ծրագրի կարիքներից։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+32. ### Ինչ է Module Pattern-ը JavaScript-ում?
+
+   
+   **Module Pattern**-ը JavaScript-ում կիրառվում է կոդի կազմակերպման և տվյալների մեկուսացման համար։ Այն թույլ է տալիս ստեղծել մասնավոր (private) փոփոխականներ և մեթոդներ՝ միաժամանակ տրամադրելով հրապարակային (public) ինտերֆեյս։
+   
+   Module Pattern-ը հաճախ օգտագործվում է այնպիսի ծրագրերում, որտեղ անհրաժեշտ է պահպանել տվյալների գաղտնիությունը և կանխել գլոբալ տիրույթի աղտոտումը։
+
+   ---
+   
+   #### Ինչու է Module Pattern-ը կարևոր?
+   
+   1. **Գլոբալ տիրույթի աղտոտման կանխում:**
+      - Module Pattern-ը օգնում է պահպանել փոփոխականները լոկալ տիրույթում՝ կանխելով բախումները։
+   
+   2. **Տվյալների գաղտնիություն (Encapsulation):**
+      - Փոփոխականներն ու ֆունկցիաները, որոնք չպետք է հասանելի լինեն դրսից, կարող են մնալ մասնավոր։
+   
+   3. **Կոդի կազմակերպում:**
+      - Ապահովում է կոդի բաժանումը տրամաբանական միավորների, ինչը դարձնում է ծրագիրը ավելի ընթեռնելի և կառավարելի։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Module Pattern-ը?
+   
+   Module Pattern-ը օգտագործում է **Immediately Invoked Function Expression (IIFE)** մեխանիզմը՝ մեկուսացված տիրույթ ստեղծելու համար։
+   
+   #### Կառուցվածք
+   
+   ```javascript
+   const Module = (function() {
+     // Մասնավոր փոփոխականներ և մեթոդներ
+     let privateVar = "This is private";
+   
+     function privateMethod() {
+       console.log(privateVar);
+     }
+   
+     // Հանրային ինտերֆեյս
+     return {
+       publicMethod: function() {
+         console.log("Accessing private method:");
+         privateMethod();
+       },
+   
+       setPrivateVar: function(value) {
+         privateVar = value;
+       },
+   
+       getPrivateVar: function() {
+         return privateVar;
+       }
+     };
+   })();
+   
+   // Օգտագործում
+   Module.publicMethod(); // "Accessing private method:" "This is private"
+   Module.setPrivateVar("New private value");
+   console.log(Module.getPrivateVar()); // "New private value"
+   ```
+
+   ---
+   
+   #### Module Pattern-ի առավելություններ
+   
+   1. **Գաղտնիություն:**
+      - Մասնավոր փոփոխականները և մեթոդները հասանելի չեն լինում դրսից։
+   
+   2. **Կոդի մաքրություն:**
+      - Կոդը բաժանվում է տրամաբանական հատվածների՝ հեշտացնելով նրա ընթեռնելիությունը։
+   
+   3. **Կրկնակի օգտագործում:**
+      - Module Pattern-ը հիանալի է տրամաբանական միավորներ կառուցելու և վերաօգտագործելու համար։
+   
+   4. **Անկախություն:**
+      - Կանխում է գլոբալ փոփոխականների բախումը։
+   
+   ---
+   
+   #### Module Pattern-ի թերությունները
+   
+   1. **Դանդաղություն մեծ ծրագրերում:**
+      - Ամեն նոր մոդուլ ստեղծելիս կարող է ավելացնել լրացուցիչ բեռնավորվածություն։
+   
+   2. **Մասնավոր տարրերի թեստավորում:**
+      - Մասնավոր փոփոխականներն ու մեթոդները դժվար է թեստավորել։
+   
+   3. **Կոդի բարդություն:**
+      - Module Pattern-ը կարող է ավելացնել կոդի բարդությունը սկսնակների համար։
+   
+   ---
+   
+   #### Module Pattern-ի օգտագործման դեպքեր
+   
+   1. **Տվյալների անվտանգ պահպանում:**
+      Օրինակ՝ վավերացնող կոդում կամ API բանալիները գաղտնի պահելու համար։
+   
+   2. **Կոդի կազմակերպում մեծ ծրագրերում:**
+      Օգտագործվում է մեծ ծրագրերում կոդը բաժանելու տրամաբանական մոդուլների։
+   
+   3. **Տեղեկատվական վահանակներ (Dashboard):**
+      Ապահովում է տեսողական և գործառնական տվյալների կառավարման մոդուլներ։
+   
+   ---
+   
+   #### Module Pattern-ը ES6-ում
+   
+   ES6-ում Module Pattern-ը հաճախ կիրառվում է `export` և `import` սինտաքսի միջոցով։
+   
+   #### Օրինակ՝ ES6 Մոդուլ
+   
+   ```javascript
+   // module.js
+   const privateVar = "This is private";
+   
+   function privateMethod() {
+     console.log(privateVar);
+   }
+   
+   export function publicMethod() {
+     console.log("Accessing private method:");
+     privateMethod();
+   }
+   ```
+   
+   ```javascript
+   // main.js
+   import { publicMethod } from './module.js';
+   
+   publicMethod(); // "Accessing private method:" "This is private"
+   ```
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+33. ### Ինչ տարբերություն կա mutable և immutable օբյեկտների միջև?
+   
+   **Mutable** և **Immutable** օբյեկտները երկու հիմնական կատեգորիաներ են JavaScript-ում, որոնք սահմանում են, թե ինչպես են տվյալները պահվում և փոփոխվում հիշողության մեջ։
+   
+   - **Mutable (Փոփոխվող):** Օբյեկտները, որոնք կարելի է փոխել տեղում՝ առանց նոր instance ստեղծելու։
+   - **Immutable (Անփոփոխ):** Օբյեկտները, որոնք չեն փոխվում տեղում, և ցանկացած փոփոխություն ստեղծում է նոր instance։
+
+   ---
+   
+   #### Mutable օբյեկտներ
+   
+   #### Նկարագրություն
+   
+   Mutable օբյեկտները թույլ են տալիս տվյալները փոխել տեղում՝ առանց նոր instance ստեղծելու։
+   
+   - Օբյեկտների և զանգվածների մեծ մասը JavaScript-ում mutable են։
+   - Փոփոխությունները ազդում են օբյեկտի բոլոր հղումների վրա, որոնք պահում են նույն instance-ը։
+   
+   #### Օրինակ
+   
+   ```javascript
+   let obj = { name: "Alice" };
+   obj.name = "Bob";
+   
+   console.log(obj.name); // "Bob"
+   ```
+   
+   ```javascript
+   let array = [1, 2, 3];
+   array.push(4);
+   
+   console.log(array); // [1, 2, 3, 4]
+   ```
+   
+   #### Առավելություններ
+   
+   1. Ավելի քիչ հիշողություն է օգտագործվում, քանի որ փոփոխությունները կատարվում են տեղում։
+   2. Արդյունավետ են մեծ տվյալների կառավարման համար։
+   
+   #### Թերություններ
+   
+   1. Կարող է առաջացնել սխալներ՝ փոփոխությունների հետ կապված, եթե նույն instance-ը օգտագործվում է տարբեր վայրերում։
+   2. Հիշողության կառավարումը դառնում է ավելի բարդ։
+   
+   ---
+   
+   #### Immutable օբյեկտներ
+   
+   #### Նկարագրություն
+   
+   Immutable օբյեկտները չեն փոփոխվում տեղում։ Օրինակ՝ յուրաքանչյուր փոփոխություն ստեղծում է նոր instance։
+   
+   - Primitive արժեքները (օրինակ՝ `string`, `number`, `boolean`) immutable են JavaScript-ում։
+   - Նույնպես կարելի է ստեղծել immutable կառուցվածքներ `Object.freeze` կամ հատուկ գրադարանների միջոցով։
+   
+   #### Օրինակ
+   
+   #### Primitive արժեքներ
+   
+   ```javascript
+   let str = "Hello";
+   let newStr = str + " World";
+   
+   console.log(str); // "Hello"
+   console.log(newStr); // "Hello World"
+   ```
+   
+   #### Object.freeze()
+   
+   ```javascript
+   const obj = Object.freeze({ name: "Alice" });
+   obj.name = "Bob"; // Չի փոխվում
+   
+   console.log(obj.name); // "Alice"
+   ```
+   
+   #### Using Libraries (Immutable.js)
+   
+   ```javascript
+   const { Map } = require('immutable');
+   
+   const map1 = Map({ name: "Alice" });
+   const map2 = map1.set("name", "Bob");
+   
+   console.log(map1.get("name")); // "Alice"
+   console.log(map2.get("name")); // "Bob"
+   ```
+   
+   #### Առավելություններ
+   
+   1. Ավելի հեշտ է հետևել փոփոխություններին, քանի որ փոփոխություններն են ստեղծում նոր instance։
+   2. Կանխում է անցանկալի կողմնակի ազդեցությունները։
+   3. Հարմար է ֆունկցիոնալ ծրագրավորման մոտեցումների համար։
+   
+   #### Թերություններ
+   
+   1. Արդյունավետության խնդիրներ մեծ տվյալների հետ աշխատելիս, քանի որ փոփոխությունները ստեղծում են նոր instance։
+   2. Ավելի շատ հիշողություն է օգտագործվում։
+   
+   ---
+   
+   #### Հիմնական Տարբերությունները
+   
+   | **Հատկանիշ**             | **Mutable**                          | **Immutable**                      |
+   |---------------------------|---------------------------------------|-------------------------------------|
+   | **Փոփոխություն տեղում**    | Այո                                   | Ոչ                                 |
+   | **Instance-ի քանակը**     | Միայն մեկ                            | Յուրաքանչյուր փոփոխություն ստեղծում է նորը |
+   | **Կողմնակի ազդեցություններ** | Հնարավոր է                           | Չի լինում                           |
+   | **Օրինակներ**             | Object, Array                        | String, Number, Immutable.js        |
+
+   ---
+
+
+**[⬆ Back to Top](#բովանդակություն)**
+
