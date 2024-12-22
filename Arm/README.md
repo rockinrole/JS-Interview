@@ -4351,3 +4351,118 @@
    ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+
+36. ### Ինչ է Higher Order Function-ը JavaScript-ում?
+
+   
+   **Higher Order Function**-ը (HOF) JavaScript-ում ֆունկցիա է, որը կատարում է առնվազն հետևյալ գործողություններից մեկը՝
+   
+   1. Ստանում է մեկ կամ ավելի ֆունկցիա որպես պարամետր։
+   2. Վերադարձնում է նոր ֆունկցիա որպես արդյունք։
+   
+   Higher Order Function-ները կարևոր են ֆունկցիոնալ ծրագրավորման մեջ և թույլ են տալիս գրել մաքուր, մոդուլային և վերաօգտագործելի կոդ։
+
+   ---
+   
+   #### Հիմնական առանձնահատկություններ
+   
+   1. **Ֆունկցիաներ՝ որպես առաջին կարգի օբյեկտներ (First-Class Objects):**
+      JavaScript-ում ֆունկցիաները կարող են պահվել փոփոխականներում, փոխանցվել որպես պարամետրեր և վերադարձվել այլ ֆունկցիաներից։
+   
+   2. **Հարմարավետություն կոմպոզիցիայի համար:**
+      Higher Order Function-ները հնարավորություն են տալիս կոդը բաժանել փոքր, վերաօգտագործելի մասերի։
+   
+   ---
+   
+   #### Օրինակներ
+   
+   #### 1. Օրինակ՝ Փոխանցում ֆունկցիա որպես պարամետր
+   
+   ```javascript
+   function greet(name) {
+     return `Hello, ${name}!`;
+   }
+   
+   function processUserInput(callback) {
+     const name = "Alice";
+     console.log(callback(name));
+   }
+   
+   processUserInput(greet);
+   // Output: "Hello, Alice!"
+   ```
+   
+   #### 2. Օրինակ՝ Վերադարձնում է ֆունկցիա
+   
+   ```javascript
+   function multiplier(factor) {
+     return function(number) {
+       return number * factor;
+     };
+   }
+   
+   const double = multiplier(2);
+   const triple = multiplier(3);
+   
+   console.log(double(5)); // 10
+   console.log(triple(5)); // 15
+   ```
+   
+   #### 3. Array Higher Order Functions
+   
+   JavaScript-ում ներկառուցված Higher Order Function-ներ են `map`, `filter`, և `reduce` մեթոդները։
+   
+   #### Օրինակ՝ `map`
+   
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   const squared = numbers.map(num => num * num);
+   
+   console.log(squared); // [1, 4, 9, 16, 25]
+   ```
+   
+   #### Օրինակ՝ `filter`
+   
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   const evenNumbers = numbers.filter(num => num % 2 === 0);
+   
+   console.log(evenNumbers); // [2, 4]
+   ```
+   
+   #### Օրինակ՝ `reduce`
+   
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   const sum = numbers.reduce((acc, num) => acc + num, 0);
+   
+   console.log(sum); // 15
+   ```
+   
+   ---
+   
+   #### Ինչու օգտագործել Higher Order Function-ներ
+   
+   1. **Կոդի վերաօգտագործում:**
+      Higher Order Function-ները թույլ են տալիս մեկ անգամ գրել ընդհանուր լուծումներ և օգտագործել դրանք տարբեր դեպքերում։
+   
+   2. **Կոդի մաքրություն և ընթեռնելիություն:**
+      Կոդը դառնում է ավելի ընթեռնելի և մոդուլային՝ բաժանելով խնդիրները ավելի փոքր մասերի։
+   
+   3. **Դինամիկություն:**
+      Higher Order Function-ները թույլ են տալիս ծրագրին դինամիկ կերպով փոխել իր վարքագիծը։
+
+   ---
+   
+   #### Հիմնական տարբերություններ սովորական ֆունկցիաներից
+   
+   | **Հատկանիշ**              | **Սովորական Ֆունկցիա**                | **Higher Order Function**            |
+   |---------------------------|--------------------------------------|--------------------------------------|
+   | **Ֆունկցիա ստանում է որպես պարամետր** | Ոչ                                   | Այո                                  |
+   | **Վերադարձնում է ֆունկցիա** | Ոչ                                   | Այո                                  |
+   | **Օգտագործման դեպքեր**     | Հիմնական հաշվարկներ                  | Մոդուլային և վերաօգտագործելի լուծումներ |
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
