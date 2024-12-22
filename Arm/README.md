@@ -4030,3 +4030,187 @@
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+
+34. ### Ինչպես են աշխատում setters և getters JavaScript-ում?
+
+   **Setters** և **Getters**-ը JavaScript-ում հատուկ մեթոդներ են, որոնք օգտագործվում են օբյեկտների հատկությունների արժեքները ստանալու (get) կամ սահմանելու (set) համար։ Դրանք թույլ են տալիս վերահսկել, թե ինչպես են հատկությունները ընթերցվում կամ փոփոխվում՝ առանց ուղղակիորեն մուտք գործելու տվյալ օբյեկտի հատկությունները։
+   
+   Setters-ը և Getters-ը կիրառվում են, երբ ցանկանում ենք ապահովել տվյալների գաղտնիություն և վերահսկում, ինչպես նաև տրամադրել հատկությունների հաշվարկային կամ վավերացված արժեքներ։
+   
+   ---
+   
+   #### Սինտաքս
+   
+   Setters և Getters օգտագործելու համար ստեղծվում են համապատասխան `get` և `set` մեթոդներ օբյեկտի հատկությունների վրա։
+   
+   ```javascript
+   let obj = {
+     // Getter մեթոդ
+     get propertyName() {
+       return this._propertyName;
+     },
+   
+     // Setter մեթոդ
+     set propertyName(value) {
+       this._propertyName = value;
+     }
+   };
+   ```
+   
+   - **`get` մեթոդը** օգտագործվում է հատկության արժեքը ստանալու համար։
+   - **`set` մեթոդը** օգտագործվում է հատկության արժեքը փոփոխելու համար։
+   - Սովորաբար `_propertyName`-ը կիրառվում է որպես մասնավոր փոփոխական (private variable), որը պահում է հատկության արժեքը։
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### 1. Հիմնական Օրինակ
+   
+   Ստեղծենք օբյեկտ, որը պարունակում է `name` հատկություն, որը կարելի է ստանալ կամ փոփոխել `get` և `set` մեթոդներով։
+   
+   ```javascript
+   let user = {
+     _name: "Alice",
+   
+     // Getter մեթոդ՝ արժեք ստանալու համար
+     get name() {
+       return this._name;
+     },
+   
+     // Setter մեթոդ՝ արժեք փոփոխելու համար
+     set name(value) {
+       if (value.length > 0) {
+         this._name = value;
+       } else {
+         console.log("Name cannot be empty");
+       }
+     }
+   };
+   
+   console.log(user.name); // "Alice"
+   user.name = "Bob";
+   console.log(user.name); // "Bob"
+   user.name = ""; // "Name cannot be empty"
+   ```
+   
+   #### 2. Հաշվարկային Հատկություններ
+   
+   Setters և Getters մեթոդները կարող են կիրառվել հաշվարկային հատկությունների համար, ինչպիսիք են տարածքը կամ ծավալը։
+   
+   ```javascript
+   let rectangle = {
+     _width: 0,
+     _height: 0,
+   
+     // Getter՝ տարածքը հաշվարկելու համար
+     get area() {
+       return this._width * this._height;
+     },
+   
+     // Setter՝ լայնությունը սահմանելու համար
+     set width(value) {
+       this._width = value;
+     },
+   
+     // Setter՝ բարձրությունը սահմանելու համար
+     set height(value) {
+       this._height = value;
+     }
+   };
+   
+   rectangle.width = 10;
+   rectangle.height = 5;
+   console.log(rectangle.area); // 50
+   ```
+   
+   #### 3. Օգտագործումը class-երում
+   
+   Setters և Getters մեթոդները հաճախ օգտագործվում են JavaScript-ի class-երում՝ օբյեկտների վրա հավելյալ վերահսկում ապահովելու համար։
+   
+   ```javascript
+   class User {
+     constructor(name) {
+       this._name = name;
+     }
+   
+     // Getter մեթոդ՝ արժեք ստանալու համար
+     get name() {
+       return this._name;
+     }
+   
+     // Setter մեթոդ՝ արժեք փոփոխելու համար
+     set name(value) {
+       if (value.length > 0) {
+         this._name = value;
+       } else {
+         console.log("Name cannot be empty");
+       }
+     }
+   }
+   
+   let user = new User("Alice");
+   console.log(user.name); // "Alice"
+   user.name = "Charlie";
+   console.log(user.name); // "Charlie"
+   user.name = ""; // "Name cannot be empty"
+   ```
+
+   ---
+   
+   #### Ինչու օգտագործել Setters և Getters
+   
+   Setters և Getters մեթոդները JavaScript-ում ունեն մի քանի կարևոր առավելություններ՝
+   
+   1. **Տվյալների Վավերացում (Validation):**
+      - `set` մեթոդի միջոցով կարող եք սահմանափակել, թե ինչ արժեքներ կարող են մուտք գործել օբյեկտի հատկությանը։
+   
+      ```javascript
+      let user = {
+        _age: 0,
+   
+        set age(value) {
+          if (value > 0) {
+            this._age = value;
+          } else {
+            console.log("Age must be a positive number");
+          }
+        },
+   
+        get age() {
+          return this._age;
+        }
+      };
+   
+      user.age = 25;
+      console.log(user.age); // 25
+      user.age = -5; // "Age must be a positive number"
+      ```
+   
+   2. **Կոդի Կարդացելիություն (Readability):**
+      - Օգտագործելով `get` և `set`, կարող եք գրել ավելի ընթեռնելի կոդ՝ առանց մեթոդներ կանչելու։
+   
+      ```javascript
+      console.log(user.age); // Ավելի ընթեռնելի, քան user.getAge()
+      ```
+   
+   3. **Հաշվարկային Հատկություններ (Computed Properties):**
+      - Կարող եք օգտագործել `get` մեթոդը՝ հաշվողական հատկություններ դինամիկ ստեղծելու համար։
+   
+   4. **Մասնավոր Տվյալների Կառավարում:**
+      - Մասնավոր հատկությունները հնարավոր է կառավարել միայն `get` և `set` մեթոդների միջոցով։
+   
+   ---
+   
+   #### Թերություններ
+   
+   1. **Բարդություն:**
+      - Setters և Getters-ը կարող են ավելի բարդ թվալ սկսնակ ծրագրավորողների համար։
+   
+   2. **Արդյունավետության խնդիրներ:**
+      - Եթե `get` կամ `set` մեթոդները կատարում են բարդ հաշվարկներ, դրանք կարող են նվազեցնել ծրագրի արդյունավետությունը։
+   
+   ---
+
+
+**[⬆ Back to Top](#բովանդակություն)**
