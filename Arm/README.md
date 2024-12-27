@@ -156,8 +156,12 @@
    console.log(typeof 'Hello'); // "string"
    console.log(typeof true); // "boolean"
    ```
+---
 
-    **[⬆ Back to Top](#բովանդակություն)**
+**[⬆ Back to Top](#բովանդակություն)**
+
+---
+
 
 4. ### Ինչ է NAN և ինչպես կարող ենք հասկանալ, որ արժեքը NAN է
    `NaN` նշանակում է **"անվավեր թիվ"** (invalid number) JavaScript-ում։ Այն առաջանում է այն դեպքում, երբ թվաբանական գործողությունը կամ արժեքի փոխակերպումը չի տալիս վավեր թիվ։
@@ -197,8 +201,12 @@
     Number.isNaN(0o46);     // false (վավեր թիվ է)
     Number.isNaN('123abc'); // false (ոչ մի փոխակերպում չկա)
     ```
+---
 
-    **[⬆ Back to Top](#բովանդակություն)**
+**[⬆ Back to Top](#բովանդակություն)**
+
+---
+
 
 5. ### Ինչ է toString և ինչպես կարող ենք այն օգտագործել
    `toString`-ը JavaScript-ում օբյեկտների և primitive արժեքների մեթոդ է, որը վերադարձնում է տվյալ արժեքի տողի (string) ներկայացումը։ Այն հիմնականում մաս է կազմում `Object.prototype`-ին և հասանելի է գրեթե բոլոր օբյեկտների և արժեքների համար։
@@ -293,8 +301,11 @@
    console.log(String(null));       // "null"
    console.log(String(undefined));  // "undefined"
    ```
-   
-    **[⬆ Back to Top](#բովանդակություն)**
+---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+---
 
 6. ### Ինչ է toNumber և ինչպես կարող ենք այն օգտագործել
    
@@ -419,9 +430,13 @@
       ```javascript
       console.log(parseInt("123abc"));   // 123
       console.log(parseFloat("123.45px")); // 123.45
-      
 
-    **[⬆ Back to Top](#բովանդակություն)**
+
+---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+---
 
 7. ### Ինչ է toBoolean և ինչպես կարող ենք այն օգտագործել
    
@@ -541,9 +556,12 @@
       }
       // Output: ոչինչ չի տպվի
       ```
-
+  
+---
 
    **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 8. ### Ինչ է Coercion և ինչպես կարող ենք այն օգտագործել
    
@@ -668,9 +686,12 @@
       values.forEach(value => console.log(Boolean(value)));
       // Output: false, true, false, true, false, false, true, true
       ```
-         
 
-    **[⬆ Back to Top](#բովանդակություն)**
+---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+---
 
 9. ### Ինչ է boxing-ը
 
@@ -768,9 +789,13 @@
       console.log(str1 == str2);  // true (տիպը փոխակերպվում է)
       console.log(str1 === str2); // false (տիպերը տարբեր են)
       ```
+  
+---
 
+**[⬆ Back to Top](#բովանդակություն)**
 
-    **[⬆ Back to Top](#բովանդակություն)**
+   ---
+
 
 10. ### Ինչ են double equal (==) և triple equal (===) օպերատորները
   
@@ -841,8 +866,11 @@
    - [Abstract Equality Comparison](https://tc39.es/ecma262/#sec-abstract-equality-comparison)
    - [Strict Equality Comparison](https://tc39.es/ecma262/#sec-strict-equality-comparison)
 
+   ---
 
    **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 11. ### Ինչ է hoisting-ը JavaScript-ում?
    **Hoisting**-ը JavaScript-ում այն մեխանիզմն է, որի միջոցով փոփոխականները, ֆունկցիաները և դասերը "բարձրացվում" են իրենց սահմանման տիրույթի վերև՝ դրանց հայտարարված լինելու մասին նախապես տեղեկացնելու նպատակով։ Սակայն միայն հայտարարված լինելը "բարձրացվում" է, ոչ թե նրանց արժեքի նշանակումը։
@@ -936,7 +964,12 @@
    - [Function Declaration Instantiation](https://tc39.es/ecma262/#sec-function-definitions-runtime-semantics-instantiatefunctionobject)
    - [Class Definitions](https://tc39.es/ecma262/#sec-class-definitions-runtime-semantics-classdefinitionevaluation)
 
+
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 12. ### Ինչ տարբերություն կա let, const և var միջև?
    JavaScript-ում փոփոխականները կարելի է հայտարարել երեք հիմնական բանալի բառերով՝ `var`, `let` և `const`։ Թեև դրանք կարող են թվալ նման, դրանք ունեն տարբեր վարքագծեր և սահմանափակումներ, որոնք ազդում են դրանց օգտագործման վրա։
@@ -1054,6 +1087,8 @@
    ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 13. ### Ինչ է closure-ը JavaScript-ում?
    
@@ -1176,6 +1211,8 @@
    ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 14. ### Ինչպես է աշխատում "this" բառը JavaScript-ում?
    
@@ -1310,7 +1347,11 @@
    boundGreet(); // "Jane"
    ```
 
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 15. ### Ինչ է Event Loop-ը JavaScript-ում?
    **Event Loop**-ը JavaScript-ի կարևոր մեխանիզմներից է, որը կառավարում է, թե ինչպես է լեզուն կատարում բազմաբնույթ գործողություններ (tasks), վերլուծում ասինխրոն կոդը և ապահովում ֆունկցիաների ճիշտ հերթական կատարումը։ Այն հանդիսանում է JavaScript-ի **Single-Threaded, Non-Blocking** բնույթի հիմքը։
@@ -1428,8 +1469,12 @@
    4. Event Loop-ը ստուգում է Microtask Queue-ը։ Եթե այն դատարկ չէ, կատարում է Microtask-երը։
    5. Եթե Microtask Queue-ը դատարկ է, Event Loop-ը անցնում է Task Queue-ին։
 
+   ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
 16. ### Ինչ է debounce-ը և throttle-ը JavaScript-ում?
    `debounce` և `throttle` տեխնիկաները օգտագործվում են JavaScript-ում բարձր հաճախականությամբ իրադարձությունների (high-frequency events) օպտիմալացման համար։ Դրանք կարևոր են այն դեպքերում, երբ իրադարձությունները կարող են կանչվել շատ հաճախ և հանգեցնել կատարողականության անկման։
    
@@ -1513,9 +1558,12 @@
    | **Նպատակ**                    | Կատարել ֆունկցիան միայն իրադարձության դադարից հետո։| Կատարել ֆունկցիան ֆիքսված միջակայքով։ |
    | **Կիրառման դեպքեր**            | Input դաշտի իրադարձություններ։                | Scroll կամ resize իրադարձություններ։ |
    | **Կատարում հաճախականությամբ**  | Փոքր հաճախականությամբ։                         | Ֆիքսված ժամանակային միջակայքով։      |
-   
+
+   ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 17. ### Ինչ է Promise-ը և ինչպես է այն աշխատում?
    
@@ -1677,10 +1725,13 @@
    
    ---
 
-
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
+
 18. ### Ինչպես է աշխատում async/await-ը JavaScript-ում?
+
+
 **`async/await`**-ը JavaScript-ի կառուցվածք է, որը տրամադրում է ավելի ընթեռնելի սինտաքս Promise-ների հետ աշխատելու համար։ Այն թույլ է տալիս գրել ասինխրոն կոդ, որը կարդացվում է ինչպես սինխրոն կոդ։
    
    - **`async` ֆունկցիան**: Վերադարձնում է `Promise`։
@@ -1797,9 +1848,14 @@
    
    3. **Generational գաղափարների պարզեցում**:
       - `async/await`-ը փոխարինում է Generators-ի բարդ սինտաքսը։
-   
+
+
+   ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
 19. ### Ինչ է DOM-ը և ինչ տարբերություն կա HTML-ի և DOM-ի միջև?
 **DOM (Document Object Model)**-ը ծրագրային ինտերֆեյս է, որը ներկայացնում է HTML կամ XML փաստաթղթի կառուցվածքը ծառի տեսքով։ DOM-ը հնարավորություն է տալիս ծրագրավորողներին փոխել, ավելացնել կամ հեռացնել փաստաթղթի տարրերը ծրագրային մակարդակում։
    
@@ -1914,7 +1970,11 @@
    3. **Ավտոմատ թարմացում:**
       Փոփոխությունները անմիջապես արտացոլվում են փաստաթղթում։
 
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 20. ### Ինչ է ES6 մոդուլը և ինչպես է այն աշխատում?
 **ES6 մոդուլները** (Modules) JavaScript-ում ներկայացնում են կոդի վերաօգտագործման (reuse) և կոդի կառուցվածքի (organization) արդիական մեխանիզմ։ Մոդուլները թույլ են տալիս բաժանել կոդը տարբեր ֆայլերի և վերահսկել, թե որոնք են ներմուծվում և արտահանվում։
@@ -2053,7 +2113,11 @@
    console.log(divide(6, 3));   // 2
    ```
 
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 21. ### Ինչ է JavaScript-ում call, apply, bind մեթոդները?
    
@@ -2190,12 +2254,14 @@
    console.log(Math.min.apply(null, numbers)); // 2
    ```
 
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
 
-22. ### Ինչ է `map`, `filter` և `reduce` մեթոդները JavaScript-ում?
-   
+   ---
 
-   
+22. ### Ինչ է `map`, `filter` և `reduce` մեթոդները JavaScript-ում?
+
    JavaScript-ում `map`, `filter` և `reduce` մեթոդները օգտագործվում են զանգվածների (arrays) վրա գործողությունների համար։ Դրանք օգնում են գրել կարճ, ընթեռնելի և ֆունկցիոնալ կոդ՝ զերծ մանուալ լուպերից։
    
    - **`map`**: Արտացոլում է զանգվածը՝ վերադարձնելով նոր զանգված, որի յուրաքանչյուր տարր հաշվարկվում է callback ֆունկցիայի միջոցով։
@@ -2339,7 +2405,11 @@
    - **`filter`:** Օգտագործեք տարրերը ֆիլտրելու համար։
    - **`reduce`:** Օգտագործեք տվյալները կուտակելու համար մեկ արժեքի մեջ։
 
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 23. ### Ինչ է տարբերությունը Shallow Copy-ի և Deep Copy-ի միջև?
    
@@ -2450,7 +2520,11 @@
    - **Shallow Copy**-ն հարմար է այն դեպքերի համար, երբ օբյեկտը կամ զանգվածը չունի nested կառուցվածքներ կամ երբ դուք չեք ցանկանում դրանք փոփոխել։
    - **Deep Copy**-ն անհրաժեշտ է, երբ պահանջվում է ամբողջական, անկախ պատճեն՝ ներառյալ խորը կառուցվածքները։
 
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 
 24. ### Ինչ է Prototype-ը JavaScript-ում?
@@ -2623,6 +2697,7 @@
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 25. ### Ինչ է JavaScript-ում event bubbling-ը և event capturing-ը 
    
@@ -2789,9 +2864,11 @@
    - **Event Bubbling**: Իրադարձությունը տարածվում է ներքևից վեր։
    - **Event Capturing**: Իրադարձությունը տարածվում է վերևից ներքև։
 
+   ---
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 26. ### Ինչ է IIFE (Immediately Invoked Function Expression)?
    
@@ -2923,10 +3000,11 @@
    3. **Անմիջական կատարում:**
       IIFE-ն ապահովում է ֆունկցիայի անմիջապես կատարումը՝ չսպասելով հետագա կանչերին։
 
-
+   ---
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 27. ### Ինչ է JavaScript-ում WeakMap-ը և WeakSet-ը?
 
@@ -3075,8 +3153,11 @@
    // Garbage collector-ը կհեռացնի user1-ը WeakSet-ից։
    ```
 
+   ---
+
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 28. ### Ինչ է Execution Context-ը JavaScript-ում?
    
@@ -3244,9 +3325,11 @@
    - **Ֆունկցիայի Execution Context:** Ստեղծվում է ամեն ֆունկցիայի կանչի ժամանակ։
    - Execution Context-ները կառավարվում են Execution Stack-ի միջոցով։
 
+   ---
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 29. ### Ինչ է Scope-ը և Scope Chain-ը JavaScript-ում?
    
@@ -3436,9 +3519,11 @@
       }
       ```
 
-
+   ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 
 30. ### Ինչ է JavaScript-ի strict mode-ը?
@@ -3633,8 +3718,12 @@
    
    Strict Mode-ը հզոր գործիք է, որը թույլ է տալիս JavaScript-ում գրել ավելի անվտանգ, ընթեռնելի և կանխատեսելի կոդ։ Այն հատկապես օգտակար է խոշոր նախագծերում, որտեղ սխալների հայտնաբերումն ու կառավարմանը մեծ դեր ունեն։ Ժամանակակից ֆրեյմվորքները և ES6+ մոդուլները ավտոմատ աշխատում են Strict Mode-ով՝ դարձնելով այն անբաժան JavaScript ծրագրավորման գործընթացից։
 
+   ---
+
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
 
 31. ### Ինչ է CORS-ը և ինչու է այն կարևոր?
 
@@ -3780,6 +3869,8 @@
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
+
 32. ### Ինչ է Module Pattern-ը JavaScript-ում?
 
    
@@ -3915,6 +4006,8 @@
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
+
 33. ### Ինչ տարբերություն կա mutable և immutable օբյեկտների միջև?
    
    **Mutable** և **Immutable** օբյեկտները երկու հիմնական կատեգորիաներ են JavaScript-ում, որոնք սահմանում են, թե ինչպես են տվյալները պահվում և փոփոխվում հիշողության մեջ։
@@ -4030,6 +4123,7 @@
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 34. ### Ինչպես են աշխատում setters և getters JavaScript-ում?
 
@@ -4215,6 +4309,7 @@
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 35. ### Ինչ է տարբերություն function declaration-ի և function expression-ի միջև?
 
@@ -4352,6 +4447,7 @@
 
 **[⬆ Back to Top](#բովանդակություն)**
 
+   ---
 
 36. ### Ինչ է Higher Order Function-ը JavaScript-ում?
 
@@ -4466,3 +4562,1231 @@
    ---
 
 **[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+37. ### Ինչ է Currying-ը JavaScript-ում?
+
+   **Currying**-ը ֆունկցիաների փոխակերպման տեխնիկա է, որը թույլ է տալիս ֆունկցիան ընդունել մեկական պարամետր՝ փոխարենը միանգամից ստանալ բոլոր պարամետրերը։ Currying-ի դեպքում ֆունկցիան վերադարձնում է նոր ֆունկցիա, որը սպասում է հաջորդ պարամետրի փոխանցմանը։
+   
+   Currying-ը հաճախ օգտագործվում է ֆունկցիոնալ ծրագրավորման մեջ, որտեղ մեծ ուշադրություն է դարձվում փոքր և մոդուլային ֆունկցիաների օգտագործմանը։
+
+   ---
+   
+   #### Ինչու օգտագործել Currying
+   
+   1. **Կոդի վերաօգտագործում:**
+      - Currying-ը թույլ է տալիս ստեղծել մասնագիտացված ֆունկցիաներ ավելի մեծ ֆունկցիաներից։
+   
+   2. **Կոդի ընթեռնելիություն:**
+      - Currying-ի միջոցով ֆունկցիաների լոգիկան դառնում է ավելի պարզ և ընթեռնելի։
+   
+   3. **Ֆունկցիոնալ ծրագրավորում:**
+      - Ֆունկցիոնալ ծրագրավորման մոտեցումները հաճախ հիմնված են Currying-ի վրա, ինչը հեշտացնում է ֆունկցիաների կոմպոզիցիան։
+
+   ---
+   
+   #### Օրինակ՝ Currying-ի պարզ կիրառում
+   
+   ```javascript
+   function multiply(a) {
+     return function(b) {
+       return a * b;
+     };
+   }
+   
+   const multiplyByTwo = multiply(2);
+   console.log(multiplyByTwo(5)); // 10
+   
+   const multiplyByThree = multiply(3);
+   console.log(multiplyByThree(5)); // 15
+   ```
+   
+   #### Բացատրություն
+   
+   - Առաջին կանչով `multiply(2)` ֆունկցիան պահպանում է `a = 2` արժեքը։
+     - Վերադարձված ֆունկցիան սպասում է երկրորդ պարամետրի `b`-ի արժեքին։
+   
+   ---
+   
+   #### Օրինակ՝ Ներդրված ֆունկցիաների օգտագործում
+   
+   Currying-ի դեպքում կարող եք ստեղծել ավելի բարդ կառուցվածքներ՝ վերբեռնելով բազմաթիվ պարամետրեր։
+   
+   ```javascript
+   function add(a) {
+     return function(b) {
+       return function(c) {
+         return a + b + c;
+       };
+     };
+   }
+   
+   console.log(add(1)(2)(3)); // 6
+   ```
+   
+   ---
+   
+   #### Currying՝ Օգտագործելով Arrow Function
+   
+   JavaScript-ում կարող եք օգտագործել Arrow Function-ներ՝ Currying-ը պարզեցնելու համար։
+   
+   ```javascript
+   const add = a => b => c => a + b + c;
+   
+   console.log(add(1)(2)(3)); // 6
+   ```
+   
+   ---
+   
+   #### Առավելություններ
+   
+   1. **Հարմար է մասնակի կիրառման համար (Partial Application):**
+      - Currying-ը թույլ է տալիս ստեղծել նոր ֆունկցիաներ՝ տալով միայն մի մաս պարամետրերի։
+   
+      ```javascript
+      const greet = greeting => name => `${greeting}, ${name}!`;
+   
+      const sayHello = greet("Hello");
+      console.log(sayHello("Alice")); // "Hello, Alice!"
+      console.log(sayHello("Bob"));   // "Hello, Bob!"
+      ```
+   
+   2. **Կոմպոզիցիա (Composition):**
+      - Currying-ը հեշտացնում է ֆունկցիաների կոմպոզիցիան, որտեղ մեկ ֆունկցիայի արդյունքը փոխանցվում է որպես պարամետր մյուսին։
+   
+   3. **Լոգիկայի պարզեցում:**
+      - Բարդ ֆունկցիաները կարելի է բաժանել ավելի փոքր մասերի՝ ավելի հեշտ վերահսկելի դարձնելու համար։
+
+   ---
+   
+   #### Currying-ի և Normale ֆունկցիաների տարբերությունը
+   
+   | **Հատկանիշ**                | **Նորմալ Ֆունկցիա**                   | **Curried Ֆունկցիա**                 |
+   |-----------------------------|--------------------------------------|-------------------------------------|
+   | **Պարամետրերի փոխանցում**    | Բոլոր պարամետրերը միանգամից           | Մեկական պարամետր                  |
+   | **Կառուցվածք**               | Պարզ                                  | Ներդրված ֆունկցիաներ               |
+   | **Օգտագործման դեպքեր**       | Սովորական ֆունկցիաներ                 | Ֆունկցիոնալ ծրագրավորում, մասնակի կիրառություն |
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+
+38. ### Ինչ է JavaScript-ի Task Queue-ը?
+
+   
+   **Task Queue**-ը JavaScript-ում կարևոր մասն է, որը կառավարում է այն գործառույթների հերթականությունը, որոնք սպասում են կատարման։ Task Queue-ը աշխատում է **Event Loop**-ի հետ համատեղ՝ ապահովելով ասինխրոն գործառույթների ճիշտ կատարման հաջորդականությունը։
+   
+   Task Queue-ը հիմնականում պատասխանատու է այն callback-ների կառավարման համար, որոնք պետք է կատարվեն, երբ առաջադրանքը (task) ավարտվում է, օրինակ՝ **setTimeout**, **setInterval**, կամ **DOM Event**-եր։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Task Queue-ը
+   
+   1. Երբ ծրագրում հանդիպում է ասինխրոն գործողություն (օրինակ՝ **setTimeout**, **fetch**), այն փոխանցվում է համապատասխան **Web API**-ին կամ **Node.js API**-ին։
+   2. Ասինխրոն գործողությունը կատարվում է API-ի կողմից։
+   3. Երբ գործողությունը ավարտվում է, նրա callback-ը տեղափոխվում է Task Queue։
+   4. **Event Loop**-ը ստուգում է՝ արդյոք Call Stack-ը (կատարման ստեկը) դատարկ է։
+   5. Եթե Call Stack-ը դատարկ է, Event Loop-ը տեղափոխում է Task Queue-ից առաջին callback-ը Call Stack և կատարում այն։
+
+   ---
+   
+   #### Task Queue-ի հիմնական բաղադրիչները
+   
+   1. **Call Stack (Կատարման Ստեկ):**
+      - Կառավարում է սինխրոն կոդը։ Սկզբում բոլոր ֆունկցիաները կատարվում են այստեղ։
+   
+   2. **Web APIs:**
+      - Սինխրոն գործողությունների համար պատասխանատու են JavaScript-ի միջավայրի առաջարկած API-ները։
+   
+   3. **Task Queue:**
+      - Սպասում են callback-երը, մինչև Call Stack-ը դատարկվի։
+   
+   4. **Event Loop:**
+      - Ապահովում է Task Queue-ից Call Stack-ի միջև համագործակցությունը։
+
+   ---
+   
+   #### Task Queue-ի Օրինակ
+   
+   ```javascript
+   console.log("Start");
+   
+   setTimeout(() => {
+     console.log("Callback from setTimeout");
+   }, 0);
+   
+   console.log("End");
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Start
+   End
+   Callback from setTimeout
+   ```
+   
+   **Բացատրություն:**
+   1. "Start"-ը և "End"-ը անմիջապես կատարվում են, քանի որ դրանք սինխրոն կոդ են։
+   2. **setTimeout**-ը փոխանցում է callback-ը Task Queue-ին, բայց այն կատարվում է միայն այն բանից հետո, երբ Call Stack-ը դատարկվում է։
+
+   ---
+   
+   #### Task Queue-ի և Microtask Queue-ի Տարբերությունները
+   
+   JavaScript-ում գոյություն ունի նաև **Microtask Queue**։ Այն հիմնականում օգտագործվում է **Promises**, **MutationObserver**-ի և այլնի համար։
+   
+   #### Հիմնական տարբերությունները
+   
+   | **Հատկանիշ**              | **Task Queue**                         | **Microtask Queue**                     |
+   |---------------------------|----------------------------------------|----------------------------------------|
+   | **Օգտագործվում է**         | setTimeout, setInterval, I/O          | Promises, MutationObserver             |
+   | **Կատարման առաջնահերթություն** | Կատարվում է հետո                     | Կատարվում է անմիջապես                  |
+   
+   #### Օրինակ՝ Task Queue vs Microtask Queue
+   
+   ```javascript
+   console.log("Start");
+   
+   setTimeout(() => {
+     console.log("Task Queue");
+   }, 0);
+   
+   Promise.resolve().then(() => {
+     console.log("Microtask Queue");
+   });
+   
+   console.log("End");
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Start
+   End
+   Microtask Queue
+   Task Queue
+   ```
+   
+   **Բացատրություն:**
+   - **Promises**-ի callback-ը (Microtask) կատարվում է մինչև Task Queue-ի callback-ը։
+   
+   ---
+   
+   #### Ինչու է Task Queue-ը կարևոր
+   
+   1. **Ասինխրոնության կառավարում:**
+      - Task Queue-ը ապահովում է ասինխրոն գործողությունների կարգավորված կատարման հաջորդականությունը։
+   
+   2. **UI-ի արձագանքման բարելավում:**
+      - Task Queue-ը թույլ է տալիս բրաուզերին վերաանկարչել UI-ն և կատարել ֆունկցիաներ՝ առանց սառեցնելու։
+   
+   3. **Կոդի կանխատեսելիություն:**
+      - Կատարումն ավելի հեշտ է հասկանալ Event Loop-ի և Task Queue-ի մեխանիզմների շնորհիվ։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+
+39. ### Ինչ է JavaScript-ում տարբեր սխալների տեսակները (SyntaxError, ReferenceError, TypeError)?
+
+   JavaScript-ում սխալները (errors) հանդիպում են կոդի գրության կամ կատարման ընթացքում և բաժանվում են տարբեր տեսակների՝ կախված սխալի բնույթից։ Ճիշտ հասկանալը, թե ինչ են նշանակում տարբեր սխալները, կարևոր է ծրագրավորողների համար, քանի որ դա օգնում է գտնել և շտկել խնդիրները։
+
+   ---
+   
+   #### 1. SyntaxError (Սինտաքսի սխալ)
+   
+   **SyntaxError**-ը տեղի է ունենում, երբ կոդի սինտաքսը սխալ է, այսինքն՝ JavaScript-ի շարժիչը չի կարողանում հասկանալ գրված կոդը։
+   
+   #### Երբ է առաջանում
+   - Երբ բացակայում են անհրաժեշտ փակագծերը կամ կետադրական նշանները։
+   - Երբ օգտագործվում են ոչ վավեր JavaScript-ի սինտաքս։
+   
+   #### Օրինակներ
+   
+   #### Բացակայում է փակագիծը
+   ```javascript
+   console.log("Hello World"; // SyntaxError: Unexpected token ')'
+   ```
+   
+   #### Անվավեր ֆունկցիա
+   ```javascript
+   function() {
+     console.log("Invalid function");
+   } // SyntaxError: Function statements require a name
+   ```
+   
+   #### Արգելված վերապահված բառերի օգտագործում
+   ```javascript
+   var let = 5; // SyntaxError: Unexpected strict mode reserved word
+   ```
+   
+   #### Ինչպես շտկել
+   - Ուշադիր ստուգեք կոդի սինտաքսը։
+   - Օգտագործեք IDE-ներ կամ լինթերներ, որոնք կարող են գտնել սինտաքսի սխալները։
+
+   ---
+   
+   #### 2. ReferenceError (Հղման սխալ)
+   
+   **ReferenceError**-ը տեղի է ունենում, երբ փորձ է կատարվում մուտք գործել փոփոխական կամ ֆունկցիա, որը չի հայտարարվել։
+   
+   #### Երբ է առաջանում
+   - Երբ փոփոխականը կամ ֆունկցիան չի հայտարարվել, բայց օգտագործվում է։
+   - Երբ փորձ է կատարվում մուտք գործել բլոկի տիրույթում հայտարարված փոփոխականը՝ տիրույթից դուրս։
+   
+   #### Օրինակներ
+   
+   #### Փոփոխականը չի հայտարարվել
+   ```javascript
+   console.log(x); // ReferenceError: x is not defined
+   ```
+   
+   #### Փոփոխականը հասանելի չէ իր տիրույթից դուրս
+   ```javascript
+   {
+     let y = 10;
+   }
+   console.log(y); // ReferenceError: y is not defined
+   ```
+   
+   #### Տառասխալ փոփոխականի անունում
+   ```javascript
+   let name = "Alice";
+   console.log(nam); // ReferenceError: nam is not defined
+   ```
+   
+   #### Ինչպես շտկել
+   - Համոզվեք, որ փոփոխականները կամ ֆունկցիաները հայտարարված են նախքան դրանց օգտագործումը։
+   - Ստուգեք տառասխալները։
+   - Օգտագործեք JavaScript-ի լինթեր՝ տիրույթային խնդիրները հայտնաբերելու համար։
+   
+   ---
+   
+   #### 3. TypeError (Տիպի սխալ)
+   
+   **TypeError**-ը տեղի է ունենում, երբ գործողությունը անհնար է օբյեկտի կամ տվյալների տիպի համար։
+   
+   #### Երբ է առաջանում
+   - Երբ փորձ է կատարվում կանչել ֆունկցիա, որը գոյություն չունի։
+   - Երբ փորձ է կատարվում հատկություն մուտքագրել `undefined` կամ `null` արժեքի վրա։
+   - Երբ գործողությունը չի համընկնում տվյալների տիպի հետ։
+   
+   #### Օրինակներ
+   
+   #### Փորձ կանչել ֆունկցիա, որը գոյություն չունի
+   ```javascript
+   let num = 5;
+   num(); // TypeError: num is not a function
+   ```
+   
+   #### Փորձ մուտք գործել հատկություն `undefined`-ի վրա
+   ```javascript
+   let obj;
+   console.log(obj.name); // TypeError: Cannot read properties of undefined (reading 'name')
+   ```
+   
+   #### Չհամապատասխանող գործողություն
+   ```javascript
+   let x = 10;
+   x.toUpperCase(); // TypeError: x.toUpperCase is not a function
+   ```
+   
+   #### Ինչպես շտկել
+   - Համոզվեք, որ գործողությունները համընկնում են տվյալների տիպի հետ։
+   - Ստուգեք, որ օբյեկտները և դրանց հատկությունները ճիշտ կերպով հասանելի են։
+   - Արժեքները ստուգեք `undefined` կամ `null` լինելու համար՝ նախքան դրանց վրա գործողություններ կատարելը։
+   
+   ```javascript
+   let obj;
+   if (obj && obj.name) {
+     console.log(obj.name);
+   }
+   ```
+   
+   ---
+
+   #### Այլ Սխալների Տեսակներ
+   
+   JavaScript-ում կան նաև այլ սխալներ, որոնք արժե նշել.
+   
+   1. **RangeError:**
+      - Առաջանում է, երբ արժեքը դուրս է գալիս թույլատրելի միջակայքից։
+      ```javascript
+      let num = 1;
+      num.toFixed(100); // RangeError: toFixed() digits argument must be between 0 and 100
+      ```
+   
+   2. **EvalError:**
+      - Առաջանում է, երբ ոչ ճիշտ կերպով օգտագործվում է `eval()`-ը (հազվադեպ հանդիպող սխալ):
+   
+   3. **URIError:**
+      - Առաջանում է, երբ URI-ի հետ կապված մեթոդներում (օր.`decodeURIComponent`) օգտագործվում է անվավեր սինտաքս։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+40. ### Ինչ է JavaScript-ի Garbage Collection-ը?
+
+   
+   **Garbage Collection**-ը (GC) JavaScript-ի մեխանիզմ է, որը ավտոմատ կերպով կառավարում է հիշողությունը՝ ազատելով այն օբյեկտներից, որոնք այլևս օգտագործման մեջ չեն։ JavaScript-ը ունի ավտոմատ հիշողության կառավարում, ինչը նշանակում է, որ ծրագրավորողները պարտադիր չեն, որ մաքրեն չօգտագործվող տվյալները, բայց պետք է հասկանան GC-ի աշխատանքը՝ օպտիմալ կոդ գրելու համար։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Garbage Collection-ը
+   
+   JavaScript-ը օգտագործում է **Reachability (Հասանելիություն)**-ի վրա հիմնված ալգորիթմներ՝ որոշելու, թե որ օբյեկտները պետք է հեռացվեն հիշողությունից։
+   
+   #### Reachability-ի մեխանիզմը
+   
+   Օբյեկտը համարվում է հասանելի, եթե այն կարող է հասանելի լինել ծրագրում որևէ կետից։ Հիմնական հասանելի օբյեկտներն են՝
+   
+   1. **Global Object:**
+      - Օրինակ՝ բրաուզերում դա `window` օբյեկտն է։
+   
+   2. **Կատարման Stack (Call Stack):**
+      - Ակտիվ ֆունկցիաների փոփոխականները և պարամետրերը։
+   
+   3. **Կապված Closure-ներ:**
+      - Ֆունկցիաները, որոնք պահպանում են իրենց ծնող տիրույթները։
+   
+   Հասանելի օբյեկտները կոչվում են **Root**։ Եթե օբյեկտը չի կարող հասանելի լինել ոչ մի Root-ից, այն համարվում է անօգտագործվող և ենթակա է հեռացման։
+
+   ---
+   
+   #### Garbage Collection-ի Ալգորիթմներ
+   
+   JavaScript-ի շարժիչները (օրինակ՝ V8-ը) օգտագործում են տարբեր ալգորիթմներ Garbage Collection-ը իրականացնելու համար։
+   
+   #### 1. Mark-and-Sweep
+   
+   Այս հիմնական ալգորիթմը հետևյալ քայլերով է աշխատում՝
+   
+   1. Սկսում է Root օբյեկտներից։
+   2. Նշում (mark) է բոլոր օբյեկտները, որոնք հասանելի են Root-ներից։
+   3. Հեռացնում է բոլոր չնշված օբյեկտները։
+   
+   ```plaintext
+   Root -> Object A -> Object B
+   Root -> Object C
+   
+   Object D (չնշված) -> Հեռացվում է
+   ```
+   
+   #### 2. Reference Counting
+   
+   Reference Counting ալգորիթմը հետևում է, թե քանի հղում ունի յուրաքանչյուր օբյեկտ։ Եթե օբյեկտի հղումների քանակը դառնում է 0, այն հեռացվում է։
+   
+   #### Թերություններ
+   - **Circular References (Շրջանակային հղումներ):** Reference Counting-ը չի կարողանում կառավարել շրջանաձև հղումները։
+   
+   ```javascript
+   let objA = {};
+   let objB = {};
+   
+   objA.ref = objB;
+   objB.ref = objA;
+   
+   objA = null;
+   objB = null;
+   // Շրջանաձև հղումները խանգարում են հեռացմանը
+   ```
+   
+   ---
+   
+   #### Garbage Collection-ի Օրինակ
+   
+   ```javascript
+   function createObject() {
+     let obj = { name: "Alice" };
+     console.log(obj.name);
+   }
+   
+   createObject();
+   // obj-ն այլևս հասանելի չէ և կհանվի հիշողությունից
+   ```
+
+   ---
+   
+   #### Circular References-ի Կառավարում
+   
+   JavaScript-ի ժամանակակից շարժիչները (օրինակ՝ V8) կարողանում են հայտնաբերել և կառավարել շրջանաձև հղումները։
+   
+   ```javascript
+   let objA = { name: "A" };
+   let objB = { name: "B" };
+   
+   objA.ref = objB;
+   objB.ref = objA;
+   
+   objA = null;
+   objB = null;
+   // Շրջանաձև հղումները կհանվեն V8-ի միջոցով
+   ```
+
+   ---
+   
+   #### Ավելի Օպտիմալ Հիշողության Կառավարում
+   
+   Թեև Garbage Collection-ը ավտոմատ է, ծրագրավորողները կարող են գրել ավելի արդյունավետ կոդ՝ հետևյալ սկզբունքներով՝
+   
+   1. **Օգտագործվող Օբյեկտների Մաքրում:**
+      - Ազատեք փոփոխականների հղումները, երբ դրանք այլևս չեն օգտագործվում։
+   
+      ```javascript
+      let obj = { name: "Alice" };
+      obj = null; // Հղումը հանվեց
+      ```
+   
+   2. **Closure-ների ճիշտ օգտագործում:**
+      - Խուսափեք closure-ներում ավելորդ տվյալների պահպանումից։
+   
+   3. **Զգուշություն Circular References-ից:**
+      - Կարիք չկա ձեռքով կառավարել դրանք ժամանակակից շարժիչներում, բայց լավ պրակտիկան կարևոր է։
+   
+   ---
+   
+   #### Թերություններ
+   
+   1. **Ավելի մեծ ծախսեր մեծ ծրագրերում:**
+      - Garbage Collection-ը կարող է ժամանակ առնել՝ դանդաղեցնելով ծրագիրը։
+   
+   2. **Հիշողության արտահոսք (Memory Leak):**
+      - Չնայած GC-ը ավտոմատ է, սխալ կոդը կարող է ստեղծել հիշողության արտահոսք։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+41. ### Ինչ է Promise Chaining-ը JavaScript-ում?
+
+   
+   **Promise Chaining**-ը JavaScript-ում տեխնիկա է, որը թույլ է տալիս կապել մի քանի ասինխրոն գործողություններ այնպես, որ հաջորդ գործողությունը կատարվի նախորդի ավարտից հետո։ Դա իրականացվում է `then()` մեթոդի միջոցով, որը վերադարձնում է նոր **Promise**, որը կարելի է շարունակում օգտագործել հաջորդ `then()`-ում։
+   
+   Promise Chaining-ը օգնում է խուսափել "callback hell"-ից, որտեղ ներդրված callback-ների պատճառով կոդը դառնում է դժվար ընթեռնելի։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Promise Chaining-ը
+   
+   Promise Chaining-ը կառուցվում է մի քանի քայլերից. յուրաքանչյուր `then()`-ը սպասում է նախորդ Promise-ի կատարմանը և վերադարձնում է նոր Promise:
+   
+   #### Օրինակ
+   
+   ```javascript
+   const fetchData = () => {
+     return new Promise((resolve, reject) => {
+       setTimeout(() => resolve("Step 1: Data fetched"), 1000);
+     });
+   };
+   
+   fetchData()
+     .then((result) => {
+       console.log(result);
+       return "Step 2: Data processed";
+     })
+     .then((result) => {
+       console.log(result);
+       return "Step 3: Finished";
+     })
+     .then((result) => {
+       console.log(result);
+     })
+     .catch((error) => {
+       console.error("Error:", error);
+     });
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Step 1: Data fetched
+   Step 2: Data processed
+   Step 3: Finished
+   ```
+   
+   ---
+   
+   #### Promise Chaining-ի Հատկություններ
+   
+   1. **Վերադարձնում է նոր Promise:**
+      - `then()`-ը միշտ վերադարձնում է նոր Promise, որը հնարավոր է շարունակել։
+   
+   2. **Error Handling (Սխալների կառավարում):**
+      - Եթե որևէ Promise ավարտվում է սխալով, ապա հաջորդ `then()`-ները չեն կատարվում, և սխալը փոխանցվում է `catch()`-ին։
+   
+   #### Օրինակ՝ Error Handling
+   
+   ```javascript
+   const stepOne = () => {
+     return new Promise((resolve, reject) => {
+       setTimeout(() => reject("Error in Step 1"), 1000);
+     });
+   };
+   
+   stepOne()
+     .then((result) => {
+       console.log(result);
+       return "Step 2";
+     })
+     .then((result) => {
+       console.log(result);
+     })
+     .catch((error) => {
+       console.error("Caught error:", error);
+     });
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Caught error: Error in Step 1
+   ```
+   
+   ---
+   
+   #### Բարդ Օրինակ՝ Fetch API-ի Օգտագործում
+   
+   Promise Chaining-ը հաճախ կիրառվում է API հարցումների (requests) արդյունքները շղթայաբար մշակելու համար։
+   
+   ```javascript
+   fetch("https://jsonplaceholder.typicode.com/posts/1")
+     .then((response) => {
+       if (!response.ok) {
+         throw new Error("Network response was not ok");
+       }
+       return response.json();
+     })
+     .then((data) => {
+       console.log("Post Title:", data.title);
+       return fetch("https://jsonplaceholder.typicode.com/users/1");
+     })
+     .then((response) => response.json())
+     .then((user) => {
+       console.log("User Name:", user.name);
+     })
+     .catch((error) => {
+       console.error("Error:", error);
+     });
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Post Title: sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+   User Name: Leanne Graham
+   ```
+
+   ---
+   
+   #### Խուսափել Callback Hell-ից
+   
+   Promise Chaining-ը ավելի ընթեռնելի է դարձնում կոդը՝ համեմատած callback-ների հետ։
+   
+   #### Callback Hell
+   
+   ```javascript
+   setTimeout(() => {
+     console.log("Step 1");
+     setTimeout(() => {
+       console.log("Step 2");
+       setTimeout(() => {
+         console.log("Step 3");
+       }, 1000);
+     }, 1000);
+   }, 1000);
+   ```
+   
+   #### Promise Chaining
+   
+   ```javascript
+   new Promise((resolve) => {
+     setTimeout(() => resolve("Step 1"), 1000);
+   })
+     .then((result) => {
+       console.log(result);
+       return new Promise((resolve) => setTimeout(() => resolve("Step 2"), 1000));
+     })
+     .then((result) => {
+       console.log(result);
+       return new Promise((resolve) => setTimeout(() => resolve("Step 3"), 1000));
+     })
+     .then((result) => {
+       console.log(result);
+     });
+   ```
+
+   ---
+   
+   #### Կարգավիճակների (States) Ճշգրտում
+   
+   Promise-ների տարբեր կարգավիճակներն են՝
+   
+   1. **Pending:** Սկզբնական վիճակ, երբ Promise-ը դեռ չի կատարվել կամ մերժվել։
+   2. **Fulfilled:** Promise-ը կատարվել է և վերադարձրել արդյունք։
+   3. **Rejected:** Promise-ը մերժվել է և վերադարձրել սխալ։
+   
+   Promise Chaining-ը աշխատում է հենց այս կարգավիճակների հիման վրա՝ փոխանցելով արդյունքը կամ սխալը հաջորդ քայլին։
+
+   ---
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+42. ### Ինչ է Microtasks-ը JavaScript-ում?
+   
+   **Microtasks**-ը JavaScript-ում ասինխրոն գործողությունների տեսակ է, որոնք ունեն ավելի բարձր առաջնահերթություն, քան սովորական **tasks**-երը (օրինակ՝ `setTimeout` կամ `setInterval`)։ Microtasks-ը կատարվում են **Event Loop**-ի ընթացքում անմիջապես այն պահին, երբ Call Stack-ը դառնում է դատարկ, բայց առաջ այն tasks-ից, որոնք գտնվում են Task Queue-ում։
+   
+   Microtasks-ը ստեղծվում են հիմնականում հետևյալ գործողություններից՝
+   
+   1. **Promises** (օր.`.then`, `.catch`, `.finally`)
+   2. **MutationObserver**
+   3. **queueMicrotask()**
+   
+   ---
+   
+   #### Ինչպես է աշխատում Microtasks Queue-ը
+   
+   Microtasks-ը պահվում են **Microtask Queue**-ում։ Երբ Call Stack-ը դատարկվում է, Event Loop-ը ստուգում է Microtask Queue-ը և կատարում այնտեղ գտնվող բոլոր Microtasks-երը՝ նախքան Task Queue-ի գործողություններին անցնելը։
+
+   ---
+   
+   #### Օրինակ՝ Microtasks-ի օգտագործում
+   
+   #### Օրինակ՝ Promise
+   
+   ```javascript
+   console.log("Start");
+   
+   Promise.resolve().then(() => {
+     console.log("Microtask 1");
+   }).then(() => {
+     console.log("Microtask 2");
+   });
+   
+   console.log("End");
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Start
+   End
+   Microtask 1
+   Microtask 2
+   ```
+   
+   **Բացատրություն:**
+   1. "Start"-ը և "End"-ը կատարվում են անմիջապես, քանի որ դրանք սինխրոն գործողություններ են։
+   2. Promise-ի `.then()` callback-ները դառնում են Microtasks և կատարվում են Call Stack-ի դատարկվելուց հետո։
+   
+   ---
+   
+   #### Task vs Microtask
+   
+   #### Հիմնական տարբերությունները
+   
+   | **Հատկանիշ**              | **Task** (օր.`setTimeout`)            | **Microtask** (օր.`Promise.then`)       |
+   |---------------------------|---------------------------------------|----------------------------------------|
+   | **Queue**                 | Task Queue                           | Microtask Queue                        |
+   | **Առաջնահերթություն**      | Կատարվում է հետո                     | Կատարվում է անմիջապես                  |
+   | **Օգտագործման դեպքեր**     | setTimeout, setInterval              | Promise, MutationObserver, queueMicrotask |
+   
+   #### Օրինակ՝ Task vs Microtask
+   
+   ```javascript
+   console.log("Start");
+   
+   setTimeout(() => {
+     console.log("Task");
+   }, 0);
+   
+   Promise.resolve().then(() => {
+     console.log("Microtask");
+   });
+   
+   console.log("End");
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Start
+   End
+   Microtask
+   Task
+   ```
+   
+   **Բացատրություն:**
+   - Promise-ի `.then()` callback-ը (Microtask) կատարվում է Task Queue-ի առաջ, նույնիսկ եթե Task-ը ունի 0 միլիվայրկյան սպասում։
+   
+   ---
+   
+   #### queueMicrotask()
+   
+   `queueMicrotask`-ը մեթոդ է, որը թույլ է տալիս ձեռքով ավելացնել Microtask Queue-ում նոր callback։
+   
+   #### Օրինակ
+   
+   ```javascript
+   console.log("Start");
+   
+   queueMicrotask(() => {
+     console.log("Microtask");
+   });
+   
+   console.log("End");
+   ```
+   
+   **Արդյունք:**
+   
+   ```plaintext
+   Start
+   End
+   Microtask
+   ```
+   
+   **Բացատրություն:**
+   - `queueMicrotask`-ի callback-ը կատարվում է Call Stack-ի դատարկվելուց հետո՝ Task Queue-ի առաջ։
+   
+   ---
+   
+   #### Օգտագործման դեպքեր
+   
+   1. **Promises-ի կառավարում:**
+      - Ապահովում է ավելի բարձր առաջնահերթությամբ callback-ների կատարումը։
+   
+   2. **DOM փոփոխությունների հետևում:**
+      - `MutationObserver`-ի միջոցով հնարավոր է հետևել DOM-ի փոփոխություններին Microtask Queue-ի միջոցով։
+   
+   3. **Մանր բեռնավորված գործողություններ:**
+      - Երբ անհրաժեշտ է իրականացնել շատ փոքր գործողություն, որը պետք է կատարվի անմիջապես, առանց սպասելու Task Queue-ի հերթին։
+   
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+43. ### Ինչ է Callback Hell-ը և ինչպես կարող ենք այն խուսափել?
+
+   
+   **Callback Hell**-ը JavaScript-ում խնդիր է, որը առաջանում է, երբ callback-ները (ֆունկցիաներ, որոնք փոխանցվում են որպես պարամետր) ներդրված են մեկից ավելի մակարդակներով։ Սա կարող է կոդը դարձնել բարդ, դժվար ընթեռնելի և կառավարելի։
+   
+   Callback Hell-ը հաճախ հանդիպում է, երբ աշխատում ենք ասինխրոն գործողությունների հետ, օրինակ՝ **setTimeout**, **XHR** կամ **fs** մոդուլի ֆունկցիաներ։
+
+   ---
+   
+   #### Օրինակ՝ Callback Hell
+   
+   ```javascript
+   setTimeout(() => {
+     console.log("Step 1");
+     setTimeout(() => {
+       console.log("Step 2");
+       setTimeout(() => {
+         console.log("Step 3");
+         setTimeout(() => {
+           console.log("Step 4");
+         }, 1000);
+       }, 1000);
+     }, 1000);
+   }, 1000);
+   ```
+   
+   #### Խնդիր
+   - Կոդը դառնում է "սանդղաձև" և դժվար է ընթերցվում։
+   - Դժվար է ավելացնել կամ փոփոխել որևէ մակարդակ։
+   - Կոդը դառնում է անկայուն՝ սխալների կառավարման բարդության պատճառով։
+
+   ---
+   
+   #### Ինչպես խուսափել Callback Hell-ից
+   
+   #### 1. Օգտագործեք Named Functions
+   Instead of inline callback functions, define and use named functions.
+   
+   ```javascript
+   function step1() {
+     console.log("Step 1");
+     setTimeout(step2, 1000);
+   }
+   
+   function step2() {
+     console.log("Step 2");
+     setTimeout(step3, 1000);
+   }
+   
+   function step3() {
+     console.log("Step 3");
+     setTimeout(step4, 1000);
+   }
+   
+   function step4() {
+     console.log("Step 4");
+   }
+   
+   setTimeout(step1, 1000);
+   ```
+   
+   #### Առավելություններ
+   - Կոդը դառնում է ավելի հստակ և ընթեռնելի։
+   - Հեշտ է փոփոխել կամ վերահսկել որոշակի քայլեր։
+   
+   ---
+   
+   #### 2. Օգտագործեք Promises
+   **Promises**-ը JavaScript-ում ներդրվել է, որպեսզի կառավարի callback-ների բարդությունը։ Promises-ը թույլ է տալիս գրել կոդ, որը մաքուր է և կանխատեսելի։
+   
+   ```javascript
+   const step1 = () => {
+     return new Promise((resolve) => {
+       setTimeout(() => {
+         console.log("Step 1");
+         resolve();
+       }, 1000);
+     });
+   };
+   
+   const step2 = () => {
+     return new Promise((resolve) => {
+       setTimeout(() => {
+         console.log("Step 2");
+         resolve();
+       }, 1000);
+     });
+   };
+   
+   const step3 = () => {
+     return new Promise((resolve) => {
+       setTimeout(() => {
+         console.log("Step 3");
+         resolve();
+       }, 1000);
+     });
+   };
+   
+   step1()
+     .then(step2)
+     .then(step3)
+     .then(() => {
+       console.log("Step 4");
+     });
+   ```
+   
+   #### Առավելություններ
+   - Կոդը դառնում է ավելի մաքուր և ընթեռնելի։
+   - Ապահովում է սխալների կառավարում `catch()`-ի միջոցով։
+   
+   ---
+   
+   #### 3. Օգտագործեք Async/Await
+   **Async/Await**-ը ES8-ում ներդրված սինտաքս է, որը դարձնում է Promise-ի հետ աշխատելը ավելի հեշտ։
+   
+   ```javascript
+   const step = (message) => {
+     return new Promise((resolve) => {
+       setTimeout(() => {
+         console.log(message);
+         resolve();
+       }, 1000);
+     });
+   };
+   
+   const runSteps = async () => {
+     await step("Step 1");
+     await step("Step 2");
+     await step("Step 3");
+     console.log("Step 4");
+   };
+   
+   runSteps();
+   ```
+   
+   #### Առավելություններ
+   - Կոդը ընթեռնելի է, ինչպես սինխրոն կոդը։
+   - Ավելի հեշտ է կառավարել բարդ ասինխրոն գործողությունները։
+
+   ---
+   
+   #### Եզրակացություն
+   
+   **Callback Hell**-ը JavaScript-ում բարդացնում է կոդի ընթերցելիությունը և կառավարման գործընթացը, բայց կարելի է խուսափել հետևյալ միջոցներով՝
+   
+   1. Օգտագործեք **Named Functions**՝ պարզեցնելու ներդրված callback-ները։
+   2. Օգտագործեք **Promises**՝ callback-ների փոխարեն։
+   3. Օգտագործեք **Async/Await**՝ Promise-ի հետ աշխատելու համար ավելի ընթերցելի սինտաքսով։
+
+---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+---
+
+44. ### Ինչ տարբերություն կա setTimeout, setInterval և requestAnimationFrame միջև?
+   
+   JavaScript-ը ապահովում է մի քանի մեթոդներ՝ ասինխրոն ժամանակի վրա հիմնված գործողություններ կատարելու համար։ Դրանցից են՝ **setTimeout**, **setInterval** և **requestAnimationFrame**։ Յուրաքանչյուր մեթոդ ունի իր կիրառման դեպքերը և տարբերությունները։
+   
+   ---
+   
+   #### 1. **setTimeout**
+   
+   #### Նկարագրություն
+   **setTimeout**-ը օգտագործվում է միանգամյա գործողություն կատարելու համար որոշակի ժամանակային հետաձգումով։
+   
+   #### Սինտաքս
+   ```javascript
+   setTimeout(callback, delay, ...args);
+   ```
+   - `callback`: ֆունկցիան, որը պետք է կատարվի։
+   - `delay`: ժամանակի հետաձգումը միլիվայրկյաններով։
+   - `args`: պարամետրեր, որոնք կփոխանցվեն callback ֆունկցիային։
+   
+   #### Օրինակ
+   ```javascript
+   setTimeout(() => {
+     console.log("Executed after 2 seconds");
+   }, 2000);
+   ```
+   
+   #### Հատկանիշներ
+   - Կատարվում է միայն մեկ անգամ՝ նշված ժամանակից հետո։
+   - Հարմար է ասինխրոն գործողություններ թեստավորելու համար։
+   
+   ---
+   
+   ### 2. **setInterval**
+   
+   #### Նկարագրություն
+   **setInterval**-ը օգտագործվում է պարբերական գործողություններ կատարելու համար՝ նշված ժամանակահատվածով։
+   
+   #### Սինտաքս
+   ```javascript
+   setInterval(callback, delay, ...args);
+   ```
+   - `callback`: ֆունկցիան, որը պետք է կատարվի։
+   - `delay`: ժամանակի ինտերվալը միլիվայրկյաններով։
+   - `args`: պարամետրեր, որոնք կփոխանցվեն callback ֆունկցիային։
+   
+   #### Օրինակ
+   ```javascript
+   setInterval(() => {
+     console.log("Executed every 1 second");
+   }, 1000);
+   ```
+   
+   #### Հատկանիշներ
+   - Կատարվում է բազմիցս՝ ամեն անգամ նշված ինտերվալից հետո։
+   - Կատարումը շարունակվում է մինչև այն չդադարեցվի `clearInterval()`-ի միջոցով։
+   
+   #### Դադարեցում
+   ```javascript
+   const intervalId = setInterval(() => {
+     console.log("Running...");
+   }, 1000);
+   
+   setTimeout(() => {
+     clearInterval(intervalId);
+     console.log("Interval cleared");
+   }, 5000);
+   ```
+
+   ---
+   
+   #### 3. **requestAnimationFrame**
+   
+   #### Նկարագրություն
+   **requestAnimationFrame**-ը օգտագործվում է վիզուալ անիմացիաներ ստեղծելու համար։ Այն հարմարեցված է բրաուզերի վերաանկարչման արագությանը և ապահովում է ավելի սահուն անիմացիա։
+   
+   #### Սինտաքս
+   ```javascript
+   requestAnimationFrame(callback);
+   ```
+   - `callback`: ֆունկցիան, որը պետք է կատարվի հաջորդ frame-ի ընթացքում։
+   
+   #### Օրինակ
+   ```javascript
+   let start = null;
+   function animate(timestamp) {
+     if (!start) start = timestamp;
+     const progress = timestamp - start;
+     console.log(`Progress: ${progress}ms`);
+   
+     if (progress < 2000) {
+       requestAnimationFrame(animate);
+     }
+   }
+   
+   requestAnimationFrame(animate);
+   ```
+   
+   #### Հատկանիշներ
+   - Հարմար է FPS-ի (Frames Per Second) վերահսկման համար։
+   - Ավտոմատ դադարում է աշխատել, երբ էջը թաքնված է (visibility change), ինչը օգնում է նվազեցնել էներգիայի օգտագործումը։
+
+   ---
+   
+   #### Տարբերությունները
+   
+   | **Հատկանիշ**                | **setTimeout**                   | **setInterval**                  | **requestAnimationFrame**         |
+   |-----------------------------|----------------------------------|----------------------------------|----------------------------------|
+   | **Օգտագործման նպատակ**       | Միանգամյա գործողություն           | Պարբերական գործողություն          | Վիզուալ անիմացիաներ               |
+   | **Հաճախականություն**         | Միայն մեկ անգամ                 | Ամեն անգամ ինտերվալից հետո       | Հարմարեցվում է բրաուզերի FPS-ին     |
+   | **Կառավարման մեթոդ**         | clearTimeout()                  | clearInterval()                 | cancelAnimationFrame()            |
+   | **Էներգիայի արդյունավետություն** | Չի վերահսկվում                   | Չի վերահսկվում                   | Ավելի արդյունավետ                  |
+   | **Ժամանակի ճշտություն**      | Կախված է բրաուզերից              | Կախված է բրաուզերից              | Ապահովում է ավելի սահուն փորձ       |
+
+   ---
+   
+   #### Եզրակացություն
+   
+   - Օգտագործեք **setTimeout**, երբ անհրաժեշտ է գործողություն կատարել միայն մեկ անգամ՝ որոշակի ժամանակից հետո։
+   - Օգտագործեք **setInterval**, երբ անհրաժեշտ է պարբերական գործողություններ կատարել՝ առանց բարդության։
+   - Օգտագործեք **requestAnimationFrame**, երբ աշխատում եք անիմացիաների կամ վիզուալ թարմացումների հետ, քանի որ այն ապահովում է ավելի սահուն աշխատանք և ավելի լավ կատարում։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+45. ### Ինչ է Service Worker-ը JavaScript-ում?
+
+   **Service Worker**-ը JavaScript-ում ֆոնային սցենար է, որը թույլ է տալիս վեբ ծրագրերին աշխատել առանց ինտերնետի կամ ցածր ցանցային կապի պայմաններում։ Այն հիմնականում օգտագործվում է Progressive Web App (PWA)-ներում՝ աջակցելով քեշավորման, ֆոնային համաժամացման և push ծանուցումների։
+   
+   Service Worker-ը աշխատում է առանձին թելի վրա (thread) և չունի անմիջական մուտք դեպի DOM։
+
+   ---
+   
+   #### Հիմնական Հատկանիշներ
+   
+   1. **Ֆոնային գործընթաց:**
+      - Աշխատում է վեբ էջից անկախ և շարունակվում է նույնիսկ այն դեպքում, երբ էջը փակված է։
+   
+   2. **Քեշավորում (Caching):**
+      - Օգտագործվում է ռեսուրսների տեղական պահեստավորման համար, ինչը թույլ է տալիս ծրագրին աշխատել offline ռեժիմում։
+   
+   3. **Ծանուցումներ (Push Notifications):**
+      - Աջակցում է push ծանուցումների, որոնք օգտատերերին կարող են տեղեկացնել առանց կայքը բացելու։
+   
+   4. **Ֆոնային համաժամացում (Background Sync):**
+      - Հնարավորություն է տալիս տվյալների համաժամացում կատարել, երբ ցանցային կապը վերականգնվում է։
+
+   ---
+   
+   #### Ինչպես է աշխատում Service Worker-ը
+   
+   Service Worker-ը անցնում է երեք հիմնական փուլով՝
+   
+   1. **Տեղադրում (Install):**
+      - Service Worker-ը սկզբում գրանցվում է և կատարվում է նրա setup-ը։
+   
+   2. **Ակտիվացում (Activate):**
+      - Service Worker-ը ակտիվանում է և սկսում վերահսկել կայքը։
+   
+   3. **Միջամտություն (Fetch Events):**
+      - Service Worker-ը սկսում է միջամտել ցանցային հարցումներին և կառավարում ռեսուրսները։
+
+   ---
+   
+   #### Service Worker-ի Օրինակ
+   
+   #### 1. Գրանցում
+   
+   ```javascript
+   if ('serviceWorker' in navigator) {
+     navigator.serviceWorker.register('/service-worker.js')
+       .then(registration => {
+         console.log('Service Worker registered with scope:', registration.scope);
+       })
+       .catch(error => {
+         console.error('Service Worker registration failed:', error);
+       });
+   }
+   ```
+   
+   #### 2. Service Worker Ֆայլ
+   
+   ```javascript
+   self.addEventListener('install', event => {
+     console.log('Service Worker installing...');
+   
+     event.waitUntil(
+       caches.open('v1').then(cache => {
+         return cache.addAll([
+           '/',
+           '/index.html',
+           '/styles.css',
+           '/script.js'
+         ]);
+       })
+     );
+   });
+   
+   self.addEventListener('activate', event => {
+     console.log('Service Worker activated.');
+   });
+   
+   self.addEventListener('fetch', event => {
+     event.respondWith(
+       caches.match(event.request).then(response => {
+         return response || fetch(event.request);
+       })
+     );
+   });
+   ```
+
+   ---
+   
+   #### Service Worker-ի Հիմնական Միջոցառումներ
+   
+   1. **install:**
+      - Գործարկվում է, երբ Service Worker-ը գրանցվում է։ Հիմնականում օգտագործվում է ռեսուրսների քեշավորման համար։
+   
+   2. **activate:**
+      - Գործարկվում է, երբ Service Worker-ը ակտիվանում է և սկսում վերահսկել էջը։
+   
+   3. **fetch:**
+      - Միջամտում է ցանցային հարցումներին։ Կարող է վերադարձնել տեղական քեշից կամ ցանցից ստացված պատասխան։
+   
+   4. **message:**
+      - Օգտագործվում է էջի և Service Worker-ի միջև հաղորդակցության համար։
+
+   ---
+   
+   #### Արժեքները և Թերությունները
+   
+   #### Արժեքներ
+   - **Offline աջակցություն:**
+      - Ծրագիրը կարող է աշխատել առանց ինտերնետի։
+   
+   - **Ցանցային տրաֆիկի օպտիմալացում:**
+      - Քեշավորման միջոցով նվազեցնում է ցանցային հարցումները։
+   
+   - **Արագություն:**
+      - Քեշից ռեսուրսները բեռնումը ավելի արագ է, քան ցանցից։
+   
+   #### Թերություններ
+   - **Բարդություն:**
+      - Ծրագրավորողներից պահանջում է լրացուցիչ գիտելիքներ Service Worker-ի աշխատանքի մասին։
+   
+   - **Սկզբնական բեռնում:**
+      - Առաջին բեռնումը կարող է ավելի երկար տևել՝ ռեսուրսների քեշավորման պատճառով։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
