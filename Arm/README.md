@@ -6650,6 +6650,1556 @@
    - **Iterables**-ը JavaScript-ում հատուկ օբյեկտներ են, որոնք կարող են օգտագործվել `for...of` ցիկլի, `spread` օպերատորի և այլ մեխանիզմների հետ։
    - **Iterators**-ը հատուկ օբյեկտներ են, որոնք կառավարվում են `next()` մեթոդի միջոցով։
    - Ճկունություն ստանալու համար կարելի է ստեղծել սեփական Iterables և օգտագործել Generators՝ բարդ հոսքերի կառավարումը հեշտացնելու համար։
+  
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+51. ### Ինչ է Destructuring-ը JavaScript-ում?
+
+   **Destructuring**-ը JavaScript-ի սինտաքս է, որը թույլ է տալիս հեշտությամբ բաժանել (extract) արժեքներ զանգվածներից կամ հատկություններ օբյեկտներից և վերագրել դրանք փոփոխականներին։
+   
+   Այն դարձնում է կոդը ավելի կարճ, պարզ և ընթեռնելի՝ հանելով բարդ հղումները։
+   
+   ---
+   
+   #### Զանգվածների (Array) Destructuring
+   
+   #### Օրինակներ
+   
+   #### Հիմնական Օրինակ
+   ```javascript
+   const numbers = [1, 2, 3];
+   const [a, b, c] = numbers;
+   
+   console.log(a); // 1
+   console.log(b); // 2
+   console.log(c); // 3
+   ```
+   
+   #### Արժեքների բաց թողում
+   ```javascript
+   const numbers = [1, 2, 3, 4];
+   const [first, , third] = numbers;
+   
+   console.log(first); // 1
+   console.log(third); // 3
+   ```
+   
+   #### Մնացորդային արժեքներ (`rest` օպերատոր)
+   ```javascript
+   const numbers = [1, 2, 3, 4, 5];
+   const [first, second, ...rest] = numbers;
+   
+   console.log(first); // 1
+   console.log(second); // 2
+   console.log(rest); // [3, 4, 5]
+   ```
+
+   ---
+   
+   #### Օբյեկտների (Object) Destructuring
+   
+   #### Օրինակներ
+   
+   #### Հիմնական Օրինակ
+   ```javascript
+   const person = {
+     name: "Alice",
+     age: 25
+   };
+   
+   const { name, age } = person;
+   
+   console.log(name); // "Alice"
+   console.log(age);  // 25
+   ```
+   
+   #### Վերանվանում հատկություններ
+   ```javascript
+   const person = {
+     name: "Alice",
+     age: 25
+   };
+   
+   const { name: fullName, age: years } = person;
+   
+   console.log(fullName); // "Alice"
+   console.log(years);    // 25
+   ```
+   
+   #### Արժեքների տեղադրվածություն (Default values)
+   ```javascript
+   const person = {
+     name: "Alice"
+   };
+   
+   const { name, age = 30 } = person;
+   
+   console.log(name); // "Alice"
+   console.log(age);  // 30
+   ```
+   
+   #### Մնացորդային հատկություններ (`rest` օպերատոր)
+   ```javascript
+   const person = {
+     name: "Alice",
+     age: 25,
+     country: "Armenia"
+   };
+   
+   const { name, ...rest } = person;
+   
+   console.log(name); // "Alice"
+   console.log(rest); // { age: 25, country: "Armenia" }
+   ```
+   
+   ---
+   
+   #### Կիրառում Ֆունկցիաներում
+   
+   #### Օրինակներ
+   
+   #### Զանգվածի Destructuring
+   ```javascript
+   function sum([a, b]) {
+     return a + b;
+   }
+   
+   console.log(sum([5, 10])); // 15
+   ```
+   
+   #### Օբյեկտի Destructuring
+   ```javascript
+   function introduce({ name, age }) {
+     return `My name is ${name} and I am ${age} years old.`;
+   }
+   
+   const person = {
+     name: "Alice",
+     age: 25
+   };
+   
+   console.log(introduce(person));
+   // Output: My name is Alice and I am 25 years old.
+   ```
+
+   ---
+   
+   #### Nested Destructuring
+   
+   #### Օրինակ
+   ```javascript
+   const person = {
+     name: "Alice",
+     address: {
+       city: "Yerevan",
+       country: "Armenia"
+     }
+   };
+   
+   const {
+     name,
+     address: { city, country }
+   } = person;
+   
+   console.log(name);    // "Alice"
+   console.log(city);    // "Yerevan"
+   console.log(country); // "Armenia"
+   ```
+
+   ---
+   
+   #### Խառնված Օրինակ
+   
+   ```javascript
+   const data = {
+     title: "Destructuring",
+     tags: ["JavaScript", "ES6"],
+     author: {
+       name: "Alice",
+       age: 25
+     }
+   };
+   
+   const {
+     title,
+     tags: [firstTag, secondTag],
+     author: { name, age }
+   } = data;
+   
+   console.log(title);     // "Destructuring"
+   console.log(firstTag);  // "JavaScript"
+   console.log(secondTag); // "ES6"
+   console.log(name);      // "Alice"
+   console.log(age);       // 25
+   ```
+
+   ---
+   
+   #### Destructuring-ի Առավելություններ
+   
+   1. **Կոդի ընթեռնելիություն:**
+      - Կոդը դառնում է կարճ և ընթեռնելի։
+   
+   2. **Արժեքների արագ մուտք:**
+      - Հեշտացնում է մուտքը տվյալների բարդ կառուցվածքներից։
+   
+   3. **Կոդի պարզեցում:**
+      - Կրճատում է ավելորդ հղումները և փոփոխական հայտարարումները։
+
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+52. ### Ինչ է Template Literals-ը և ինչպես կարող ենք այն օգտագործել?
+
+   **Template Literals**-ը (կոչվում են նաև Template Strings) ES6-ում ներդրված սինտաքս է, որը թույլ է տալիս ստեղծել տողեր, որոնք ավելի ընթեռնելի և ճկուն են, քան ավանդական տողային սինտաքսը։ Template Literals-ը օգտագործում է backtick (\` \`) նշանները և ապահովում է տողի մեջ արտահայտություններ և բազմատող տեքստեր ներառելու հնարավորություն։
+
+   ---
+   
+   ## Հիմնական Հատկանիշներ
+   
+   1. **Backtick (\` \`) Սինտաքս:**
+      - Տողերը սահմանվում են backtick-ներով, ոչ թե մեկ կամ կրկնակի չակերտներով։
+   
+   2. **Ինտերպոլացիա (`${}`):**
+      - Հնարավորություն է տալիս տեղադրել փոփոխականներ կամ արտահայտություններ տողի մեջ։
+   
+   3. **Բազմատող Տեքստեր:**
+      - Կարելի է գրել բազմատող տեքստ առանց լրացուցիչ նշանների։
+   
+   4. **Tags (Tag Functions):**
+      - Առաջարկում է օգտագործել ֆունկցիաներ՝ տողի մշակման համար։
+
+   ---
+   
+   #### Սինտաքս
+   ```javascript
+   const string = `Your string here`;
+   ```
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### 1. Տողի ինտերպոլացիա
+   
+   ```javascript
+   const name = "Alice";
+   const age = 25;
+   
+   const message = `My name is ${name} and I am ${age} years old.`;
+   console.log(message);
+   // Output: My name is Alice and I am 25 years old.
+   ```
+   
+   - **`${}`** սինտաքսը թույլ է տալիս օգտագործել փոփոխականներ կամ արտահայտություններ։
+   
+   #### 2. Բազմատող տեքստեր
+   
+   ```javascript
+   const multiline = `This is a
+   multiline string.`;
+   
+   console.log(multiline);
+   // Output:
+   // This is a
+   // multiline string.
+   ```
+   
+   #### 3. Արտահայտություններ տողի մեջ
+   
+   ```javascript
+   const a = 10;
+   const b = 20;
+   
+   const result = `The sum of a and b is ${a + b}.`;
+   console.log(result);
+   // Output: The sum of a and b is 30.
+   ```
+
+   ---
+   
+   #### Tag Functions (Tagging Template Literals)
+   
+   Tagging-ը թույլ է տալիս Template Literal-ը մշակել ֆունկցիայի միջոցով։
+   
+   #### Օրինակ՝ Tag Function
+   
+   ```javascript
+   function highlight(strings, ...values) {
+     return strings.map((str, index) => {
+       return `${str}<strong>${values[index] || ""}</strong>`;
+     }).join("");
+   }
+   
+   const name = "Alice";
+   const age = 25;
+   
+   const message = highlight`My name is ${name} and I am ${age} years old.`;
+   console.log(message);
+   // Output: My name is <strong>Alice</strong> and I am <strong>25</strong> years old.
+   ```
+   
+   #### Ինչպես է աշխատում
+   1. `strings`-ը պահում է տողի մասերը՝ առանց փոփոխականների։
+   2. `...values`-ը պահում է `${}`-ի արտահայտությունների արդյունքները։
+   3. Ֆունկցիան վերադառնում է մշակված տողը։
+
+   ---
+   
+   #### Template Literals-ի Օգտագործման Տարբեր Դեպքեր
+   
+   #### 1. HTML-ի ստեղծում
+   
+   ```javascript
+   const title = "Welcome";
+   const body = "This is a sample text.";
+   
+   const html = `
+     <div>
+       <h1>${title}</h1>
+       <p>${body}</p>
+     </div>
+   `;
+   
+   console.log(html);
+   ```
+   
+   #### 2. Տվյալների ձևաչափում
+   
+   ```javascript
+   const items = ["Apple", "Banana", "Cherry"];
+   
+   const list = `
+     <ul>
+       ${items.map(item => `<li>${item}</li>`).join("")}
+     </ul>
+   `;
+   
+   console.log(list);
+   ```
+   
+   #### 3. Դինամիկ տեքստերի ստեղծում
+   
+   ```javascript
+   const user = {
+     name: "Alice",
+     age: 25,
+     city: "Yerevan"
+   };
+   
+   const userInfo = `
+     Name: ${user.name}
+     Age: ${user.age}
+     City: ${user.city}
+   `;
+   
+   console.log(userInfo);
+   ```
+
+   ---
+   
+   #### Template Literals-ի Առավելություններ
+   
+   1. **Կոդի ընթեռնելիություն:**
+      - Հեշտացնում է բազմատող տեքստերի և դինամիկ տողերի ստեղծումը։
+   
+   2. **Ինտերպոլացիա:**
+      - Թույլ է տալիս փոխել տեքստերը դինամիկ կերպով՝ օգտագործելով փոփոխականներ և արտահայտություններ։
+   
+   3. **Tag Functions-ի աջակցություն:**
+      - Հնարավորություն է տալիս կատարել բարդ մշակումներ տողերի վրա։
+   
+   4. **HTML ձևաչափում:**
+      - Հարմար է դինամիկ HTML կոդ գեներացնելու համար։
+
+   ---
+   
+   #### Թերություններ
+   
+   1. **Ավելի մեծ ուշադրություն անվտանգությանը:**
+      - Template Literals-ը, երբ օգտագործվում է HTML-ի համար, կարող է հանգեցնել **XSS (Cross-Site Scripting)** խոցելիությունների։
+   
+   2. **Հնարավոր բարձր ծախսեր Tag Functions-ի դեպքում:**
+      - Եթե օգտագործվում են բարդ ֆունկցիաներ, կարող է բարձրանալ կատարման ժամանակը։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+53. ### Ինչ է Tagged Templates-ը JavaScript-ում?
+
+   **Tagged Templates**-ը JavaScript-ի հզոր գործիք է, որը թույլ է տալիս Template Literals-ի (կամ Template Strings-ի) միջոցով կատարել բարդ մշակումներ տողի վրա՝ ֆունկցիայի միջոցով։ Այն թույլ է տալիս փոփոխել կամ վերահսկել տողի կառուցվածքը՝ մինչ դրա վերջնական օգտագործումը։
+
+   ---
+   
+   #### Ինչպես է աշխատում Tagged Templates-ը
+   
+   Tagged Templates-ը օգտագործում է ֆունկցիա, որը գործարկվում է տողի մասերի և տեղադրված արժեքների վրա։
+   
+   #### Սինտաքս
+   ```javascript
+   function tagFunction(strings, ...values) {
+     // strings: Տողի ստատիկ մասերը (առանց փոփոխականների)
+     // values: `${}`-ի արտահայտությունների արդյունքները
+   }
+   
+   tagFunction`Some text with ${value1} and ${value2}`;
+   ```
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### Հիմնական Օրինակ
+   ```javascript
+   function tag(strings, ...values) {
+     console.log(strings); // ['My name is ', ' and I am ', ' years old.']
+     console.log(values);  // ['Alice', 25]
+   }
+   
+   const name = "Alice";
+   const age = 25;
+   
+   tag`My name is ${name} and I am ${age} years old.`;
+   ```
+
+   ---
+   
+   #### Տողերի փոփոխություն
+   
+   ```javascript
+   function highlight(strings, ...values) {
+     return strings.map((str, index) => {
+       return `${str}<strong>${values[index] || ""}</strong>`;
+     }).join("");
+   }
+   
+   const name = "Alice";
+   const age = 25;
+   
+   const result = highlight`My name is ${name} and I am ${age} years old.`;
+   console.log(result);
+   // Output: My name is <strong>Alice</strong> and I am <strong>25</strong> years old.
+   ```
+
+   ---
+   
+   #### Օգտագործման Տարբեր Դեպքեր
+   
+   #### 1. HTML-ի անվտանգ ստեղծում
+   
+   Tagged Templates-ը կարելի է օգտագործել XSS (Cross-Site Scripting) հարձակումներից պաշտպանվելու համար։
+   
+   ```javascript
+   function escapeHTML(strings, ...values) {
+     return strings.map((str, index) => {
+       const escapedValue = String(values[index] || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+       return `${str}${escapedValue}`;
+     }).join("");
+   }
+   
+   const userInput = "<script>alert('Hacked!')</script>";
+   
+   const safeHTML = escapeHTML`<div>${userInput}</div>`;
+   console.log(safeHTML);
+   // Output: <div>&lt;script&gt;alert('Hacked!')&lt;/script&gt;</div>
+   ```
+   
+   #### 2. Լոգերի ֆորմատավորում
+   
+   ```javascript
+   function logFormat(strings, ...values) {
+     const timestamp = new Date().toISOString();
+     return `[${timestamp}] ${strings.map((str, i) => `${str}${values[i] || ""}`).join("")}`;
+   }
+   
+   const level = "INFO";
+   const message = "Server started";
+   
+   console.log(logFormat`[${level}] ${message}`);
+   // Output: [2023-01-01T12:00:00.000Z] [INFO] Server started
+   ```
+   
+   #### 3. Միջազգայինացում (I18n)
+   
+   Tagged Templates-ը կարող է օգտագործվել թարգմանություններ իրականացնելու համար։
+   
+   ```javascript
+   function i18n(strings, ...values) {
+     const translations = {
+       "Hello": "Bonjour",
+       "world": "monde"
+     };
+   
+     return strings.map((str, index) => {
+       return `${translations[str.trim()] || str}${values[index] || ""}`;
+     }).join("");
+   }
+   
+   const message = i18n`Hello, world!`;
+   console.log(message);
+   // Output: Bonjour, monde!
+   ```
+
+   ---
+   
+   #### Ինչպես է Tag Function-ը աշխատում
+   
+   1. **Strings մասերը**:
+      - Պարունակում են տողի ստատիկ մասերը՝ առանց `${}` արտահայտությունների։
+   
+   2. **Values մասերը**:
+      - Պարունակում են `${}` արտահայտությունների հաշվարկված արժեքները։
+   
+   3. **Մշակում**:
+      - Ֆունկցիան ստանում է strings և values, մշակում է դրանք և վերադարձնում վերջնական տողը։
+   
+   ---
+   
+   #### Առավելություններ
+   
+   1. **Ճկունություն տողերի մշակման մեջ**:
+      - Հնարավորություն է տալիս փոխել տողի կառուցվածքը և ավելացնել բարդ ֆորմատավորում։
+   
+   2. **Անվտանգություն**:
+      - Հնարավորություն է տալիս կանխել XSS հարձակումները՝ հատուկ մշակման միջոցով։
+   
+   3. **Միջազգայինացում**:
+      - Կառուցվածքային թարգմանությունների իրականացում։
+   
+   4. **Կոդի պարզեցում**:
+      - Լոգերի, HTML-ի և այլ տեքստերի դինամիկ ձևաչափում։
+
+   ---
+   
+   #### Թերություններ
+   
+   1. **Կատարման ժամանակի բարձր ծախսեր**:
+      - Բարդ Tag Functions-ը կարող է բարձրացնել կատարման ժամանակը։
+   
+   2. **Կոդի բարդություն**:
+      - Նորեկների համար Tag Function-ի սինտաքսը կարող է բարդ լինել։
+
+   ---
+   
+   #### Եզրակացություն
+   
+   **Tagged Templates**-ը JavaScript-ում հզոր գործիք է, որը թույլ է տալիս կառուցել անվտանգ, ճկուն և դինամիկ տեքստեր։ Դրանք իդեալական են HTML-ի ձևաչափման, տվյալների անվտանգության ապահովման և բարդ տողի մշակման համար։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+54. ### Ինչ է Set-ը և Map-ը JavaScript-ում?
+
+   
+   **Set** և **Map**-ը JavaScript-ում ES6-ում ներդրված տվյալների կառուցվածքներ են, որոնք առաջարկում են արդյունավետ միջոց մեծ տվյալների հավաքածուները պահպանելու և դրանց վրա գործողություններ կատարելու համար։
+   
+   - **Set**-ը ներկայացնում է արժեքների հավաքածու, որտեղ չկա կրկնօրինակ։
+   - **Map**-ը ներկայացնում է բանալի-արժեք զույգերի հավաքածու, որտեղ բանալիները եզակի են։
+
+   ---
+   
+   #### 1. Set
+   
+   #### Նկարագրություն
+   **Set**-ը տվյալների կառուցվածք է, որը պահպանում է միայն եզակի արժեքներ։ Այն կարող է պարունակել ցանկացած տիպի արժեք՝ primitive կամ object։
+   
+   #### Սինտաքս
+   ```javascript
+   const set = new Set([iterable]);
+   ```
+   - **`iterable`**: Ցանկալի տվյալների iterable օբյեկտ, օրինակ՝ զանգված։
+   
+   #### Հիմնական Մեթոդներ
+   
+   | **Մեթոդ**       | **Նկարագրություն**                                  |
+   |------------------|----------------------------------------------------|
+   | `add(value)`     | Ավելացնում է նոր արժեք։                            |
+   | `delete(value)`  | Հեռացնում է արժեքը։                                |
+   | `has(value)`     | Ստուգում է՝ արդյոք արժեքը առկա է Set-ում։          |
+   | `clear()`        | Հեռացնում է բոլոր արժեքները։                        |
+   | `size`           | Վերադարձնում է Set-ի տարրերի քանակը։              |
+   
+   #### Օրինակներ
+   
+   #### Հիմնական Օրինակ
+   ```javascript
+   const mySet = new Set();
+   
+   mySet.add(1);
+   mySet.add(2);
+   mySet.add(2); // Կրկնօրինակները անտեսվում են
+   
+   console.log(mySet.size); // 2
+   console.log(mySet.has(1)); // true
+   
+   mySet.delete(2);
+   console.log(mySet.has(2)); // false
+   
+   mySet.clear();
+   console.log(mySet.size); // 0
+   ```
+   
+   #### Զանգվածից եզակի արժեքներ
+   ```javascript
+   const array = [1, 2, 2, 3, 4, 4];
+   const uniqueSet = new Set(array);
+   
+   console.log([...uniqueSet]); // [1, 2, 3, 4]
+   ```
+   
+   ---
+   
+   #### 2. Map
+   
+   #### Նկարագրություն
+   **Map**-ը բանալի-արժեք զույգերի հավաքածու է, որտեղ բանալիները կարող են լինել ցանկացած տիպի, ոչ միայն string (ինչպես օբյեկտների դեպքում)։
+   
+   #### Սինտաքս
+   ```javascript
+   const map = new Map([iterable]);
+   ```
+   - **`iterable`**: Բանալի-արժեք զույգերի iterable օբյեկտ։
+   
+   #### Հիմնական Մեթոդներ
+   
+   | **Մեթոդ**        | **Նկարագրություն**                                    |
+   |-------------------|------------------------------------------------------|
+   | `set(key, value)` | Ավելացնում է բանալի-արժեք զույգ։                      |
+   | `get(key)`        | Վերադարձնում է բանալու արժեքը։                        |
+   | `has(key)`        | Ստուգում է՝ արդյոք բանալին առկա է Map-ում։           |
+   | `delete(key)`     | Հեռացնում է բանալու զույգը։                           |
+   | `clear()`         | Հեռացնում է բոլոր բանալի-արժեք զույգերը։              |
+   | `size`            | Վերադարձնում է Map-ի տարրերի քանակը։                 |
+   
+   #### Օրինակներ
+   
+   #### Հիմնական Օրինակ
+   ```javascript
+   const myMap = new Map();
+   
+   myMap.set('name', 'Alice');
+   myMap.set('age', 25);
+   
+   console.log(myMap.get('name')); // "Alice"
+   console.log(myMap.has('age')); // true
+   
+   myMap.delete('age');
+   console.log(myMap.has('age')); // false
+   
+   myMap.clear();
+   console.log(myMap.size); // 0
+   ```
+   
+   #### Օբյեկտները որպես բանալի
+   ```javascript
+   const key = { id: 1 };
+   const myMap = new Map();
+   
+   myMap.set(key, "Object Key");
+   console.log(myMap.get(key)); // "Object Key"
+   ```
+
+   ---
+   
+   #### Տարբերություններ Set-ի և Map-ի միջև
+   
+   | **Հատկանիշ**          | **Set**                                  | **Map**                                  |
+   |------------------------|------------------------------------------|------------------------------------------|
+   | **Տվյալների կառուցվածք** | Արժեքների հավաքածու                    | Բանալի-արժեք զույգերի հավաքածու          |
+   | **Կրկնօրինակներ**       | Չի թույլատրվում                         | Բանալիները եզակի են                      |
+   | **Բանալիների տեսակ**    | Միայն արժեքներ (բանալի չկա)             | Ցանկացած տիպի բանալի                    |
+   | **Կիրառման դեպքեր**     | Եզակի արժեքներ պահելու համար             | Բարդ բանալի-արժեք հարաբերություններ պահելու համար |
+
+   ---
+   
+   #### Iteration (Իտերացիա)
+   
+   #### Set-ի Իտերացիա
+   ```javascript
+   const mySet = new Set([1, 2, 3]);
+   
+   for (const value of mySet) {
+     console.log(value);
+   }
+   // Output: 1, 2, 3
+   ```
+   
+   #### Map-ի Իտերացիա
+   ```javascript
+   const myMap = new Map([
+     ['name', 'Alice'],
+     ['age', 25]
+   ]);
+   
+   for (const [key, value] of myMap) {
+     console.log(`${key}: ${value}`);
+   }
+   // Output:
+   // name: Alice
+   // age: 25
+   ```
+
+   ---
+   
+   #### Երբ օգտագործել
+   
+   - **Set**:
+      - Երբ անհրաժեշտ է պահել միայն եզակի արժեքներ։
+      - Կրկնօրինակների հեռացում։
+   
+   - **Map**:
+      - Երբ անհրաժեշտ է բանալի-արժեք զույգերի հարաբերություն։
+      - Երբ բանալիները պետք է լինեն ոչ string տիպի։
+   
+   ---
+   
+   #### Եզրակացություն
+   
+   **Set** և **Map**-ը JavaScript-ում հզոր և ճկուն տվյալների կառուցվածքներ են։
+   
+   - **Set**-ը հարմար է եզակի արժեքների համար։
+   - **Map**-ը հարմար է բանալի-արժեք զույգերի համար։
+   
+   Այս կառուցվածքները դարձնում են կոդը ավելի ընթեռնելի և արդյունավետ՝ առաջարկելով ֆունկցիոնալության լայն շրջանակ։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+55. ### Ինչ է JavaScript-ի Event Delegation-ը?
+   
+   
+   **Event Delegation**-ը JavaScript-ում տեխնիկա է, որը թույլ է տալիս բաշխել իրադարձությունների մշակումը ծնողական տարրերին՝ զավակների փոխարեն։ Սա հնարավոր է, քանի որ իրադարձությունները "բարձրանում են" (bubble up) դեպի DOM-ի ծառի վերևը, ինչը թույլ է տալիս ծնող տարրին լսել իրադարձություններ, որոնք տեղի են ունենում նրա զավակների վրա։
+
+   ---
+   
+   #### Ինչպես է աշխատում Event Delegation-ը
+   
+   JavaScript-ում իրադարձությունները ունեն **event bubbling** մեխանիզմ, որտեղ իրադարձությունը սկսում է իր ընթացքը սկզբնական տարրից (target) և "բարձրանում է" դեպի նրա ծնողները մինչև հասնում է `document`-ին։ Event Delegation-ը օգտագործում է այս մեխանիզմը՝ թույլ տալով ծնողական տարրին վերահսկել իր բոլոր զավակների իրադարձությունները։
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### Առանց Event Delegation-ի
+   
+   Եթե ձեզ անհրաժեշտ է click իրադարձություն մշակել բազմաթիվ կոճակների համար, առանց Event Delegation-ի կոդը կստացվի այսպես.
+   
+   ```javascript
+   const buttons = document.querySelectorAll('.button');
+   
+   buttons.forEach(button => {
+     button.addEventListener('click', event => {
+       console.log(`Button ${event.target.textContent} clicked`);
+     });
+   });
+   ```
+   
+   #### Event Delegation-ի Օգտագործմամբ
+   
+   Event Delegation-ի միջոցով մենք կարող ենք օգտագործել միայն մեկ event listener՝ կիրառված ծնողական տարրի վրա.
+   
+   ```javascript
+   const parent = document.querySelector('.parent');
+   
+   parent.addEventListener('click', event => {
+     if (event.target.classList.contains('button')) {
+       console.log(`Button ${event.target.textContent} clicked`);
+     }
+   });
+   ```
+   
+   #### Ինչպես է աշխատում
+   1. **`event.target`**: Այն տարրը, որտեղ իրականում տեղի է ունեցել իրադարձությունը։
+   2. **`classList.contains`**: Ստուգում է, թե արդյոք իրադարձությունը տեղի է ունեցել կոնկրետ տարրի վրա։
+
+   ---
+   
+   #### Օգտագործման Տարբեր Դեպքեր
+   
+   #### 1. Դինամիկ տարրեր
+   Event Delegation-ը օգտակար է, երբ դուք ստեղծում եք տարրեր դինամիկ կերպով։
+   
+   ```javascript
+   const list = document.querySelector('.list');
+   
+   list.addEventListener('click', event => {
+     if (event.target.tagName === 'LI') {
+       console.log(`Clicked on item: ${event.target.textContent}`);
+     }
+   });
+   
+   // Դինամիկ տարր ավելացնել
+   const newItem = document.createElement('li');
+   newItem.textContent = 'New Item';
+   list.appendChild(newItem);
+   ```
+   
+   #### 2. Ավելի քիչ հիշողության օգտագործում
+   Երբ ունեք բազմաթիվ տարրեր, Event Delegation-ը նվազեցնում է հիշողության օգտագործումը՝ փոխարենը կիրառելով միայն մեկ event listener։
+
+   ---
+   
+   #### Առավելություններ
+   
+   1. **Արդյունավետություն:**
+      - Նվազեցնում է event listeners-ի քանակը, ինչը բարելավում է կատարողականությունը։
+   
+   2. **Դինամիկ տարրերի աջակցություն:**
+      - Ապահովում է դինամիկ ավելացված տարրերի իրադարձությունների կառավարումը։
+   
+   3. **Կոդի պարզեցում:**
+      - Ավելի քիչ կոդ է անհրաժեշտ, քանի որ անհրաժեշտ է միայն մեկ listener։
+   
+   ---
+   
+   #### Թերություններ
+   
+   1. **Event bubbling-ի կախվածություն:**
+      - Տեխնիկան հիմնված է իրադարձության "բարձրանալու" մեխանիզմի վրա, ինչը կարող է որոշ դեպքերում անցանկալի լինել։
+   
+   2. **Սահմանափակումներ իրադարձությունների տեսակների վրա:**
+      - Որոշ իրադարձություններ, ինչպիսիք են `focus`-ը կամ `blur`-ը, չեն աջակցում bubbling։
+   
+   3. **Լրացուցիչ ստուգումներ:**
+      - Անհրաժեշտ է ստուգել `event.target`-ը, որպեսզի համոզվեք, որ իրադարձությունը տեղի է ունեցել ճիշտ տարրի վրա։
+   
+   ---
+   
+   #### Եզրակացություն
+   
+   **Event Delegation**-ը հզոր տեխնիկա է JavaScript-ում, որը թույլ է տալիս պարզեցնել իրադարձությունների կառավարումը, բարելավել կատարողականությունը և աջակցել դինամիկ տարրերին։ Այս մոտեցումը հատկապես օգտակար է, երբ աշխատում եք մեծ թվով տարրերի կամ դինամիկ բովանդակության հետ։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+56. ### Ինչ է Factory Function-ը JavaScript-ում?
+   
+   **Factory Function**-ը JavaScript-ում ֆունկցիա է, որը վերադարձնում է նոր օբյեկտ։ Այն օգտագործվում է օբյեկտներ ստեղծելու համար՝ առանց նոր կոնստրուկտորների կամ դասերի անհրաժեշտության։ Factory Function-ը հնարավորություն է տալիս ստեղծել օբյեկտների բազմացում, որոնք կարող են կիսել ընդհանուր տրամաբանություն կամ տարբեր լինել ըստ փոխանցված պարամետրերի։
+
+   ---
+   
+   #### Ինչու օգտագործել Factory Function
+   
+   1. **Դասերի (Class) այլընտրանք:**
+      - Հեշտ և ընթեռնելի սինտաքս։
+   
+   2. **Անկախություն նոր օպերատորից:**
+      - Չկա կարիք օգտագործելու `new` օպերատոր։
+   
+   3. **Կոդի վերսկսում (Reuse):**
+      - Հնարավորություն է տալիս կրկին օգտագործել նույն տրամաբանությունը տարբեր օբյեկտների համար։
+   
+   4. **Ինկապսուլացիա:**
+      - Օբյեկտի ներսի վիճակը և մեթոդները պաշտպանված են արտաքին մուտքից։
+
+   ---
+   
+   #### Սինտաքս
+   ```javascript
+   function createObject(param1, param2) {
+     return {
+       property1: param1,
+       property2: param2,
+       method() {
+         console.log(`${this.property1} and ${this.property2}`);
+       }
+     };
+   }
+   
+   const obj = createObject('value1', 'value2');
+   obj.method(); // Output: value1 and value2
+   ```
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### Հիմնական Օրինակ
+   
+   ```javascript
+   function createPerson(name, age) {
+     return {
+       name,
+       age,
+       greet() {
+         console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+       }
+     };
+   }
+   
+   const person1 = createPerson('Alice', 30);
+   const person2 = createPerson('Bob', 25);
+   
+   person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
+   person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+   ```
+   
+   ---
+   
+   #### Factory Function-ով Մասնավոր Տվյալների Ապահովում
+   
+   ```javascript
+   function createCounter() {
+     let count = 0; // Մասնավոր փոփոխական
+   
+     return {
+       increment() {
+         count++;
+         console.log(`Count: ${count}`);
+       },
+       decrement() {
+         count--;
+         console.log(`Count: ${count}`);
+       },
+       getCount() {
+         return count;
+       }
+     };
+   }
+   
+   const counter = createCounter();
+   counter.increment(); // Count: 1
+   counter.increment(); // Count: 2
+   counter.decrement(); // Count: 1
+   console.log(counter.getCount()); // 1
+   ```
+   
+   ---
+   
+   #### Օբյեկտների Կոմպոզիցիա
+   Factory Function-ները հարմար են օբյեկտների կոմպոզիցիայի համար՝ բազմակի հատկություններ և մեթոդներ ավելացնելու նպատակով։
+   
+   ```javascript
+   function createMover() {
+     return {
+       move() {
+         console.log('Moving...');
+       }
+     };
+   }
+   
+   function createShouter() {
+     return {
+       shout() {
+         console.log('Shouting!');
+       }
+     };
+   }
+   
+   function createRobot(name) {
+     return {
+       name,
+       ...createMover(),
+       ...createShouter()
+     };
+   }
+   
+   const robot = createRobot('Robo');
+   robot.move();  // Moving...
+   robot.shout(); // Shouting!
+   ```
+
+   ---
+   
+   #### Factory Function vs Constructor Function
+   
+   | **Հատկանիշ**                | **Factory Function**                         | **Constructor Function**                   |
+   |-----------------------------|---------------------------------------------|-------------------------------------------|
+   | **Սինտաքս**                 | Սովորական ֆունկցիա                         | Պահանջում է `new` օպերատոր               |
+   | **Մասնավոր փոփոխականներ**  | Հեշտորեն աջակցվում են փակ (closure) սինտաքսով | Պահանջում է լրացուցիչ մեթոդներ            |
+   | **Վերադարձի տեսակ**         | Օբյեկտ                                     | Արտադրած օբյեկտ կամ `undefined`          |
+   | **Օգտագործման պարզություն**  | Ավելի հեշտ                                  | Ավելի բարդ                                 |
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+57. ### Ինչ է Class-ը JavaScript-ում?
+   
+   **Class**-ը JavaScript-ում ES6-ում ներկայացված սինտաքս է, որը ապահովում է օբյեկտի վրա հիմնված ծրագրավորման (OOP) մոտեցում։ Class-ները օգտագործվում են օբյեկտներ ստեղծելու համար, որոնք կարող են պարունակել տվյալներ (հատկություններ) և ֆունկցիաներ (մեթոդներ)։ Class-ը JavaScript-ում հանդիսանում է `prototype`-ի վրա հիմնված ժառանգման պարզեցված սինտաքս։
+
+   ---
+   
+   #### Սինտաքս
+   
+   ```javascript
+   class ClassName {
+     constructor(param1, param2) {
+       this.property1 = param1;
+       this.property2 = param2;
+     }
+   
+     method1() {
+       console.log('This is a method');
+     }
+   }
+   
+   const instance = new ClassName('value1', 'value2');
+   instance.method1();
+   ```
+   
+   ### Հիմնական բաղադրիչներ
+   1. **Constructor:**
+      - Սինտաքս, որը օգտագործվում է class-ի նոր օբյեկտների սկզբնականացման համար։
+   
+   2. **Methods (Մեթոդներ):**
+      - Ֆունկցիաներ, որոնք սահմանվում են class-ի ներսում։
+   
+   3. **Instance:**
+      - Class-ի օրինակ, որը ստեղծվում է `new` օպերատորով։
+   
+   ---
+   
+   #### Օրինակներ
+   
+   #### Հիմնական Օրինակ
+   
+   ```javascript
+   class Person {
+     constructor(name, age) {
+       this.name = name;
+       this.age = age;
+     }
+   
+     greet() {
+       console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+     }
+   }
+   
+   const person1 = new Person('Alice', 30);
+   const person2 = new Person('Bob', 25);
+   
+   person1.greet(); // Output: Hello, my name is Alice and I am 30 years old.
+   person2.greet(); // Output: Hello, my name is Bob and I am 25 years old.
+   ```
+
+   ---
+   
+   #### Ժառանգում (Inheritance)
+   
+   JavaScript-ի Class-ները աջակցում են ժառանգումը `extends` բանալի բառի միջոցով։
+   
+   #### Օրինակ
+   
+   ```javascript
+   class Animal {
+     constructor(name) {
+       this.name = name;
+     }
+   
+     speak() {
+       console.log(`${this.name} makes a noise.`);
+     }
+   }
+   
+   class Dog extends Animal {
+     speak() {
+       console.log(`${this.name} barks.`);
+     }
+   }
+   
+   const dog = new Dog('Buddy');
+   dog.speak(); // Output: Buddy barks.
+   ```
+
+   ---
+   
+   #### Static Մեթոդներ
+   
+   **Static** մեթոդները կոչվում են հենց class-ից, այլ ոչ թե նրա օրինակներից։
+   
+   ### Օրինակ
+   ```javascript
+   class MathUtils {
+     static add(a, b) {
+       return a + b;
+     }
+   }
+   
+   console.log(MathUtils.add(5, 10)); // Output: 15
+   ```
+
+
+   ---
+   
+   #### Getters և Setters
+   
+   Getters և Setters ապահովում են հատկությունների հասանելիություն և կառավարում class-ի ներսում։
+   
+   ### Օրինակ
+   ```javascript
+   class Rectangle {
+     constructor(width, height) {
+       this.width = width;
+       this.height = height;
+     }
+   
+     get area() {
+       return this.width * this.height;
+     }
+   
+     set area(value) {
+       this.width = Math.sqrt(value);
+       this.height = Math.sqrt(value);
+     }
+   }
+   
+   const rect = new Rectangle(4, 5);
+   console.log(rect.area); // Output: 20
+   rect.area = 36;
+   console.log(rect.width, rect.height); // Output: 6 6
+   ```
+
+   ---
+   
+   #### Class-ի Հատկանիշները
+   
+   | **Հատկանիշ**             | **Նկարագրություն**                                 |
+   |---------------------------|--------------------------------------------------|
+   | **Constructor**           | Սահմանում է class-ի սկզբնականացման տրամաբանությունը։|
+   | **Methods**               | Ֆունկցիաներ, որոնք կապված են class-ի հետ։         |
+   | **Static Methods**        | Մեթոդներ, որոնք կապված են class-ի հետ, ոչ թե օրինակների։|
+   | **Inheritance**           | Թույլ է տալիս ստեղծել նոր class-ներ՝ ժառանգելով գոյություն ունեցող class-ից։|
+   
+   ---
+   
+   #### Class vs Constructor Function
+   
+   | **Հատկանիշ**             | **Class**                               | **Constructor Function**                |
+   |---------------------------|-----------------------------------------|-----------------------------------------|
+   | **Սինտաքսի պարզություն** | Ավելի ընթեռնելի և կառուցվածքային       | Ավելի բարդ և կոդային հին մոտեցում       |
+   | **Inheritance**           | Աջակցում է `extends`-ի միջոցով          | Պահանջում է `Object.create` կամ `prototype`|
+   | **Static Methods**        | Պարզորեն սահմանվում են `static` բանալիով | Պահանջում է լրացուցիչ կոդ                 |
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+58. ### Ինչ է object cloning-ի տարբեր եղանակներ JavaScript-ում?
+   
+   **Object Cloning**-ը JavaScript-ում տվյալ օբյեկտի կրկնօրինակ ստեղծելու գործընթացն է։ Cloning-ը կարևոր է, երբ ուզում ենք ստեղծել օբյեկտի նոր տարբերակ, որը անկախ կլինի սկզբնական օբյեկտից։
+   
+   JavaScript-ում օբյեկտները փոխանցվում են ըստ հղման (reference), ինչը նշանակում է, որ ուղղակի նշանակման դեպքում նոր փոփոխականը կկապվի սկզբնական օբյեկտի հետ։
+   
+   ```javascript
+   const obj1 = { key: 'value' };
+   const obj2 = obj1; // Reference
+   obj2.key = 'new value';
+   
+   console.log(obj1.key); // "new value"
+   ```
+   
+   Object Cloning-ի միջոցով հնարավոր է ստեղծել անկախ օբյեկտներ։
+
+
+   ---
+   
+   #### Տարբեր Եղանակներ
+   
+   #### 1. **Shallow Copy**
+   Shallow Copy-ը ստեղծում է օբյեկտի միայն առաջին մակարդակի հատկությունների կրկնօրինակ։ Nested օբյեկտները (deep properties) շարունակում են պահել իրենց հղումները։
+   
+   #### Օրինակներ
+   
+   ##### Օգտագործելով `Object.assign()`
+   ```javascript
+   const obj1 = { a: 1, b: { c: 2 } };
+   const obj2 = Object.assign({}, obj1);
+   
+   obj2.b.c = 42;
+   console.log(obj1.b.c); // 42
+   ```
+   
+   ##### Օգտագործելով Spread Operator (`...`)
+   ```javascript
+   const obj1 = { a: 1, b: { c: 2 } };
+   const obj2 = { ...obj1 };
+   
+   obj2.b.c = 42;
+   console.log(obj1.b.c); // 42
+   ```
+   
+   #### 2. **Deep Copy**
+   Deep Copy-ը ստեղծում է օբյեկտի բոլոր մակարդակների անկախ կրկնօրինակ։ Nested օբյեկտները նույնպես կկրկնօրինակվեն։
+   
+   #### Օրինակներ
+   
+   ##### Օգտագործելով Recursion
+   ```javascript
+   function deepClone(obj) {
+     if (obj === null || typeof obj !== 'object') {
+       return obj;
+     }
+   
+     const clone = Array.isArray(obj) ? [] : {};
+   
+     for (const key in obj) {
+       if (obj.hasOwnProperty(key)) {
+         clone[key] = deepClone(obj[key]);
+       }
+     }
+   
+     return clone;
+   }
+   
+   const obj1 = { a: 1, b: { c: 2 } };
+   const obj2 = deepClone(obj1);
+   
+   obj2.b.c = 42;
+   console.log(obj1.b.c); // 2
+   ```
+   
+   #### Օգտագործելով `JSON.parse` և `JSON.stringify`
+   ```javascript
+   const obj1 = { a: 1, b: { c: 2 } };
+   const obj2 = JSON.parse(JSON.stringify(obj1));
+   
+   obj2.b.c = 42;
+   console.log(obj1.b.c); // 2
+   ```
+   
+   > **Նշում:** Այս մեթոդը չի աջակցում ֆունկցիաներին կամ `undefined` արժեքներին։
+   
+   #### Օգտագործելով Third-Party Գրադարաններ (Lodash)
+   ```javascript
+   const _ = require('lodash');
+   const obj1 = { a: 1, b: { c: 2 } };
+   const obj2 = _.cloneDeep(obj1);
+   
+   obj2.b.c = 42;
+   console.log(obj1.b.c); // 2
+   ```
+
+
+   ---
+   
+   #### Համեմատություն Shallow և Deep Copy-ի միջև
+   
+   | **Հատկանիշ**         | **Shallow Copy**              | **Deep Copy**                 |
+   |-----------------------|-------------------------------|-------------------------------|
+   | **Կրկնօրինակ մակարդակ** | Միայն առաջին մակարդակը        | Բոլոր մակարդակները            |
+   | **Կատարողականություն**  | Արագ և արդյունավետ            | Ավելի դանդաղ                  |
+   | **Ներդրված օբյեկտներ**  | Պահպանում է հղումը            | Ստեղծում է նոր օբյեկտներ      |
+
+   ---
+   
+   #### Երբ օգտագործել
+   
+   1. **Shallow Copy:**
+      - Երբ օբյեկտը չունի ներդրված (nested) կառուցվածքներ կամ դրանք փոփոխության ենթակա չեն։
+   
+   2. **Deep Copy:**
+      - Երբ աշխատում եք բարդ, բազմամակարդակ օբյեկտների հետ և ցանկանում եք ամբողջական անկախություն սկզբնական օբյեկտից։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+59. ### Ինչ է JSON-ը և ինչու է այն կարևոր JavaScript-ում?
+
+   
+   **JSON (JavaScript Object Notation)**-ը թեթև, պարզ և ընթեռնելի տվյալների փոխանակման ձևաչափ է։ Այն ներկայացնում է տվյալների կառուցվածքը `key-value` զույգերի կամ զանգվածների միջոցով և հիմնականում օգտագործվում է վեբ հավելվածներում սերվերի և հաճախորդի միջև տվյալների փոխանակման համար։
+   
+   JSON-ը հիմնված է JavaScript-ի սինտաքսի վրա, սակայն լայնորեն կիրառվում է բազմաթիվ ծրագրավորման լեզուներում։
+
+   ---
+   
+   #### JSON-ի Հիմնական Սինտաքս
+   
+   1. **Օբյեկտներ**
+      - Տվյալները ներկայացվում են `key-value` զույգերով, որտեղ `key`-ը միշտ տողի տեսքով է, իսկ `value`-ը կարող է լինել տող, թիվ, boolean, null, զանգված կամ այլ օբյեկտ։
+   
+   2. **Զանգվածներ**
+      - Տվյալների շարքը ներկայացվում է զանգվածներով՝ տողի կամ թվի տեսքով արժեքներով։
+   
+   #### Օրինակ
+   ```json
+   {
+     "name": "Alice",
+     "age": 25,
+     "isStudent": false,
+     "skills": ["JavaScript", "React", "Node.js"]
+   }
+   ```
+   
+   - **Key**-երը միշտ պետք է լինեն տողերի տեսքով։
+     - Արժեքները կարող են լինել հետևյալ տեսակների՝
+        - Տող (string): "Alice"
+        - Թիվ (number): 25
+        - Boolean: true կամ false
+        - Null: null
+        - Զանգված (array): ["JavaScript", "React"]
+        - Օբյեկտ (object): { "key": "value" }
+
+   ---
+   
+   #### Ինչպես է աշխատում JSON-ը JavaScript-ում
+   
+   JavaScript-ը առաջարկում է ներկառուցված մեթոդներ JSON-ի հետ աշխատելու համար՝ `JSON.parse` և `JSON.stringify`։
+   
+   #### 1. JSON.parse
+   Այս մեթոդը օգտագործվում է JSON տողը JavaScript օբյեկտի վերածելու համար։
+   
+   #### Օրինակ
+   ```javascript
+   const jsonString = '{"name": "Alice", "age": 25}';
+   const user = JSON.parse(jsonString);
+   
+   console.log(user.name); // Output: Alice
+   console.log(user.age);  // Output: 25
+   ```
+   
+   #### 2. JSON.stringify
+   Այս մեթոդը օգտագործվում է JavaScript օբյեկտը JSON տողի վերածելու համար։
+   
+   #### Օրինակ
+   ```javascript
+   const user = { name: "Alice", age: 25 };
+   const jsonString = JSON.stringify(user);
+   
+   console.log(jsonString); // Output: {"name":"Alice","age":25}
+   ```
+
+   ---
+   
+   #### JSON-ի Կարևորությունը JavaScript-ում
+   
+   1. **Տվյալների Փոխանակում**
+      - JSON-ը հիմնական ձևաչափն է, որն օգտագործվում է սերվերի և հաճախորդի միջև տվյալների փոխանակման համար։ Օրինակ՝ API-ների միջոցով տվյալներ ստանալու և ուղարկելու համար։
+   
+   2. **API-ների Համատեղելիություն**
+      - JSON-ը աջակցվում է REST և GraphQL API-ներում՝ որպես տվյալների փոխանցման ստանդարտ ձևաչափ։
+   
+   3. **Թեթևություն**
+      - JSON-ը ավելի փոքր և արագ է, քան XML-ը, ինչը մեծացնում է վեբ հավելվածի կատարողականությունը։
+   
+   4. **Ընթեռնելիություն**
+      - JSON-ը հեշտ է կարդալ և գրել, ինչը դարձնում է այն հարմար ծրագրավորողների և ոչ տեխնիկական մասնագետների համար։
+   
+   5. **Լայն աջակցություն**
+      - JSON-ը աջակցվում է գրեթե բոլոր ժամանակակից ծրագրավորման լեզուներում, ինչը դարձնում է այն ունիվերսալ լուծում տվյալների փոխանակման համար։
+   
+   ---
+   
+   #### JSON-ի և JavaScript-ի միջև Կապը
+   
+   JSON-ը և JavaScript-ը սերտորեն կապված են միմյանց հետ։ JSON-ը հիմնված է JavaScript-ի օբյեկտի սինտաքսի վրա, և դրա հետ աշխատելու համար JavaScript-ը տրամադրում է հարմարավետ մեթոդներ։
+   
+   - **Օրինակ՝ Տվյալների Փոխանցում**
+   ```javascript
+   const apiResponse = '{"name": "Alice", "age": 25}';
+   const user = JSON.parse(apiResponse);
+   
+   user.isStudent = true;
+   
+   const updatedData = JSON.stringify(user);
+   console.log(updatedData); // Output: {"name":"Alice","age":25,"isStudent":true}
+   ```
+
+   ---
+   
+   #### JSON-ի Սահմանափակումներ
+   
+   1. **Կոշտ Սինտաքս**
+      - Key-երը պետք է լինեն տողերի տեսքով։
+      - Տվյալները չեն կարող պարունակել ֆունկցիաներ, `undefined` կամ `NaN` արժեքներ։
+   
+   2. **Անվտանգություն**
+      - Եթե JSON տվյալները ստուգված չեն, դրանք կարող են պարունակել վնասակար բովանդակություն։
+   
+   3. **Կարդալ միայն Սինխրոն կերպով**
+      - JSON-ը JavaScript-ում չի ապահովում streaming կամ մասային կարդալու մեթոդներ։
+   
+   4. **Կոմպլեքս տվյալների սինտաքս**
+      - Nested (ներդրված) օբյեկտները կարող են ավելի բարդ լինել կարդալու կամ կառավարելու համար։
+
+   ---
+   
+   #### JSON-ի Տարբերությունը XML-ի Համեմատ
+   
+   | **Հատկանիշ**       | **JSON**                             | **XML**                              |
+   |---------------------|---------------------------------------|---------------------------------------|
+   | **Սինտաքսի պարզություն** | Ավելի կարճ և ընթեռնելի                 | Ավելի բարդ և ծավալուն                 |
+   | **Տվյալների տեսակներ**   | Աջակցում է primitive տեսակներին        | Աջակցում է միայն տեքստին             |
+   | **Օգտագործման դյուրինություն** | Թեթև և հեշտ ինտեգրվող                | Ավելի ծանր և պահանջում է լրացուցիչ գրադարաններ |
+
+   ---
+   
+   #### Երբ օգտագործել JSON
+   
+   1. **API-ներ**
+      - Օգտագործեք JSON API-ների տվյալների փոխանակման համար։
+   
+   2. **Տվյալների պահպանում**
+      - Հարմար է փոքր չափերի տվյալներ պահելու համար՝ localStorage-ում կամ sessionStorage-ում։
+   
+   3. **Կոմպլեքս օբյեկտների փոխանցում**
+      - Հարմար է nested օբյեկտների և զանգվածների փոխանցման համար։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+60. ### Ինչ է AJAX-ը JavaScript-ում?
+
+   **AJAX (Asynchronous JavaScript and XML)**-ը տեխնոլոգիաների համակցություն է, որը թույլ է տալիս վեբ հավելվածներին փոխանակել տվյալներ սերվերի հետ առանց էջը վերաբեռնելու։ Այն թույլ է տալիս իրականացնել դինամիկ և ինտերակտիվ վեբ հավելվածներ՝ տվյալները ստանալով կամ ուղարկելով ֆոնային ռեժիմում։
+   
+   Չնայած անվանման մեջ նշվում է XML-ը, այսօր AJAX-ը հաճախ օգտագործվում է JSON տվյալների փոխանակման համար՝ իր պարզության և թեթևության շնորհիվ։
+   
+   ---
+   
+   #### Ինչպես է աշխատում AJAX-ը
+   
+   AJAX-ը օգտագործում է **XMLHttpRequest (XHR)** օբյեկտը կամ **Fetch API**-ն՝ սերվերի հետ ֆոնային կապ հաստատելու համար։
+   
+   #### Հիմնական քայլեր
+   1. Ստեղծվում է պահանջ (request) սերվերին։
+   2. Սերվերը մշակում է պահանջը և վերադարձնում պատասխան (response)։
+   3. Պատասխանը օգտագործվում է՝ էջը կամ տվյալները թարմացնելու համար՝ առանց ամբողջ էջը վերաբեռնելու։
+   
+   ---
+   
+   #### Օրինակ՝ Օգտագործելով XMLHttpRequest
+   
+   ```javascript
+   const xhr = new XMLHttpRequest();
+   
+   xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+   
+   xhr.onload = function () {
+     if (xhr.status === 200) {
+       const data = JSON.parse(xhr.responseText);
+       console.log(data);
+     }
+   };
+   
+   xhr.onerror = function () {
+     console.error('Request failed');
+   };
+   
+   xhr.send();
+   ```
+   
+   - **`open(method, url, async)`**: Նախապատրաստում է պահանջը (GET կամ POST):
+   - `method`: HTTP մեթոդ։
+   - `url`: Պահանջի URL հասցեն։
+   - `async`: Սինխրոն կամ ասինխրոն պահանջ (default՝ true):
+   
+   - **`send()`**: Ուղարկում է պահանջը սերվերին։
+   
+   ---
+   
+   #### Օրինակ՝ Օգտագործելով Fetch API
+   
+   Fetch API-ն համեմատաբար նոր և ավելի ընթեռնելի մեթոդ է AJAX գործողությունների համար։
+   
+   ```javascript
+   fetch('https://jsonplaceholder.typicode.com/posts')
+     .then(response => {
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+       return response.json();
+     })
+     .then(data => console.log(data))
+     .catch(error => console.error('Fetch error:', error));
+   ```
+   
+   - **`fetch(url)`**: Ուղարկում է պահանջը նշված URL հասցեին։
+   - **`.then(response => response.json())`**: Վերածում է պատասխանը JSON օբյեկտի։
+   - **`.catch()`**: Կառավարում է հնարավոր սխալները։
+
+   ---
+   
+   #### AJAX-ի Առավելությունները
+   
+   1. **Անխափան օգտագործման փորձ**
+      - Օգտագործողները չեն տեսնում էջի թարմացում կամ "loading" էֆեկտներ։
+   
+   2. **Արագ կատարողականություն**
+      - Փոփոխվում են միայն անհրաժեշտ տվյալները, ոչ թե ամբողջ էջը։
+   
+   3. **Դինամիկ և ինտերակտիվ բովանդակություն**
+      - Թույլ է տալիս իրականացնել որոնման դաշտեր, ավտոմատ լրացում, ֆիլտրներ և այլն։
+   
+   4. **Շերտավորված տվյալների կառավարում**
+      - Թույլ է տալիս սերվերի տվյալները կառավարել առանձին ֆոնային գործընթացում։
+
+   ---
+   
+   #### AJAX-ի Թերությունները
+   
+   1. **SEO Խնդիրներ**
+      - Որոնման համակարգերը կարող են չսատարել դինամիկ բովանդակության "կարդալը"։
+   
+   2. **Անվտանգություն**
+      - Եթե տվյալները չեն ստուգվում, դրանք կարող են ենթարկվել XSS (Cross-Site Scripting) հարձակումների։
+   
+   3. **Զննարկչի աջակցություն**
+      - Հին զննարկիչները կարող են չաջակցել AJAX-ի որոշ հատկություններին։
+   
+   ---
+   
+   #### Երբ օգտագործել AJAX
+   
+   1. **Real-Time Տվյալների Թարմացում**
+      - Օրինակ՝ վիճակագրական վահանակներ, չաթ հավելվածներ։
+   
+   2. **Որոնման դաշտեր և ֆիլտրեր**
+      - Հնարավորություն է տալիս արդյունքները թարմացնել անմիջապես առանց էջի վերաբեռնելու։
+   
+   3. **Ֆորմաների Աջակցություն**
+      - Ֆորմայի տվյալները սերվերին ուղարկելու համար՝ առանց էջը թարմացնելու։
+
+   ---
+   
+   #### AJAX-ի և JSON-ի Կապը
+   
+   AJAX-ը հաճախ օգտագործվում է JSON տվյալների փոխանակման համար, քանի որ JSON-ը թեթև և հեշտ ինտեգրվող ձևաչափ է։ Օրինակ՝ API-ներից JSON տվյալներ ստանալու և դրանք վեբ հավելվածում ցուցադրելու համար։
+   
+   ```javascript
+   fetch('https://jsonplaceholder.typicode.com/posts')
+     .then(response => response.json())
+     .then(data => {
+       data.forEach(post => console.log(post.title));
+     });
+   ```
+
+   ---
+   
+   #### Եզրակացություն
+   
+   **AJAX**-ը JavaScript-ում կարևոր տեխնոլոգիա է, որը թույլ է տալիս վեբ հավելվածներին դինամիկ կերպով փոխանակել տվյալներ սերվերի հետ՝ առանց էջը վերաբեռնելու։ Դրա միջոցով հնարավոր է ապահովել ավելի արագ, ինտերակտիվ և արդյունավետ օգտագործման փորձ։
+   
+   Օգտագործելով AJAX-ը՝ դուք կարող եք ստեղծել ժամանակակից վեբ հավելվածներ, որոնք հարմար են ինչպես օգտագործողների, այնպես էլ ծրագրավորողների համար։
+
    ---
 
 **[⬆ Back to Top](#բովանդակություն)**
