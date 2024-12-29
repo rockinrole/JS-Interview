@@ -10348,3 +10348,587 @@
 **[⬆ Back to Top](#բովանդակություն)**
 
    ---
+
+77. ### Ինչ է JavaScript-ում WeakRef-ը?
+
+   
+   **WeakRef**-ը JavaScript-ում թույլ հղում (weak reference) է դեպի օբյեկտ։ Այն թույլ է տալիս պահպանել օբյեկտի հղումը առանց խոչընդոտելու այն Garbage Collector-ի կողմից հեռացնելու գործընթացը։
+   
+   **WeakRef**-ը ներդրվել է ECMAScript 2021-ում և հիմնականում օգտագործվում է որոշակի հատուկ դեպքերում, երբ անհրաժեշտ է թույլ հղում դեպի օբյեկտ, բայց առանց ազդելու հիշողության կառավարման վրա։
+   
+---
+   
+   #### Ինչպես է աշխատում WeakRef-ը
+   
+   WeakRef-ը թույլ հղում է պահում օբյեկտի վրա՝ թույլ տալով Garbage Collector-ին այն հեռացնել, եթե այլ հղումներ չկան։ WeakRef-ի հիմնական նպատակն է ապահովել, որ օբյեկտը չպահպանվի հիշողության մեջ ավելի երկար, քան անհրաժեշտ է։
+   
+   #### Սինտաքս
+   ```javascript
+   const weakRef = new WeakRef(target);
+   ```
+   - **`target`**: Օբյեկտ, որի հղումը պետք է պահել որպես թույլ հղում։
+   
+   #### Նշումներ
+   - WeakRef-ը չի պահպանում օբյեկտը "կենդանի" (reachable) վիճակում։
+     - WeakRef-ից արժեքը ստանալու համար օգտագործվում է `.deref()` մեթոդը։
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### 1. Ստեղծում և Օգտագործում
+   ```javascript
+   let obj = { name: 'Alice' };
+   
+   // Ստեղծում ենք WeakRef
+   const weakRef = new WeakRef(obj);
+   
+   // Օբյեկտից արժեք ստանալու համար օգտագործվում է deref()
+   console.log(weakRef.deref()); // Output: { name: 'Alice' }
+   
+   // Հեռացնում ենք օբյեկտը
+   obj = null;
+   
+   // WeakRef-ը կարող է վերադարձնել undefined, եթե օբյեկտը Garbage Collector-ի կողմից հեռացված է
+   console.log(weakRef.deref()); // Output: undefined (կախված GC-ից)
+   ```
+   
+   #### 2. WeakRef-ի Օգտագործում Կեշավորման Համար
+   WeakRef-ը հաճախ օգտագործվում է կեշավորման ժամանակ, երբ անհրաժեշտ է կարճատև պահել տվյալներ, բայց չխոչընդոտել նրանց Garbage Collector-ին հեռացնելուց։
+   
+   ```javascript
+   class Cache {
+     constructor() {
+       this.store = new Map();
+     }
+   
+     set(key, value) {
+       this.store.set(key, new WeakRef(value));
+     }
+   
+     get(key) {
+       const ref = this.store.get(key);
+       return ref ? ref.deref() : undefined;
+     }
+   }
+   
+   const cache = new Cache();
+   let user = { name: 'Bob' };
+   
+   cache.set('user1', user);
+   
+   console.log(cache.get('user1')); // Output: { name: 'Bob' }
+   
+   // Հեռացնում ենք օբյեկտի հղումը
+   user = null;
+   
+   // Garbage Collector-ը կարող է հեռացնել օբյեկտը
+   console.log(cache.get('user1')); // Output: undefined (կախված GC-ից)
+   ```
+
+   ---
+   
+   #### WeakRef-ի Հատկություններ
+   
+   1. **`deref()` մեթոդ:**
+      - Վերադարձնում է թույլ հղված օբյեկտը, եթե այն դեռ "կենդանի" է։
+      - Եթե օբյեկտը Garbage Collector-ի կողմից հեռացված է, վերադարձնում է `undefined`։
+   
+   ```javascript
+   const weakRef = new WeakRef({ value: 42 });
+   console.log(weakRef.deref()?.value); // Output: 42
+   ```
+   
+   2. **Միայն Օբյեկտների Հետ Աշխատանք:**
+      - WeakRef-ը կարող է պահել միայն օբյեկտների հղումներ, ոչ պարզ տիպերի (primitive types):
+      ```javascript
+      const weakRef = new WeakRef(42); // TypeError
+      ```
+
+   ---
+   
+   #### WeakRef-ի Առավելություններ
+   
+   1. **Հիշողության Արդյունավետություն:**
+      - Օգտակար է այն դեպքերում, երբ անհրաժեշտ է թույլ հղում, բայց առանց օբյեկտի "կենդանի" պահելու։
+   
+   2. **Օգտագործում Կարճատև Տվյալների Հետ:**
+      - Հարմար է կարճատև արժեքների կամ ժամանակավոր կեշերի համար։
+   
+   ---
+   
+   #### WeakRef-ի Թերություններ
+   
+   1. **Garbage Collector-ի Կախվածություն:**
+      - WeakRef-ը կախված է Garbage Collector-ից, ինչը նշանակում է, որ դուք չեք կարող ճշգրիտ կառավարել, թե երբ օբյեկտը կհեռացվի։
+   
+   2. **Կիրառման Սահմանափակումներ:**
+      - Հիմնականում կիրառվում է միայն հատուկ դեպքերում, օրինակ՝ կեշավորման և ռեսուրսների ժամանակավոր կառավարման համար։
+
+   ---
+   
+   #### Երբ Օգտագործել WeakRef
+   
+   1. **Կեշավորման Համար:**
+      - Երբ պետք է պահել տվյալներ, բայց թույլ տալ Garbage Collector-ին հեռացնել դրանք։
+   
+   2. **Ինտենսիվ Օբյեկտների Կառավարում:**
+      - Երբ հավելվածը աշխատում է մեծ թվով օբյեկտների հետ, և պահանջվում է հիշողության արդյունավետ կառավարում։
+
+---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+78. ### Ինչ է Web APIs-ը JavaScript-ում?
+
+   
+   **Web APIs**-ը JavaScript-ում գործիքների և ինտերֆեյսների հավաքածու է, որը թույլ է տալիս ծրագրավորողներին փոխազդել վեբ զննարկիչների և վեբ հավելվածների հետ։ Web APIs-ն ապահովում է ֆունկցիոնալություն, ինչպիսիք են տվյալների փոխանակումը, օգտագործողի ինտերֆեյսի կառավարումը, ցանցային հարցումների կատարումը և այլն։
+   
+   Web APIs-ը ստեղծվում են զննարկիչների մշակողների կողմից և ապահովում են ինտեգրված հնարավորություններ, որոնք օգնում են հեշտացնել վեբ հավելվածների ստեղծումը։
+
+   ---
+   
+   #### Ինչպես են աշխատում Web APIs-ը
+   
+   1. **JavaScript-ի և APIs-ի կապ**:
+      - JavaScript-ը փոխազդում է Web APIs-ի հետ՝ օգտագործելով համապատասխան մեթոդներ և հատկություններ։
+   
+   2. **Զննարկիչների կողմից աջակցություն**:
+      - Web APIs-ը ներդրված են զննարկիչներում, ինչպիսիք են Chrome, Firefox, Safari և Edge։
+   
+   3. **Ներդրված ասինխրոնություն**:
+      - Շատ Web APIs աջակցում են ասինխրոն կոդին, ինչը հնարավորություն է տալիս կատարել գործողություններ ֆոնում՝ չխանգարելով գլխավոր թելը (main thread):
+
+   ---
+   
+   #### Web APIs-ի Տիպեր
+   
+   #### 1. **DOM (Document Object Model)**
+   - Օգտագործվում է վեբ էջերի կառուցվածքը փոփոխելու և դրանց բովանդակությունը կառավարելու համար։
+   
+   **Օրինակ:**
+   ```javascript
+   const header = document.querySelector('h1');
+   header.textContent = 'Hello, Web APIs!';
+   ```
+   
+   #### 2. **Console API**
+   - Օգտագործվում է զննարկչի կոնսոլում տվյալների մուտքագրման կամ դուրս բերման համար։
+   
+   **Օրինակ:**
+   ```javascript
+   console.log('This is a message in the console.');
+   ```
+   
+   #### 3. **Fetch API**
+   - Օգտագործվում է HTTP հարցումներ կատարելու համար։
+   
+   **Օրինակ:**
+   ```javascript
+   fetch('https://api.example.com/data')
+     .then(response => response.json())
+     .then(data => console.log(data))
+     .catch(error => console.error('Error:', error));
+   ```
+   
+   #### 4. **Geolocation API**
+   - Օգտագործվում է օգտագործողի դիրքը ստանալու համար։
+   
+   **Օրինակ:**
+   ```javascript
+   navigator.geolocation.getCurrentPosition(
+     position => {
+       console.log('Latitude:', position.coords.latitude);
+       console.log('Longitude:', position.coords.longitude);
+     },
+     error => console.error('Error:', error)
+   );
+   ```
+   
+   #### 5. **Canvas API**
+   - Օգտագործվում է վեկտորային գրաֆիկաներ ստեղծելու համար։
+   
+   **Օրինակ:**
+   ```javascript
+   const canvas = document.getElementById('myCanvas');
+   const ctx = canvas.getContext('2d');
+   ctx.fillStyle = 'blue';
+   ctx.fillRect(10, 10, 150, 100);
+   ```
+   
+   #### 6. **Web Storage API**
+   - Տեղական տվյալներ պահպանելու համար։
+   
+   **Օրինակ (localStorage):**
+   ```javascript
+   localStorage.setItem('username', 'JohnDoe');
+   console.log(localStorage.getItem('username'));
+   ```
+   
+   #### 7. **Notifications API**
+   - Օգտագործվում է համակարգային ծանուցումներ ցուցադրելու համար։
+   
+   **Օրինակ:**
+   ```javascript
+   if (Notification.permission === 'granted') {
+     new Notification('Hello, Web APIs!');
+   } else {
+     Notification.requestPermission();
+   }
+   ```
+   
+   #### 8. **WebSockets API**
+   - Օգտագործվում է իրական ժամանակում երկկողմանի հաղորդակցության համար։
+   
+   **Օրինակ:**
+   ```javascript
+   const socket = new WebSocket('ws://example.com/socket');
+   
+   socket.onopen = () => console.log('Connection opened');
+   socket.onmessage = event => console.log('Message:', event.data);
+   ```
+
+   ---
+   
+   #### Առավելություններ
+   
+   1. **Հեշտացում:**
+      - Web APIs-ն ապահովում է գործիքներ, որոնք դյուրացնում են բարդ գործողությունների իրականացումը։
+   
+   2. **Ասինխրոն գործողություններ:**
+      - Շատ APIs աջակցում են ասինխրոն գործողություններին՝ բարելավելով կատարողականությունը։
+   
+   3. **Զննարկչի ֆունկցիոնալության ինտեգրում:**
+      - Թույլ է տալիս ծրագրավորողներին մուտք գործել զննարկչի հնարավորություններին։
+   
+   4. **Հասանելիություն և Համատեղելիություն:**
+      - Շատ APIs աջակցվում են հիմնական զննարկիչների կողմից։
+
+   ---
+   
+   #### Թերություններ
+   
+   1. **Աջակցության սահմանափակում:**
+      - Ոչ բոլոր APIs են աջակցվում հին զննարկիչներում։
+   
+   2. **Ասինխրոնության բարդություն:**
+      - Ասինխրոն գործողությունների կառավարումը կարող է լինել բարդ։
+   
+   3. **Անվտանգության խնդիրներ:**
+      - Օրինակ՝ Geolocation API-ն պահանջում է օգտագործողի թույլտվություն։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+79. ### Ինչ է JavaScript-ի Performance Optimization-ը?
+   
+   **Performance Optimization**-ը JavaScript-ում մեթոդների և տեխնիկայի շարք է, որը կիրառվում է հավելվածի արագությունը և արդյունավետությունը բարելավելու համար։ Դա ներառում է կոդի կատարողականության բարձրացում, բեռնումի ժամանակի կրճատում և ռեսուրսների օպտիմալ օգտագործում։
+   
+   JavaScript-ի օպտիմալացումը կարևոր է ինտերակտիվ վեբ հավելվածների համար, որտեղ կատարողականությունը մեծ ազդեցություն ունի օգտագործողի փորձի վրա։
+
+   ---
+   
+   #### Ինչու է կարևոր Performance Optimization-ը?
+   
+   1. **Օգտագործողի Բավարարվածություն:**
+      - Արագ բեռնվող և արձագանքող հավելվածները բարձրացնում են օգտագործողի գոհունակությունը։
+   
+   2. **SEO Արդյունավետություն:**
+      - Բարձր կատարողականություն ունեցող կայքերը ավելի լավ են դասվում որոնողական համակարգերում։
+   
+   3. **Ռեսուրսների Կառավարում:**
+      - Ապահովում է օպտիմալ հիշողության և հաշվարկային հզորությունների օգտագործումը։
+   
+   4. **Մոբիլ Բրաուզերների Աջակցություն:**
+      - Օգտակար է դանդաղ ցանցերի և սահմանափակ ռեսուրսներով սարքերի համար։
+
+   ---
+   
+   #### JavaScript Performance Optimization Տեխնիկաներ
+   
+   #### 1. **Կոդի Օպտիմալացում**
+   
+   #### Օգտագործեք ES6+ սինտաքս
+   ES6-ի սինտաքսը թույլ է տալիս գրել ավելի արագ և կարդացվող կոդ։
+   ```javascript
+   // Avoid
+   var arr = [1, 2, 3];
+   
+   // Prefer
+   const arr = [1, 2, 3];
+   ```
+   
+   #### Խուսափեք կրկնվող հաշվարկներից
+   ```javascript
+   // Avoid
+   for (let i = 0; i < array.length; i++) {
+     console.log(array[i]);
+   }
+   
+   // Prefer
+   const length = array.length;
+   for (let i = 0; i < length; i++) {
+     console.log(array[i]);
+   }
+   ```
+   
+   #### 2. **Դադարեցրեք Բլոկավորող Գործողությունները**
+   
+   #### Օգտագործեք ասինխրոն ֆունկցիաներ
+   ```javascript
+   // Avoid
+   const data = fetchSync('https://api.example.com');
+   
+   // Prefer
+   const data = await fetch('https://api.example.com');
+   ```
+   
+   #### 3. **Հիշողության Օպտիմալացում**
+   
+   #### Օգտագործեք Garbage Collector-ի Օգուտները
+   - Պահպանեք հղումները միայն անհրաժեշտ տվյալներին։
+   
+   #### Խուսափեք մեծ օբյեկտներ պահելուց
+   ```javascript
+   // Avoid
+   const largeData = new Array(1000000).fill('data');
+   
+   // Prefer
+   const processLargeData = () => {
+     const chunk = new Array(1000).fill('data');
+     return chunk;
+   };
+   ```
+   
+   #### 4. **Նվազեցրեք DOM-Ի Գործողությունները**
+   
+   DOM փոփոխությունները հաճախ թանկարժեք են։
+   - Օգտագործեք `documentFragment` մեծ DOM թարմացումների համար։
+   
+   ```javascript
+   const fragment = document.createDocumentFragment();
+   for (let i = 0; i < 100; i++) {
+     const div = document.createElement('div');
+     fragment.appendChild(div);
+   }
+   document.body.appendChild(fragment);
+   ```
+   
+   #### 5. **Բեռնումի Ժամանակի Կրճատում**
+   
+   #### Կոմպրեսիա և Մինիմալացում
+   - Օգտագործեք գործիքներ, ինչպիսիք են Webpack կամ Parcel։
+   
+   ```bash
+   npm install terser
+   ```
+   
+   #### Lazy Loading
+   Բեռնեք միայն անհրաժեշտ սկրիպտները։
+   ```javascript
+   if (condition) {
+     import('./module.js').then(module => {
+       module.default();
+     });
+   }
+   ```
+   
+   #### 6. **Օգտագործեք Կեշավորում**
+   
+   #### Կեշավորեք AJAX հարցումները
+   ```javascript
+   const fetchData = async (url) => {
+     const cache = localStorage.getItem(url);
+     if (cache) return JSON.parse(cache);
+   
+     const response = await fetch(url);
+     const data = await response.json();
+     localStorage.setItem(url, JSON.stringify(data));
+     return data;
+   };
+   ```
+   
+   #### Կիրառեք Service Workers
+   ```javascript
+   navigator.serviceWorker.register('/sw.js');
+   ```
+
+   ---
+   
+   #### Performance Մոնիտորինգ Գործիքներ
+   
+   1. **Google Lighthouse:**
+      - Վերլուծում է կայքի արագությունը և տալիս է օպտիմալացման առաջարկներ։
+   
+   2. **Chrome DevTools Performance Tab:**
+      - Օգտագործվում է JavaScript-ի, CSS-ի և DOM-ի կատարողականության մոնիտորինգի համար։
+   
+   3. **WebPageTest:**
+      - Ամբողջական վերլուծություն կայքի բեռնումի վերաբերյալ։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+80. ### Ինչ է JavaScript-ում Event Listeners-ը?
+
+   **Event Listeners**-ը JavaScript-ում ֆունկցիաներ են, որոնք հետևում են DOM-ի տարրերում առաջացող իրադարձություններին (events) և կատարում են որոշակի գործողություններ, երբ այդ իրադարձությունները տեղի են ունենում։
+   
+   Այս մեխանիզմը թույլ է տալիս ստեղծել ինտերակտիվ վեբ հավելվածներ՝ պատասխանելով օգտագործողի գործողություններին, ինչպիսիք են `click`, `keydown`, `mouseover`, և այլն։
+
+   ---
+   
+   #### Ինչպես է աշխատում Event Listener-ը
+   
+   1. Event Listener-ը "լսում" է կոնկրետ իրադարձություն որոշակի տարրում։
+   2. Երբ այդ իրադարձությունը տեղի է ունենում, համապատասխան ֆունկցիան (callback) ակտիվանում է։
+   
+   #### Սինտաքս
+   ```javascript
+   element.addEventListener(event, callback, options);
+   ```
+   - **`element`**: DOM տարրը, որի վրա կցվում է listener-ը։
+   - **`event`**: Իրադարձության տիպը (օր.`"click"`, "mouseover")։
+   - **`callback`**: Ֆունկցիան, որը կկատարվի, երբ իրադարձությունը տեղի ունենա։
+   - **`options`** (ըստ ցանկության): Պարամետրեր, որոնք կարգավորում են իրադարձության վարքագիծը։
+
+   ---
+   
+   #### Event Listener-ի Օրինակներ
+   
+   #### 1. `click` Իրադարձություն
+   ```javascript
+   const button = document.querySelector('button');
+   
+   button.addEventListener('click', () => {
+     console.log('Button clicked!');
+   });
+   ```
+   
+   #### 2. `keydown` Իրադարձություն
+   ```javascript
+   document.addEventListener('keydown', (event) => {
+     console.log(`Key pressed: ${event.key}`);
+   });
+   ```
+   
+   #### 3. `mouseover` Իրադարձություն
+   ```javascript
+   const box = document.querySelector('.box');
+   
+   box.addEventListener('mouseover', () => {
+     console.log('Mouse is over the box!');
+   });
+   ```
+
+   ---
+   
+   #### Event Listener-ի Կարգավորումներ
+   
+   #### 1. **`once` Պարամետր**
+   - Իրադարձությունը լսելուց հետո listener-ը ավտոմատ կհեռացվի։
+   
+   ```javascript
+   button.addEventListener('click', () => {
+     console.log('This will run only once!');
+   }, { once: true });
+   ```
+   
+   #### 2. **`capture` Պարամետր**
+   - Կարգավորում է, թե իրադարձությունը պետք է լսվի "capturing" կամ "bubbling" փուլում։
+   
+   ```javascript
+   button.addEventListener('click', () => {
+     console.log('Capturing phase');
+   }, { capture: true });
+   ```
+   
+   #### 3. **`passive` Պարամետր**
+   - Կարգավորում է, որ listener-ը երբեք չկանգնեցնի իրադարձության լռելյայն վարքը։
+   
+   ```javascript
+   document.addEventListener('scroll', () => {
+     console.log('Scrolling...');
+   }, { passive: true });
+   ```
+
+   ---
+   
+   #### Իրադարձությունների Հեռացում
+   
+   Event Listener-ը կարելի է հեռացնել `removeEventListener` մեթոդի միջոցով։
+   
+   #### Օրինակ
+   ```javascript
+   const logClick = () => {
+     console.log('Button clicked!');
+   };
+   
+   button.addEventListener('click', logClick);
+   
+   // Later in the code
+   button.removeEventListener('click', logClick);
+   ```
+   > **Նշում:** `removeEventListener`-ը չի գործում, եթե callback ֆունկցիան հայտարարաված չէ որպես անունով ֆունկցիա։
+
+   ---
+   
+   #### Event Propagation (Իրադարձության Տարածում)
+   
+   JavaScript-ում իրադարձությունները տարածվում են երկու հիմնական փուլով՝ **Capturing** և **Bubbling**:
+   
+   1. **Capturing (Իրադարձության բռնում):**
+      - Իրադարձությունը տարածվում է տարրի արմատից դեպի ներս։
+   
+   2. **Bubbling (Իրադարձության պղպջակում):**
+      - Իրադարձությունը տարածվում է ներսի տարրից դեպի արմատ։
+   
+   ```javascript
+   const parent = document.querySelector('.parent');
+   const child = document.querySelector('.child');
+   
+   parent.addEventListener('click', () => {
+     console.log('Parent clicked!');
+   }, true); // Capturing phase
+   
+   child.addEventListener('click', () => {
+     console.log('Child clicked!');
+   }); // Bubbling phase
+   ```
+
+   ---
+   
+   #### Event Delegation (Իրադարձությունների Պատվիրակում)
+   
+   **Event Delegation**-ը տեխնիկա է, որը թույլ է տալիս լսել իրադարձությունները ընդհանուր տարրի վրա և կառավարել ներսի տարրերի վրա տեղի ունեցող իրադարձությունները։
+   
+   #### Օրինակ
+   ```javascript
+   const list = document.querySelector('ul');
+   
+   list.addEventListener('click', (event) => {
+     if (event.target.tagName === 'LI') {
+       console.log(`List item clicked: ${event.target.textContent}`);
+     }
+   });
+   ```
+   > Այս մեթոդը նվազեցնում է Event Listener-ների քանակը և բարելավում է կատարողականությունը։
+
+   ---
+   
+   #### Եզրակացություն
+   
+   **Event Listeners**-ը JavaScript-ում կարևոր գործիք է ինտերակտիվ վեբ հավելվածներ կառուցելու համար։
+   - Նրանք թույլ են տալիս կառավարել օգտագործողի գործողությունները և արձագանքել դրանց իրական ժամանակում։
+   - Event Delegation, Capturing և Bubbling մեխանիզմների օգտագործումը ապահովում է ավելի ճկուն և արդյունավետ կոդ։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
