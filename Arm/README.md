@@ -10932,3 +10932,1365 @@
 **[⬆ Back to Top](#բովանդակություն)**
 
    ---
+
+81. ### Ինչ է JavaScript-ում debounce-ի և timeout-ի կիրառությունը?
+   
+   **Debounce**-ը և **setTimeout**-ը JavaScript-ում գործիքներ են, որոնք օգտագործվում են որոշակի գործողությունների հաճախականությունը վերահսկելու և կատարողականությունը բարելավելու համար։ Դրանք հատկապես օգտակար են այն դեպքերում, երբ իրադարձությունները շատ հաճախ են առաջանում (օրինակ՝ `scroll`, `resize`, `input`)։
+   
+   ---
+   
+   #### Debounce
+   
+   **Debounce**-ը մեթոդ է, որը սահմանափակում է ֆունկցիայի կանչերի հաճախականությունը։ Այն թույլ է տալիս, որ ֆունկցիան կանչվի միայն այն ժամանակ, երբ իրադարձությունը դադարում է առաջանալ որոշակի ժամանակահատվածի ընթացքում։
+   
+   #### Օգտագործման դեպքեր
+   - **Հետաքրքրաշարժ որոնում (Search):**
+      - Օգտագործողի կողմից մուտքագրված տվյալները պետք է մշակվեն միայն այն դեպքում, երբ նա դադարում է մուտքագրել որոշակի ժամանակահատվածի ընթացքում։
+   
+   - **Փոփոխությունների հետևում (Resize):**
+      - Պատուհանի չափսերի փոփոխության ժամանակ կարող եք թարմացնել լեյաութը միայն փոփոխությունների ավարտից հետո։
+   
+   #### Իրականացման Օրինակ
+   ```javascript
+   function debounce(func, delay) {
+     let timeout;
+     return function(...args) {
+       clearTimeout(timeout);
+       timeout = setTimeout(() => func.apply(this, args), delay);
+     };
+   }
+   
+   // Օգտագործում
+   const handleInput = debounce((event) => {
+     console.log('Input value:', event.target.value);
+   }, 300);
+   
+   document.getElementById('search').addEventListener('input', handleInput);
+   ```
+   
+   - **Պարզաբանում**:
+   - Յուրաքանչյուր անգամ, երբ օգտատերը մուտքագրում է նոր տառ, `debounce`-ը չեղարկում է նախորդ `setTimeout`-ը և նորից սկսում հաշվարկը։
+   - Միայն այն դեպքում, երբ օգտատերը դադարում է մուտքագրել 300 միլիվայրկյան, ֆունկցիան կանչվում է։
+   
+   ---
+   
+   #### setTimeout
+   
+   **setTimeout**-ը JavaScript-ի ներկառուցված ֆունկցիա է, որը թույլ է տալիս որոշակի գործողություններ կատարել որոշակի ուշացումով։
+   
+   #### Օգտագործման դեպքեր
+   - **Միայն մեկ անգամ կատարվող գործողություններ:**
+      - Օրինակ՝ օգտատիրոջը հաղորդագրություն ցուցադրելը որոշակի ժամանակ անց։
+   
+   - **Ասինխրոն Վարքագիծ:**
+      - Ծրագրերի որոշ գործողություններ հետաձգելու համար, օրինակ՝ անիմացիաներ կամ սպասման արհեստական ինտերվալներ։
+   
+   #### Իրականացման Օրինակ
+   ```javascript
+   console.log('Start');
+   
+   setTimeout(() => {
+     console.log('This message appears after 2 seconds');
+   }, 2000);
+   
+   console.log('End');
+   ```
+   
+   - **Պարզաբանում**:
+   - Ցանկացած կոդ, որը դրված է `setTimeout`-ի մեջ, կատարվում է հիմնական ծրագրի կատարումը շարունակելուց հետո։
+   
+   ---
+   
+   #### Debounce-ի և setTimeout-ի Տարբերություններ
+   
+   | **Հատկանիշ**        | **Debounce**                                     | **setTimeout**                               |
+   |---------------------|------------------------------------------------|--------------------------------------------|
+   | **Նպատակ**          | Սահմանափակում է ֆունկցիայի կանչերի հաճախականությունը։ | Կատարում է ֆունկցիան մեկ անգամ, որոշակի ուշացումով։ |
+   | **Իրադարձությունների կառավարում** | Օգտակար է հաճախակի իրադարձությունների կառավարման համար։  | Օգտագործվում է հիմնականում ասինխրոն գործողությունների համար։ |
+   | **Կոդի կառուցվածք**  | Օգտագործվում է սովորաբար ֆունկցիայի փաթեթավորման միջոցով։ | Կառավարում է միայն գործողության ուշացումը։           |
+
+   ---
+   
+   #### Երբ օգտագործել
+   
+   #### Օգտագործել **Debounce**
+   - Երբ ցանկանում եք կառավարել հաճախակի իրադարձությունները, ինչպիսիք են՝
+   - Input կամ Search իրադարձությունները։
+   - Scroll կամ Resize գործողությունները։
+   
+   #### Օգտագործել **setTimeout**
+   - Երբ անհրաժեշտ է գործողություն կատարել որոշակի ժամանակ անց։
+   - Հաղորդագրության ցուցադրում։
+   - Ֆունկցիայի հետաձգված կանչ։
+
+   ---
+   
+   #### Եզրակացություն
+   
+   JavaScript-ում **debounce**-ը և **setTimeout**-ը կարևոր գործիքներ են կատարողականությունը բարելավելու համար։
+   - **Debounce**-ը հարմար է հաճախակի իրադարձությունների կառավարման համար, որտեղ անհրաժեշտ է կրճատել ֆունկցիաների կանչերի թիվը։
+   - **setTimeout**-ը օգտագործվում է գործողությունների որոշակի ուշացումով կատարելու համար։
+
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+82. ### Ինչ է JavaScript-ում Singleton Pattern-ը?
+   
+   **Singleton Pattern**-ը դիզայնի պարբերական նախշ է (design pattern), որն ապահովում է, որ դասի միայն մեկ օրինակ (instance) ստեղծվի, և այն գլոբալ հասանելի լինի ամբողջ ծրագրում։
+   
+   Singleton-ը հաճախ օգտագործվում է այն դեպքերում, երբ անհրաժեշտ է ունենալ մեկ ընդհանուր ռեսուրս կամ մենեջեր, ինչպիսին է կարգավորումների օբյեկտը կամ տվյալների կապի միջնորդը (database connection mediator):
+
+   ---
+   
+   #### Ինչպես է աշխատում Singleton Pattern-ը
+   
+   1. Ստեղծվում է դաս կամ օբյեկտ, որը սահմանափակում է իր օրինակի քանակը միայն մեկով։
+   2. Առաջին անգամ դրա օրինակը ստեղծելուց հետո, ցանկացած հետագա փորձ պարզապես վերադարձնում է արդեն ստեղծված օրինակը։
+
+   ---
+   
+   #### Իրականացման Օրինակներ
+   
+   #### 1. Singleton Օբյեկտ Օգտագործելով Closure
+   ```javascript
+   const Singleton = (function () {
+     let instance;
+   
+     function createInstance() {
+       return {
+         name: 'Singleton Instance',
+         createdAt: new Date()
+       };
+     }
+   
+     return {
+       getInstance() {
+         if (!instance) {
+           instance = createInstance();
+         }
+         return instance;
+       }
+     };
+   })();
+   
+   const instance1 = Singleton.getInstance();
+   const instance2 = Singleton.getInstance();
+   
+   console.log(instance1 === instance2); // true
+   ```
+   
+   #### 2. Singleton Օբյեկտ ES6 Դասով (Class)
+   ```javascript
+   class Singleton {
+     constructor() {
+       if (Singleton.instance) {
+         return Singleton.instance;
+       }
+   
+       this.name = 'Singleton Instance';
+       this.createdAt = new Date();
+       Singleton.instance = this;
+     }
+   }
+   
+   const instance1 = new Singleton();
+   const instance2 = new Singleton();
+   
+   console.log(instance1 === instance2); // true
+   ```
+   
+   #### 3. Module Pattern Օգտագործելով Singleton
+   ```javascript
+   const Singleton = (() => {
+     const instance = {
+       name: 'Singleton Instance',
+       createdAt: new Date()
+     };
+   
+     return instance;
+   })();
+   
+   console.log(Singleton.name); // "Singleton Instance"
+   ```
+
+   ---
+   
+   #### Օգտագործման Դեպքեր
+   
+   1. **Կոնֆիգուրացիոն Նստվածքներ (Configuration Settings):**
+      - Երբ անհրաժեշտ է ունենալ մեկ ընդհանուր օբյեկտ, որը պահում է հավելվածի բոլոր կարգավորումները։
+   
+   2. **Լոգավորման Համակարգեր (Logging Systems):**
+      - Որպեսզի յուրաքանչյուր լոգի մուտք օգտագործի նույն լոգի մենեջերը։
+   
+   3. **Տվյալների Բազայի Միացում (Database Connection):**
+      - Տվյալների բազայի միացման համար մեկ մենեջեր ունենալու համար։
+
+   ---
+   
+   #### Singleton Pattern-ի Առավելություններ
+   
+   1. **Հիշողության Արդյունավետություն:**
+      - Պահում է միայն մեկ օրինակ։
+   
+   2. **Կառավարման Կենտրոնացում:**
+      - Թույլ է տալիս բոլորից նույն ռեսուրսին օգտվել։
+   
+   3. **Կոդի Հստակություն:**
+      - Կանխում է նոր օրինակների ստեղծումը։
+
+   ---
+   
+   #### Singleton Pattern-ի Թերություններ
+   
+   1. **Թեստավորման Դժվարություններ:**
+      - Singleton-ը գլոբալ է, ինչը կարող է բարդացնել մոդուլային թեստերի գրումը։
+   
+   2. **Կախվածություն Գլոբալ Օբյեկտից:**
+      - Գլոբալ օբյեկտների օգտագործումը կարող է խանգարել ծրագրի ճկունությանը։
+   
+   3. **Կոդի Ցանցավորում:**
+      - Եթե Singleton-ը փոխվում է, դա կարող է ազդել բոլոր մասերի վրա։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+83. ### Ինչ է JavaScript-ում memory leak-ը և ինչպես կարող ենք խուսափել?
+
+   **Memory Leak**-ը (հիշողության արտահոսք) JavaScript-ում նշանակում է այն իրավիճակը, երբ հավելվածը պահպանում է հիշողության հատվածներ, որոնք այլևս չեն օգտագործվում, բայց չեն ազատվում Garbage Collector-ի կողմից։ Սա կարող է հանգեցնել հիշողության ավելորդ օգտագործման և հավելվածի կատարողականության նվազման։
+
+   ---
+   
+   #### Ինչպես է աշխատում Հիշողության Կառավարումը JavaScript-ում
+   
+   JavaScript-ում հիշողությունը ավտոմատ կառավարվում է **Garbage Collector**-ի կողմից, որը պատասխանատու է չօգտագործվող օբյեկտները հեռացնելու համար։ Սակայն, որոշակի սխալների պատճառով, որոշ օբյեկտներ մնում են "հասանելի" վիճակում, ինչը հանգեցնում է հիշողության արտահոսքի։
+
+   ---
+   
+   #### Memory Leak-ի Հիմնական Պատճառները
+   
+   #### 1. **Անպահպանված Գլոբալ Փոփոխականներ**
+   - Երբ փոփոխականը հայտարարվում է առանց `let`, `const` կամ `var` օգտագործելու, այն դառնում է գլոբալ օբյեկտի մաս։
+   
+   **Օրինակ:**
+   ```javascript
+   function createGlobal() {
+     globalVar = 'I am global'; // Սա կստեղծի գլոբալ փոփոխական
+   }
+   createGlobal();
+   ```
+   
+   #### 2. **Մոռացված Timer-ներ և Event Listener-ներ**
+   - Օրինակ, `setInterval`-ը կամ Event Listener-ները մնում են հիշողության մեջ, եթե դրանք չեղարկված չեն։
+   
+   **Օրինակ:**
+   ```javascript
+   const interval = setInterval(() => {
+     console.log('Running...');
+   }, 1000);
+   
+   // Բայց եթե clearInterval(interval) չկիրառվի, այն կմնա հիշողության մեջ։
+   ```
+   
+   #### 3. **Փակվածներ (Closures)**
+   - Փակվածները պահում են ֆունկցիայի շրջանակը, ինչը կարող է հիշողության արտահոսքի պատճառ դառնալ, եթե օբյեկտները ոչ պատշաճ կերպով չեն ազատվում։
+   
+   **Օրինակ:**
+   ```javascript
+   function createClosure() {
+     let bigData = new Array(1000000).fill('data');
+     return function () {
+       console.log(bigData);
+     };
+   }
+   const closure = createClosure();
+   ```
+   
+   #### 4. **Մոռացված DOM Հղումներ**
+   - Եթե հղումները դեպի DOM տարրերը պահպանվում են, սակայն տարրերը հանվում են էջից, հիշողության արտահոսք կարող է առաջանալ։
+   
+   **Օրինակ:**
+   ```javascript
+   const button = document.getElementById('myButton');
+   button.addEventListener('click', () => {
+     console.log('Clicked!');
+   });
+   // Եթե button-ը հանվում է DOM-ից, listener-ը կմնա։
+   ```
+
+   ---
+   
+   #### Ինչպես Խուսափել Memory Leak-երից
+   
+   #### 1. **Օգտագործեք `let` և `const`**
+   Միշտ հայտարարեք փոփոխականները `let` կամ `const` օպերատորներով՝ խուսափելու գլոբալ փոփոխականների ստեղծումից։
+   
+   **Օրինակ:**
+   ```javascript
+   let myVar = 'Hello';
+   ```
+   
+   #### 2. **Մաքրեք Timer-ները և Event Listener-ները**
+   Միշտ մաքրեք `setInterval`, `setTimeout`, կամ Event Listener-ները, երբ դրանք այլևս չեն օգտագործվում։
+   
+   **Օրինակ:**
+   ```javascript
+   const interval = setInterval(() => {
+     console.log('Running...');
+   }, 1000);
+   
+   // Մաքրում ենք
+   clearInterval(interval);
+   ```
+   
+   ```javascript
+   const button = document.getElementById('myButton');
+   function handleClick() {
+     console.log('Clicked!');
+   }
+   button.addEventListener('click', handleClick);
+   
+   // Հեռացնում ենք listener-ը
+   button.removeEventListener('click', handleClick);
+   ```
+   
+   #### 3. **Օգտագործեք WeakMap և WeakSet**
+   WeakMap և WeakSet տվյալների կառուցվածքները թույլ են տալիս ժամանակավոր հղումներ՝ թույլ տալով Garbage Collector-ին հեռացնել չօգտագործվող օբյեկտները։
+   
+   **Օրինակ:**
+   ```javascript
+   const weakMap = new WeakMap();
+   let obj = { key: 'value' };
+   weakMap.set(obj, 'some data');
+   
+   obj = null; // Օբյեկտը կհեռացվի Garbage Collector-ի կողմից
+   ```
+   
+   #### 4. **Օգտագործեք DOM-ի Պատվիրակում (Event Delegation)**
+   Իրադարձությունները պատվիրակելով ընդհանուր տարրին, կարող եք խուսափել ավելորդ Event Listener-ներից։
+   
+   **Օրինակ:**
+   ```javascript
+   document.body.addEventListener('click', (event) => {
+     if (event.target.tagName === 'BUTTON') {
+       console.log('Button clicked!');
+     }
+   });
+   ```
+   
+   #### 5. **Մոնիտորինգ Հիշողության Օգտագործումը**
+   Օգտագործեք Chrome DevTools կամ այլ գործիքներ՝ հիշողության օգտագործումը վերլուծելու և Memory Leak-երը հայտնաբերելու համար։
+
+   ---
+   
+   #### Եզրակացություն
+   
+   JavaScript-ում Memory Leak-երը կարող են զգալիորեն նվազեցնել հավելվածի կատարողականությունը և օգտագործողի փորձը։
+   - Խուսափեք գլոբալ փոփոխականներից։
+   - Մաքրեք Timer-ները և Event Listener-ները։
+   - Օգտագործեք WeakMap և WeakSet ժամանակավոր տվյալների համար։
+   - Կիրառեք DOM-ի պատվիրակում։
+
+---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+84. ### Ինչ է JavaScript-ում Data Binding-ը?
+
+   **Data Binding**-ը (Տվյալների Կապում) JavaScript-ում մեխանիզմ է, որը ստեղծում է կապ տվյալների և օգտագործողի ինտերֆեյսի տարրերի միջև։ Այն ապահովում է, որ տվյալների փոփոխությունները ավտոմատ կերպով արտացոլվեն UI-ում, և հակառակը՝ UI-ում կատարված փոփոխությունները ազդեն տվյալների վրա։
+   
+   Data Binding-ը հատկապես օգտագործվում է JavaScript-ի ֆրեյմվորքներում, ինչպիսիք են **Angular**, **React**, և **Vue.js**։
+
+   ---
+   
+   #### Data Binding-ի Տիպերը
+   
+   JavaScript-ում Data Binding-ը կարող է իրականացվել հետևյալ ձևերով.
+   
+   #### 1. **One-Way Data Binding (Միակողմանի Կապ)**
+   - Տվյալները փոխանցվում են միայն տվյալների մոդելից (data model) դեպի UI։
+   
+   **Օրինակ:**
+   ```javascript
+   const data = { name: 'Alice' };
+   const element = document.getElementById('name');
+   element.textContent = data.name; // Տվյալները փոխանցվում են միայն data.name-ից UI
+   ```
+   
+   #### 2. **Two-Way Data Binding (Երկկողմանի Կապ)**
+   - Տվյալները սինխրոնացվում են մոդելի և UI-ի միջև։
+   
+   **Օրինակ Vue.js-ում:**
+   ```html
+   <div id="app">
+     <input v-model="name" />
+     <p>{{ name }}</p>
+   </div>
+   
+   <script>
+   new Vue({
+     el: '#app',
+     data: {
+       name: 'Alice'
+     }
+   });
+   </script>
+   ```
+   - Երբ օգտատերը փոփոխում է input դաշտը, տվյալների մոդելը նույնպես թարմացվում է։
+   
+   #### 3. **Event Binding**
+   - Կապում է UI-ի իրադարձությունները տվյալների մոդելի ֆունկցիաների հետ։
+   
+   **Օրինակ React-ում:**
+   ```javascript
+   function App() {
+     const [count, setCount] = React.useState(0);
+   
+     return (
+       <div>
+         <p>Count: {count}</p>
+         <button onClick={() => setCount(count + 1)}>Increase</button>
+       </div>
+     );
+   }
+   ```
+
+   ---
+   
+   #### Ինչպես Իրականացնել Data Binding Առանց Ֆրեյմվորքի
+   
+   Data Binding-ը հնարավոր է իրականացնել նաև առանց ֆրեյմվորքի։
+   
+   #### Օրինակ՝ Two-Way Data Binding
+   ```javascript
+   const data = { name: '' };
+   const input = document.getElementById('input');
+   const display = document.getElementById('display');
+   
+   // Սինխրոնացում UI-ից տվյալների մոդելի հետ
+   input.addEventListener('input', (event) => {
+     data.name = event.target.value;
+     updateUI();
+   });
+   
+   // Սինխրոնացում տվյալների մոդելից UI-ի հետ
+   function updateUI() {
+     display.textContent = data.name;
+   }
+   
+   // Նախնական ցուցադրում
+   updateUI();
+   ```
+   **HTML:**
+   ```html
+   <input id="input" type="text" />
+   <p id="display"></p>
+   ```
+
+   ---
+   
+   #### Data Binding-ի Առավելությունները
+   
+   1. **Ինտերակտիվություն:**
+      - Թույլ է տալիս ավտոմատ կերպով թարմացնել UI-ը տվյալների փոփոխությունների դեպքում։
+   
+   2. **Կոդի Կրճատում:**
+      - Ավելի քիչ կոդ՝ տվյալների և UI-ի միջև կապի համար։
+   
+   3. **Արագ Զարգացում:**
+      - Թույլ է տալիս արագ ստեղծել ինտերակտիվ վեբ հավելվածներ։
+   
+   4. **Կառավարման Հեշտություն:**
+      - Տվյալների և UI-ի սինխրոնացումն ապահովում է ավելի պարզ կոդի կառուցվածք։
+
+   ---
+   
+   #### Թերությունները
+   
+   1. **Կատարողականության Խնդիրներ:**
+      - Երկկողմանի կապը մեծ ծավալի տվյալների դեպքում կարող է հանգեցնել համակարգի դանդաղման։
+   
+   2. **Կոդի Կառավարման Դժվարություն:**
+      - Թեև այն հեշտացնում է ինտերակտիվությունը, մեծ նախագծերում կարող է բարդացնել կոդի կառավարումը։
+
+
+   ---
+   
+   #### Եզրակացություն
+   
+   **Data Binding**-ը կարևոր մեխանիզմ է JavaScript-ում, որն ապահովում է տվյալների և UI-ի սինխրոնիզացումը։
+   - **One-Way Binding**-ը հարմար է պարզ ցուցադրումների համար։
+   - **Two-Way Binding**-ը հաճախ օգտագործվում է ինտերակտիվ ձևերի և UI-ների համար։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+85. ### Ինչ է JavaScript-ում Async Generator-ը?
+
+   **Async Generators**-ը JavaScript-ում հատուկ ֆունկցիաներ են, որոնք թույլ են տալիս համատեղել ասինխրոն ծրագրավորման և գեներատորների (Generators) ուժերը։ Դրանք օգտագործվում են ասինխրոն տվյալների հոսքերի հետ աշխատելու համար, երբ անհրաժեշտ է տվյալները ստանալ կամ մշակել փուլ առ փուլ։
+   
+   Async Generator-ները հայտարարավում են `async function*` սինտաքսով և վերադարձնում են **AsyncIterator**։
+
+   ---
+   
+   ## Ինչպես է աշխատում Async Generator-ը
+   
+   1. **`async function*` սինտաքս:**
+      - Օգտագործվում է Async Generator հայտարարելու համար։
+   
+   2. **`await` Օպերատոր:**
+      - Թույլ է տալիս սպասել ասինխրոն գործողությունների արդյունքին յուրաքանչյուր `yield` օպերատորի ներսում։
+   
+   3. **`for await...of` Ցիկլ:**
+      - Օգտագործվում է Async Generator-ներից արժեքները իտրացիայի համար։
+
+   ---
+   
+   #### Async Generator-ի Օրինակներ
+   
+   #### 1. Պարզ Օրինակ
+   ```javascript
+   async function* asyncGenerator() {
+     yield await Promise.resolve('First Value');
+     yield await Promise.resolve('Second Value');
+     yield await Promise.resolve('Third Value');
+   }
+   
+   (async () => {
+     for await (const value of asyncGenerator()) {
+       console.log(value);
+     }
+   })();
+   ```
+   **Արդյունք:**
+   ```
+   First Value
+   Second Value
+   Third Value
+   ```
+
+   ---
+   
+   #### 2. Օգտագործելով Async Generator API հարցումների համար
+   
+   ```javascript
+   async function* fetchData() {
+     const urls = [
+       'https://api.example.com/data1',
+       'https://api.example.com/data2',
+       'https://api.example.com/data3'
+     ];
+   
+     for (const url of urls) {
+       const response = await fetch(url);
+       const data = await response.json();
+       yield data;
+     }
+   }
+   
+   (async () => {
+     for await (const data of fetchData()) {
+       console.log(data);
+     }
+   })();
+   ```
+   - Յուրաքանչյուր URL հարցումը կատարվում է հերթականությամբ, և արդյունքը տրամադրվում է քայլ առ քայլ։
+
+   ---
+   
+   #### 3. Հոսքային Տվյալների Մշակում
+   ```javascript
+   async function* streamData() {
+     let i = 0;
+     while (i < 5) {
+       yield await new Promise((resolve) => setTimeout(() => resolve(i++), 1000));
+     }
+   }
+   
+   (async () => {
+     for await (const number of streamData()) {
+       console.log(number);
+     }
+   })();
+   ```
+   **Արդյունք (յուրաքանչյուր արժեքը կցուցադրվի մեկ վայրկյան ընդմիջումով):**
+   ```
+   0
+   1
+   2
+   3
+   4
+   ```
+
+   ---
+   
+   #### Async Generator-ի Հատկություններ
+   
+   1. **Ասինխրոն Պատասխանների Վերադարձ:**
+      - Թույլ է տալիս սպասել ասինխրոն գործողությունների արդյունքին `yield`-ի միջոցով։
+   
+   2. **Lazy Evaluation:**
+      - Տվյալները մշակվում են պահանջի հիման վրա, ոչ թե նախապես։
+   
+   3. **Համատեղելիություն `for await...of`-ի հետ:**
+      - Հեշտացնում է Async Generator-ի արժեքների իտրացիան։
+
+   ---
+   
+   #### Օգտագործման Դեպքեր
+   
+   1. **Հոսքային Տվյալներ (Streaming Data):**
+      - Օրինակ՝ API հարցումներ, հոսքային ֆայլերի ընթերցում։
+   
+   2. **Իտրատիվ Ասինխրոն Գործողություններ:**
+      - Երբ պահանջվում է մշակել տվյալները քայլ առ քայլ, օրինակ՝ էջայնացում։
+   
+   3. **Հայտնաբերման Ալգորիթմներ:**
+      - Երբ տվյալները ստացվում են փուլերով, օրինակ՝ զննարկչի տիեզերքում որոնում։
+   
+   ---
+   
+   #### Հատուկ Նշումներ
+   
+   1. **Համատեղելիություն:**
+      - Async Generator-ները աշխատում են ES2018 (ES9) կամ ավելի նոր JavaScript միջավայրերում։
+   
+   2. **Օպտիմալություն:**
+      - Թույլ է տալիս խուսափել ամբողջ տվյալների միաժամանակ բեռնմանց՝ պահպանելով կատարողականությունը։
+
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+86. ### Ինչ է Intersection Observer API-ը JavaScript-ում?
+   
+   **Intersection Observer API**-ն JavaScript-ում թուլ է տալիս հետևել DOM տարրերի տեսանելիությանը (visibility) և դրանց հետ զուգահեռ աշխատել, երբ դրանք հայտնվում են viewport-ում կամ սահմանված արմատային տարրում (root element):
+   
+   Այս API-ն օպտիմալ լուծում է այն դեպքերում, երբ անհրաժեշտ է մշտապես հետևել տարրերի դիրքին՝ առանց ձեռքով scroll իրադարձություններ մշակելու։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Intersection Observer API-ն
+   
+   1. Ստեղծվում է **IntersectionObserver** օբյեկտ, որը հետևում է թիրախ տարրերին։
+   2. Երբ թիրախ տարրը հայտնվում է կամ դուրս է գալիս սահմանված տեսանելիության սահմաններից (threshold), կանչվում է callback ֆունկցիան։
+   
+   #### Սինտաքս
+   ```javascript
+   const observer = new IntersectionObserver(callback, options);
+   
+   observer.observe(targetElement);
+   ```
+   - **`callback`**: Ֆունկցիա, որը կանչվում է, երբ թիրախ տարրերի տեսանելիությունը փոխվում է։
+   - **`options`** (ըստ ցանկության): Կոնֆիգուրացիոն օբյեկտ, որը թույլ է տալիս սահմանել հետևման պարամետրերը։
+   - **`targetElement`**: DOM տարրը, որը պետք է դիտարկվի։
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### 1. Հիմնական Օրինակ
+   ```javascript
+   const observer = new IntersectionObserver((entries) => {
+     entries.forEach(entry => {
+       if (entry.isIntersecting) {
+         console.log('Element is in view:', entry.target);
+       } else {
+         console.log('Element is out of view:', entry.target);
+       }
+     });
+   });
+   
+   const target = document.querySelector('#target');
+   observer.observe(target);
+   ```
+   
+   #### 2. Օգտագործելով `options`
+   ```javascript
+   const options = {
+     root: null, // Viewport է
+     rootMargin: '0px', // Տարրի շուրջ հավելյալ տարածք
+     threshold: 0.5 // Կանչել callback-ը, երբ 50%-ը տեսանելի է
+   };
+   
+   const observer = new IntersectionObserver((entries) => {
+     entries.forEach(entry => {
+       console.log('Intersection ratio:', entry.intersectionRatio);
+     });
+   }, options);
+   
+   const target = document.querySelector('#target');
+   observer.observe(target);
+   ```
+
+   ---
+   
+   #### Callback ֆունկցիայի Պարամետրեր
+   
+   **Callback** ֆունկցիան ստանում է երկու պարամետր.
+   
+   1. **`entries`**:
+      - Դիտարկվող տարրերի array, որը պարունակում է տեղեկություն տարրերի տեսանելիության մասին։
+   
+   2. **`observer`**:
+      - Նույն ինքը `IntersectionObserver` օբյեկտը, որը թույլ է տալիս կատարել լրացուցիչ գործողություններ։
+   
+   #### Entry Օբյեկտի Հատկություններ
+   
+   | **Հատկություն**         | **Նկարագրություն**                                                         |
+   |-------------------------|---------------------------------------------------------------------------|
+   | `isIntersecting`        | Ցույց է տալիս՝ արդյոք տարրը տեսանելի է։                                   |
+   | `intersectionRatio`     | Տարրի ինչ տոկոսն է տեսանելի։                                              |
+   | `boundingClientRect`    | Տարրի չափերի և դիրքի տեղեկությունները։                                     |
+   | `rootBounds`            | Արմատային տարրի չափերի և դիրքի մասին տեղեկություն։                         |
+   | `target`                | Դիտարկվող տարրը։                                                         |
+
+   ---
+   
+   #### Օգտագործման Դեպքեր
+   
+   1. **Լեյզի բեռնում (Lazy Loading):**
+      - Նկարների կամ այլ ռեսուրսների բեռնում միայն այն ժամանակ, երբ դրանք հայտնվում են viewport-ում։
+   
+      ```javascript
+      const images = document.querySelectorAll('img[data-src]');
+   
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            observer.unobserve(img); // Դադարեցնում ենք դիտարկումը
+          }
+        });
+      });
+   
+      images.forEach(img => imageObserver.observe(img));
+      ```
+   
+   2. **Անիմացիաների Ակտիվացում:**
+      - Կատարել անիմացիա, երբ տարրը հայտնվում է viewport-ում։
+   
+   3. **Սկզբնական վիճակի բեռնում:**
+      - Տվյալների բեռնում հաջորդ էջերի համար, երբ օգտատերը մոտենում է էջի վերջին։
+   
+   4. **Scroll Spy:**
+      - Դիտարկել, թե օգտատերը որ հատվածում է գտնվում և թարմացնել նավիգացիոն ինտերֆեյսը։
+
+   ---
+   
+   #### Առավելությունները
+   
+   1. **Կատարողականության Արդյունավետություն:**
+      - Ավելի քիչ CPU բեռ՝ համեմատած scroll իրադարձությունների հետ։
+   
+   2. **Պարզ Կոդ:**
+      - Մշակման պարզեցում՝ callback-ների և observer-ների միջոցով։
+   
+   3. **Նվազագույն Հիշողության Օգտագործում:**
+      - Ավտոմատ կառավարման շնորհիվ անհրաժեշտ գործողություններն իրականացվում են միայն պահանջի դեպքում։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+87. ### Ինչ է JavaScript-ում DOM Events-ը?
+   
+   **DOM Events**-ը JavaScript-ում թույլ են տալիս հետևել և արձագանքել օգտագործողի գործողություններին կամ ծրագրի կողմից առաջացած իրադարձություններին։ Այս մեխանիզմը հնարավորություն է տալիս ինտերակտիվացնել վեբ էջերը՝ արձագանքելով օգտագործողի գործողություններին, ինչպիսիք են `click`, `keydown`, `scroll`, և այլն։
+   
+   DOM իրադարձությունները հանդիսանում են DOM-ի կարևոր բաղադրիչ, որն ապահովում է բրաուզերի և ծրագրավորողի կոդի փոխգործակցությունը։
+   
+---
+   
+   #### Ինչպես են աշխատում DOM իրադարձությունները
+   
+   1. **Իրադարձության առաջացում (Event Triggering):**
+      - Օգտագործողը կատարում է գործողություն (օրինակ՝ սեղմում է կոճակը), կամ ծրագրում ինչ-որ պայման դառնում է ճշմարիտ։
+   
+   2. **Event Listener-ների Կցում:**
+      - Event Listener-ը հետևում է, թե երբ է առաջանում իրադարձությունը։
+   
+   3. **Callback Ֆունկցիաների Կատարում:**
+      - Երբ իրադարձությունը տեղի է ունենում, համապատասխան ֆունկցիան (callback) ակտիվանում է։
+
+   ---
+   
+   #### Սինտաքս
+   
+   #### 1. `addEventListener` մեթոդ
+   ```javascript
+   const element = document.querySelector('button');
+   
+   element.addEventListener('click', (event) => {
+     console.log('Button clicked!');
+   });
+   ```
+   
+   #### 2. Inline իրադարձություններ (հին մեթոդ)
+   ```html
+   <button onclick="alert('Button clicked!')">Click Me</button>
+   ```
+   
+   #### 3. Իրադարձություն նշանակել DOM-ի հատկությամբ
+   ```javascript
+   const button = document.querySelector('button');
+   button.onclick = () => {
+     alert('Button clicked!');
+   };
+   ```
+
+   ---
+   
+   #### DOM Իրադարձությունների Տիպեր
+   
+   1. **Մկնիկի Իրադարձություններ (Mouse Events):**
+      - `click`: Սեղմում է տարրի վրա։
+      - `dblclick`: Կրկնակի սեղմում։
+      - `mouseover`: Մկնիկը շարժվում է տարրի վրա։
+      - `mouseout`: Մկնիկը շարժվում է տարրի վրայից։
+   
+   2. **Վիճակի Իրադարձություններ (Keyboard Events):**
+      - `keydown`: Սեղմում է ստեղնը։
+      - `keyup`: Արձակում է սեղմած ստեղնը։
+   
+   3. **Ֆորմայի Իրադարձություններ (Form Events):**
+      - `submit`: Ձևի ուղարկում։
+      - `change`: Տեղեկության փոփոխություն։
+      - `input`: Տեքստային դաշտում մուտքագրում։
+   
+   4. **Պատուհանի Իրադարձություններ (Window Events):**
+      - `resize`: Պատուհանի չափսի փոփոխություն։
+      - `scroll`: Էջի տեղափոխում։
+   
+   5. **Հատուկ Իրադարձություններ:**
+      - `contextmenu`: Աջ կոճակի սեղմում։
+      - `focus`: Տարրը ուշադրության կենտրոնում է։
+      - `blur`: Տարրը կորցնում է ուշադրությունը։
+
+   ---
+   
+   #### Իրադարձությունների Վարքագիծ
+   
+   #### 1. Event Propagation (Իրադարձության տարածում)
+   - **Capturing:** Իրադարձությունը տարածվում է ծնող տարրից դեպի թիրախ տարր։
+     - **Bubbling:** Իրադարձությունը տարածվում է թիրախ տարրից դեպի ծնող տարր։
+   
+   ```javascript
+   const parent = document.querySelector('.parent');
+   const child = document.querySelector('.child');
+   
+   parent.addEventListener('click', () => console.log('Parent clicked!'), true); // Capturing
+   child.addEventListener('click', () => console.log('Child clicked!')); // Bubbling
+   ```
+   
+   #### 2. Իրադարձության կանգնեցում
+   - **`stopPropagation`:** Կանգնեցնում է իրադարձության տարածումը։
+   
+   ```javascript
+   child.addEventListener('click', (event) => {
+     event.stopPropagation();
+     console.log('Child clicked only!');
+   });
+   ```
+   
+   - **`preventDefault`:** Կանխում է իրադարձության լռելյայն գործողությունը։
+   
+   ```javascript
+   const link = document.querySelector('a');
+   link.addEventListener('click', (event) => {
+     event.preventDefault();
+     console.log('Default action prevented.');
+   });
+   ```
+
+   ---
+   
+   #### Event Delegation (Իրադարձությունների պատվիրակում)
+   
+   Event Delegation-ը տեխնիկա է, որը թույլ է տալիս վերահսկել բազմաթիվ տարրերի իրադարձությունները ընդհանուր ծնող տարրի միջոցով։
+   
+   **Օրինակ:**
+   ```javascript
+   const list = document.querySelector('ul');
+   
+   list.addEventListener('click', (event) => {
+     if (event.target.tagName === 'LI') {
+       console.log(`List item clicked: ${event.target.textContent}`);
+     }
+   });
+   ```
+
+   ---
+   
+   #### Առավելություններ
+   
+   1. **Ինտերակտիվություն:**
+      - Թույլ է տալիս էջերը դարձնել ինտերակտիվ։
+   
+   2. **Կոդի Օպտիմալացում:**
+      - Event Delegation-ը նվազեցնում է Event Listener-ների քանակը։
+   
+   3. **Անհրաժեշտ գործողությունների կառավարում:**
+      - Օգտագործողի գործողություններին արագ արձագանք։
+   
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+88. ### Ինչ է JavaScript-ում class inheritance-ը?
+
+   **Class Inheritance**-ը JavaScript-ում օբյեկտային կողմնորոշված ծրագրավորման (OOP) կարևոր բաղադրիչ է, որը թույլ է տալիս մեկ դասից ժառանգել հատկություններ (properties) և մեթոդներ (methods)։ Ժառանգությունը (inheritance) հեշտացնում է կոդի վերաօգտագործումը և հնարավորություն է տալիս ստեղծել նոր դասեր՝ արդեն առկա դասերի հիման վրա։
+   
+   JavaScript-ում ժառանգությունը իրականացվում է `extends` և `super` հիմնաբառերի միջոցով։
+
+   ---
+   
+   #### Ինչպես է աշխատում Class Inheritance-ը
+   
+   #### 1. Base Class (Հիմնական Դաս)
+   - Հիմնական դասը, որից ժառանգում են հատկություններն ու մեթոդները։
+   
+   #### 2. Subclass (Ենթադաս)
+   - Նոր դաս, որը ժառանգում է Base Class-ի հատկություններն ու մեթոդները։
+
+   ---
+   
+   #### Սինտաքս
+   
+   ```javascript
+   class Parent {
+     constructor(name) {
+       this.name = name;
+     }
+   
+     greet() {
+       console.log(`Hello, my name is ${this.name}`);
+     }
+   }
+   
+   class Child extends Parent {
+     constructor(name, age) {
+       super(name); // Կանչում է Parent-ի constructor-ը
+       this.age = age;
+     }
+   
+     displayAge() {
+       console.log(`I am ${this.age} years old`);
+     }
+   }
+   
+   const child = new Child('Alice', 10);
+   child.greet(); // Hello, my name is Alice
+   child.displayAge(); // I am 10 years old
+   ```
+
+   ---
+   
+   #### Ինչպես են աշխատում `extends` և `super`
+   
+   #### **`extends`**
+   - Օգտագործվում է Subclass-ը Base Class-ից ժառանգելու համար։
+   
+   ```javascript
+   class Animal {
+     speak() {
+       console.log('Animal speaks');
+     }
+   }
+   
+   class Dog extends Animal {
+     bark() {
+       console.log('Dog barks');
+     }
+   }
+   
+   const dog = new Dog();
+   dog.speak(); // Animal speaks
+   dog.bark(); // Dog barks
+   ```
+   
+   #### **`super`**
+   - Օգտագործվում է Base Class-ի constructor-ը կամ մեթոդները կանչելու համար։
+   
+   ```javascript
+   class Parent {
+     constructor(name) {
+       this.name = name;
+     }
+   }
+   
+   class Child extends Parent {
+     constructor(name, age) {
+       super(name); // Կանչում է Parent-ի constructor-ը
+       this.age = age;
+     }
+   }
+   
+   const child = new Child('Alice', 10);
+   console.log(child.name); // Alice
+   console.log(child.age); // 10
+   ```
+
+   ---
+   
+   #### Օրինակներ
+   
+   #### 1. Մեթոդների Վերախմբագրում (Method Overriding)
+   Subclasses-ը կարող է վերախմբագրել Base Class-ի մեթոդները։
+   
+   ```javascript
+   class Parent {
+     greet() {
+       console.log('Hello from Parent');
+     }
+   }
+   
+   class Child extends Parent {
+     greet() {
+       console.log('Hello from Child');
+     }
+   }
+   
+   const child = new Child();
+   child.greet(); // Hello from Child
+   ```
+   
+   #### 2. Static Մեթոդների Ժառանգում
+   Static մեթոդները նույնպես կարող են ժառանգվել։
+   
+   ```javascript
+   class Parent {
+     static sayHello() {
+       console.log('Hello from Parent');
+     }
+   }
+   
+   class Child extends Parent {}
+   
+   Child.sayHello(); // Hello from Parent
+   ```
+
+   ---
+   
+   #### Առավելություններ
+   
+   1. **Կոդի Վերաօգտագործում:**
+      - Նվազեցնում է կրկնվող կոդի քանակը։
+   
+   2. **Կոդի Կառուցվածք:**
+      - Կոդը դառնում է ավելի ընթեռնելի և կազմակերպված։
+   
+   3. **Ընդարձակելիություն:**
+      - Հեշտ է ստեղծել նոր դասեր առանց եղած դասերի փոփոխման։
+
+   ---
+   
+   #### Թերություններ
+   
+   1. **Բարդություն:**
+      - Մեծ թվով ժառանգությունների դեպքում կոդը կարող է դառնալ դժվար կառավարելի։
+   
+   2. **Կախվածություն:**
+      - Subclass-ը մեծապես կախված է Base Class-ից։
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+89. ### Ինչ է JavaScript-ում different states of a Promise-ը?
+
+   
+   **Promise**-ը JavaScript-ում օբյեկտ է, որը ներկայացնում է ասինխրոն գործողության վերջնական վիճակը և արժեքը (կամ պատճառը, թե ինչու այն ձախողվեց)։ Promise-ն ունի երեք հիմնական վիճակներ՝ **Pending**, **Fulfilled**, և **Rejected**:
+   
+   Promise-ի հիմնական նպատակն է կառավարվել ասինխրոն գործողությունների ավարտի դեպքում՝ ապահովելով պարզ և ընթեռնելի կառուցվածք։
+
+   ---
+   
+   #### Promise-ի Տարբեր Վիճակները
+   
+   #### 1. **Pending (Սպասող)**
+   - Այս վիճակը Promise-ի սկզբնական վիճակն է։
+     - Գործողությունը դեռ ընթացքի մեջ է, և արդյունքը դեռևս հասանելի չէ։
+   
+   **Օրինակ:**
+   ```javascript
+   const promise = new Promise((resolve, reject) => {
+     // Գործողությունը ընթացքի մեջ է
+   });
+   console.log(promise); // Promise { <pending> }
+   ```
+   
+---
+   
+   #### 2. **Fulfilled (Կատարված)**
+   - Promise-ն անցնում է այս վիճակ, երբ գործողությունն ավարտվում է հաջողությամբ, և արդյունքը հասանելի է։
+     - Այս վիճակում կանչվում է `resolve()` ֆունկցիան։
+   
+   **Օրինակ:**
+   ```javascript
+   const promise = new Promise((resolve, reject) => {
+     resolve('Success!'); // Գործողությունը կատարված է
+   });
+   
+   promise.then((result) => {
+     console.log(result); // "Success!"
+   });
+   ```
+   
+---
+   
+   #### 3. **Rejected (Մերժված)**
+   - Promise-ն անցնում է այս վիճակ, երբ գործողությունը ձախողվում է, և պատճառը մատչելի է։
+     - Այս վիճակում կանչվում է `reject()` ֆունկցիան։
+   
+   **Օրինակ:**
+   ```javascript
+   const promise = new Promise((resolve, reject) => {
+     reject('Error occurred!'); // Գործողությունը մերժված է
+   });
+   
+   promise.catch((error) => {
+     console.log(error); // "Error occurred!"
+   });
+   ```
+
+---
+   
+   #### Promise-ի Lifecycle
+   Promise-ն սկսվում է `Pending` վիճակով, այնուհետև անցնում է կամ `Fulfilled`, կամ `Rejected` վիճակ։
+   
+   ```mermaid
+   graph TD
+       A[Pending] -->|resolve| B[Fulfilled]
+       A[Pending] -->|reject| C[Rejected]
+   ```
+
+---
+   
+   #### Ինչպես Գործարկել Promise-ի Տարբեր Վիճակների Կառավարում
+   
+   #### 1. **`then` մեթոդ**
+   - Օգտագործվում է `Fulfilled` վիճակի արդյունքը ստանալու համար։
+   
+   **Օրինակ:**
+   ```javascript
+   const promise = new Promise((resolve, reject) => {
+     resolve('Data received!');
+   });
+   
+   promise.then((data) => {
+     console.log(data); // "Data received!"
+   });
+   ```
+   
+   #### 2. **`catch` մեթոդ**
+   - Օգտագործվում է `Rejected` վիճակի սխալը կառավարելու համար։
+   
+   **Օրինակ:**
+   ```javascript
+   const promise = new Promise((resolve, reject) => {
+     reject('Network error!');
+   });
+   
+   promise.catch((error) => {
+     console.log(error); // "Network error!"
+   });
+   ```
+   
+   #### 3. **`finally` մեթոդ**
+   - Կանչվում է անկախ `Fulfilled` կամ `Rejected` վիճակից։
+   
+   **Օրինակ:**
+   ```javascript
+   const promise = new Promise((resolve, reject) => {
+     resolve('Success!');
+   });
+   
+   promise
+     .then((result) => console.log(result))
+     .catch((error) => console.log(error))
+     .finally(() => console.log('Promise is settled.'));
+   ```
+   **Արդյունք:**
+   ```
+   Success!
+   Promise is settled.
+   ```
+   
+---
+   
+   #### Promise-ի Հատկություններ
+   
+   1. **Immutable Վիճակ:**
+      - Promise-ի վիճակը չի կարող փոխվել մեկ անգամ հաստատված կամ մերժված լինելուց հետո։
+   
+   2. **Chainable Մեթոդներ:**
+      - Promise-ի մեթոդները, ինչպիսիք են `then`, `catch`, և `finally`, կարող են օգտագործվել շղթայաձև (chaining):
+   
+   **Օրինակ:**
+   ```javascript
+   new Promise((resolve) => resolve(10))
+     .then((num) => num * 2)
+     .then((result) => console.log(result)) // 20
+     .catch((error) => console.error(error));
+   ```
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+90. ###  Ինչ է JavaScript-ում Event Target-ը?
+
+   **EventTarget**-ը JavaScript-ում ինտերֆեյս է, որը թույլ է տալիս DOM տարրերին (կամ այլ օբյեկտներին) լսել և մշակել իրադարձություններ (events):
+   
+   Այն ապահովում է մեթոդներ, որոնք կարող եք օգտագործել իրադարձությունների կառավարման համար՝
+   - **`addEventListener`**՝ Իրադարձության լսիչ ավելացնելու համար,
+   - **`removeEventListener`**՝ Իրադարձության լսիչը հեռացնելու համար,
+   - **`dispatchEvent`**՝ Իրադարձություն ուղարկելու համար։
+   
+   EventTarget-ը հանդիսանում է JavaScript-ի հիմնական API-ներից մեկը, որը թույլ է տալիս աշխատել DOM-ի և իրադարձությունների հետ։
+   
+   ---
+   
+   #### Ինչպիսի Օբյեկտներ են EventTarget
+   
+   EventTarget ինտերֆեյսը կիրառում են հետևյալ օբյեկտները՝
+   
+   1. **DOM տարրեր (Elements):**
+      - Օրինակ՝ `<div>`, `<button>`, `<input>`։
+   
+   2. **Window Օբյեկտ:**
+      - Օգտագործվում է ամբողջական պատուհանի իրադարձությունների համար, ինչպիսիք են `resize`, `scroll`։
+   
+   3. **Document Օբյեկտ:**
+      - Օգտագործվում է ամբողջական HTML փաստաթղթի իրադարձությունների համար։
+   
+   4. **Custom Օբյեկտներ:**
+      - Օրինակ՝ CustomEvent-ների միջոցով ձեր ստեղծած իրադարձությունները։
+
+   ---
+   
+   #### EventTarget-ի Մեթոդներ
+   
+   #### 1. **`addEventListener`**
+   Կցում է իրադարձության լսիչը թիրախ տարրին։
+   
+   **Սինտաքս**
+   ```javascript
+   EventTarget.addEventListener(type, listener, options);
+   ```
+   - **`type`**: Իրադարձության անունը (օր.`"click"`, "keydown")։
+     - **`listener`**: Ֆունկցիա, որը կկատարվի իրադարձության առաջացման դեպքում։
+     - **`options`**: Ընտրովի պարամետրեր (օր.`{ once: true, capture: true }`)։
+   
+   **Օրինակ**
+   ```javascript
+   const button = document.querySelector('button');
+   
+   button.addEventListener('click', () => {
+     console.log('Button clicked!');
+   });
+   ```
+   
+   #### 2. **`removeEventListener`**
+   Հեռացնում է իրադարձության լսիչը թիրախ տարրից։
+   
+   **Սինտաքս**
+   ```javascript
+   EventTarget.removeEventListener(type, listener, options);
+   ```
+   - Պետք է նույն `type`, `listener`, և `options` արժեքները, որոնք օգտագործվել են `addEventListener`-ում։
+   
+   **Օրինակ**
+   ```javascript
+   const logClick = () => console.log('Button clicked!');
+   
+   button.addEventListener('click', logClick);
+   button.removeEventListener('click', logClick);
+   ```
+   
+   #### 3. **`dispatchEvent`**
+   Ուղարկում է իրադարձություն դեպի թիրախ տարր։
+   
+   **Սինտաքս**
+   ```javascript
+   EventTarget.dispatchEvent(event);
+   ```
+   - **`event`**: Event օբյեկտ, որը պետք է ուղարկվի։
+   
+   **Օրինակ**
+   ```javascript
+   const event = new Event('customEvent');
+   
+   button.addEventListener('customEvent', () => {
+     console.log('Custom event triggered!');
+   });
+   
+   button.dispatchEvent(event);
+   ```
+
+---
+   
+   #### EventTarget-ի Օրինակներ
+   
+   #### 1. **EventTarget-ի Օգտագործում DOM Տարրերի Հետ**
+   ```javascript
+   const input = document.querySelector('input');
+   
+   input.addEventListener('focus', () => {
+     console.log('Input field is focused');
+   });
+   ```
+   
+   #### 2. **CustomEvent Օգտագործում**
+   ```javascript
+   const div = document.querySelector('div');
+   
+   const customEvent = new CustomEvent('myCustomEvent', {
+     detail: { message: 'Hello, world!' }
+   });
+   
+   div.addEventListener('myCustomEvent', (event) => {
+     console.log(event.detail.message); // "Hello, world!"
+   });
+   
+   div.dispatchEvent(customEvent);
+   ```
+
+---
+   
+   #### Առավելություններ
+   
+   1. **Կոդի Կազմակերպվածություն:**
+      - Թույլ է տալիս առանձնացնել իրադարձությունների տրամաբանությունը։
+   
+   2. **Կրկնակի Օգտագործում:**
+      - EventTarget-ը կարող է օգտագործվել նաև սեփական օբյեկտների համար։
+   
+   3. **Պարզ Սինտաքս:**
+      - Հեշտացնում է իրադարձությունների կառավարման մեխանիզմները։
+
+
+   ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
