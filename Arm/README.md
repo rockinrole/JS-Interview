@@ -8948,8 +8948,130 @@
 
    ---
 67. ### Ինչ է Shadow DOM-ը JavaScript-ում?
+   
+   **Shadow DOM**-ը JavaScript-ում տեխնոլոգիա է, որը թույլ է տալիս ստեղծել մեկուսացված DOM ծառ՝ զերծ մնալով գլոբալ ոճերի կամ սկրիպտերի ազդեցությունից։ Այն օգտագործվում է Web Components-ի (վեբ կոմպոնենտներ) հետ միասին՝ ինտերակտիվ և վերօգտագործվող UI բաղադրիչներ ստեղծելու համար։
+   
+   Shadow DOM-ը տալիս է **local scope**, ինչը նշանակում է, որ տարրի ներսում գտնվող ոճերը կամ կառուցվածքը չեն ազդում արտաքին տարրերի վրա և հակառակը։
+
+   ---
+   
+   #### Ինչպես է աշխատում Shadow DOM-ը
+   
+   1. Ստեղծվում է **Shadow Root**, որը ծառայում է որպես տարրի մեկուսացված DOM ծառի հիմք։
+   2. Այս ծառի ներսում կարող եք ավելացնել HTML և CSS, որոնք տեսանելի չեն գլխավոր (main) DOM-ին։
+   
+   ---
+   
+   #### Ինչու օգտագործել Shadow DOM
+   
+   1. **Մեկուսացում**
+      - Ստեղծում է մեկուսացված միջավայր՝ կանխելով ոճերի և սկրիպտերի բախումները։
+   
+   2. **Վերօգտագործում**
+      - Թույլ է տալիս ստեղծել վերօգտագործվող և անկախ կոմպոնենտներ։
+   
+   3. **Կատարողականություն**
+      - Shadow DOM-ը կարող է բարելավել կատարողականությունը՝ նվազեցնելով DOM-ի չափը և ոճերի վերաշարադրումը (repaint)։
+   
+   4. **Կառավարման պարզություն**
+      - Ապահովում է local scope, ինչը դարձնում է կոմպոնենտները ավելի հեշտ կառավարելի։
+   
+   ---
+   
+   #### Ինչպես ստեղծել Shadow DOM
+   
+   #### Օրինակ՝ Shadow Root ստեղծում
+   ```javascript
+   // Ստեղծում ենք տարր
+   const host = document.createElement('div');
+   document.body.appendChild(host);
+   
+   // Ստեղծում ենք Shadow Root
+   const shadowRoot = host.attachShadow({ mode: 'open' });
+   
+   // Ավելացնում ենք պարունակություն Shadow DOM-ի մեջ
+   shadowRoot.innerHTML = `
+     <style>
+       p {
+         color: red;
+       }
+     </style>
+     <p>This is inside Shadow DOM</p>
+   `;
+   ```
+   
+   - **`attachShadow` մեթոդը**:
+   - Ստեղծում է Shadow Root։
+   - Ընդունում է օբյեկտ, որը պարունակում է `mode` հատկությունը (`open` կամ `closed`)։
+   
+   ---
+   
+   #### Shadow DOM-ի Mode-երը
+   
+   1. **Open Mode**:
+      - Shadow Root-ը հասանելի է JavaScript-ով `shadowRoot` հատկության միջոցով։
+   
+   2. **Closed Mode**:
+      - Shadow Root-ը անհասանելի է JavaScript-ով։ Օրինակ՝
+      ```javascript
+      const shadowRoot = host.attachShadow({ mode: 'closed' });
+      console.log(host.shadowRoot); // Output: null
+      ```
+   
+   ---
+   
+   #### Օրինակ՝ Ստեղծում ենք Custom Element Shadow DOM-ով
+   
+   ```javascript
+   class MyElement extends HTMLElement {
+     constructor() {
+       super();
+       const shadow = this.attachShadow({ mode: 'open' });
+   
+       shadow.innerHTML = `
+         <style>
+           h1 {
+             color: blue;
+           }
+         </style>
+         <h1>Shadow DOM Example</h1>
+       `;
+     }
+   }
+   
+   customElements.define('my-element', MyElement);
+   
+   // Օգտագործում ենք Custom Element-ը
+   const element = document.createElement('my-element');
+   document.body.appendChild(element);
+   ```
 
 
+---
+   
+   #### Shadow DOM-ի Առավելությունները
+   
+   1. **Մեկուսացված ոճեր**:
+      - Թույլ է տալիս սահմանել կոմպոնենտի համար հատուկ ոճեր՝ առանց ազդեցության այլ տարրերի վրա։
+   
+   2. **Ոճերի բախման կանխում**:
+      - Վերացնում է գլոբալ CSS-ի և կոմպոնենտի միջև ոճերի բախման խնդիրները։
+   
+   3. **Վերօգտագործելիություն**:
+      - Shadow DOM-ը կատարյալ է վերօգտագործվող և դինամիկ UI կոմպոնենտների համար։
+
+   ---
+   
+   #### Shadow DOM-ի Թերությունները
+   
+   1. **Բարդություն**:
+      - Shadow DOM-ի ներդրումը կարող է ավելացնել հավելվածի բարդությունը։
+   
+   2. **Համատեղելիություն**:
+      - Հին զննարկիչները (օրինակ՝ IE11) չեն աջակցում Shadow DOM-ին։
+   
+   3. **Դեբագինգի դժվարություն**:
+      - Մեկուսացված կառուցվածքը կարող է բարդացնել սխալների հայտնաբերումը։
 
    ---
 
@@ -8957,8 +9079,121 @@
 
    ---
 68. ### Ինչ է JavaScript-ում polyfill-ը?
+   
 
+   **Polyfill**-ը JavaScript-ում կոդ է (հաճախ՝ գրադարան կամ ֆունկցիա), որը ապահովում է հին զննարկիչների կամ պլատֆորմների աջակցությունը ժամանակակից ֆունկցիոնալությանը, որը նրանք ի սկզբանե չեն սատարում։ Այն "լրացնում" է բաց թողնված ֆունկցիոնալությունը՝ ապահովելով համատեղելիություն ժամանակակից JavaScript հնարավորությունների և հին միջավայրերի միջև։
 
+---
+   
+   #### Ինչու է անհրաժեշտ Polyfill-ը?
+   
+   1. **Համատեղելիություն**:
+      - Հին զննարկիչները (օրինակ՝ IE11) չեն աջակցում JavaScript-ի նոր ֆունկցիաներին, ինչպիսիք են `Promise`, `fetch`, կամ `Array.prototype.includes`։ Polyfill-ները լուծում են այս խնդիրը։
+   
+   2. **Ստանդարտների առաջընթաց**:
+      - ECMAScript (JavaScript-ի ստանդարտ) նոր հնարավորությունները հաճախ ավելացվում են։ Polyfill-ները թույլ են տալիս օգտվել այդ հնարավորություններից, նույնիսկ եթե զննարկիչները դեռ չեն աջակցում դրանց։
+   
+   3. **Օգտագործողի փորձի բարելավում**:
+      - Ապահովում է, որ ձեր վեբ հավելվածը ճիշտ աշխատի բոլոր օգտատերերի համար՝ անկախ նրանց օգտագործած զննարկիչից։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Polyfill-ը?
+   
+   Polyfill-ը ստուգում է, արդյոք տվյալ ֆունկցիան կամ հատկությունը առկա է։ Եթե ոչ, այն ավելացնում է այդ ֆունկցիան կամ հատկությունը։
+   
+   #### Օրինակ՝ Polyfill `Array.prototype.includes`-ի Համար
+   
+   ```javascript
+   if (!Array.prototype.includes) {
+     Array.prototype.includes = function(element, start) {
+       if (start === undefined) {
+         start = 0;
+       }
+   
+       for (let i = start; i < this.length; i++) {
+         if (this[i] === element) {
+           return true;
+         }
+       }
+   
+       return false;
+     };
+   }
+   
+   // Օգտագործում ենք polyfill-ը
+   const array = [1, 2, 3];
+   console.log(array.includes(2)); // true
+   console.log(array.includes(5)); // false
+   ```
+
+   ---
+   
+   #### Տարբերություն Polyfill-ի և Shim-ի միջև
+   
+   | **Հատկանիշ**             | **Polyfill**                                  | **Shim**                                     |
+   |---------------------------|-----------------------------------------------|---------------------------------------------|
+   | **Նպատակ**               | Ապահովում է նոր API-ի կամ ֆունկցիայի աջակցություն։| Վերագրում է կամ ընդլայնում է առկա ֆունկցիոնալությունը։|
+   | **Անվտանգություն**        | Չի փոխում JavaScript-ի լռելյայն վարքագիծը։   | Կարող է փոխել լռելյայն վարքագիծը։           |
+   | **Օրինակ**                | `Array.prototype.includes`-ի polyfill։       | `bind` ֆունկցիայի shim։                     |
+
+   ---
+   
+   #### Հաճախ Օգտագործվող Polyfill-ներ
+   
+   1. **`Promise`**
+      - Աջակցություն ասինխրոն գործողությունների համար։
+      ```javascript
+      if (!window.Promise) {
+        // Ձեր polyfill-ը...
+      }
+      ```
+   
+   2. **`fetch`**
+      - HTTP հարցումներ կատարելու ժամանակակից API։
+      ```javascript
+      if (!window.fetch) {
+        // Ավելացրեք fetch polyfill-ը։
+      }
+      ```
+   
+   3. **`Object.assign`**
+      - Օբյեկտների հատկությունների պատճենում։
+   
+   4. **`Array.from`**
+      - Պատրաստում է զանգված `array-like` օբյեկտից։
+   
+   5. **`Intl` (Internationalization API)**
+      - Թույլ է տալիս թվերի, ամսաթվերի և լեզվական ձևաչափերի աջակցություն։
+   
+   ---
+   
+   #### Polyfill-ի Օգտագործման Մեթոդներ
+   
+   1. **CDN-ի Օգտագործում**:
+      - Կարող եք ներբեռնել հայտնի polyfill-ներ, ինչպիսիք են `polyfill.io`-ն:
+      ```html
+      <script src="https://polyfill.io/v3/polyfill.min.js"></script>
+      ```
+   
+   2. **Գրադարաններ**:
+      - Օգտագործեք գրադարաններ, ինչպիսիք են Babel-ը կամ Core-JS-ը, որոնք ապահովում են polyfill-ներ։
+      ```bash
+      npm install core-js
+      ```
+   
+   3. **Սեփական Polyfill-ներ Ստեղծել**:
+      - Պահանջվող ֆունկցիոնալությունը կարող եք իրագործել ինքնուրույն՝ կիրառելով JavaScript։
+   
+   ---
+   
+   #### Երբ չօգտագործել Polyfill
+   
+   1. **Փոքր թիրախային լսարան**:
+      - Եթե ձեր լսարանը հիմնականում օգտագործում է ժամանակակից զննարկիչներ։
+   
+   2. **Կատարողականության խնդիրներ**:
+      - Polyfill-ները կարող են մեծացնել բեռի չափը և ազդել կատարողականության վրա։
 
    ---
 
@@ -8966,7 +9201,147 @@
 
    ---
 69. ### Ինչ է Event Loop-ի և Call Stack-ի միջև կապը JavaScript-ում?
+   
+   JavaScript-ը միապրոցես (single-threaded) լեզու է, ինչը նշանակում է, որ այն կատարում է կոդը մեկ հոսքով՝ օգտագործելով **Call Stack**։ Սակայն JavaScript-ը կարող է նաև աշխատել ասինխրոն գործողությունների հետ՝ օգտագործելով **Event Loop**-ը։
+   
+   Event Loop-ը և Call Stack-ը JavaScript-ի հիմնական մեխանիզմներն են, որոնք ապահովում են կոդի ճիշտ կատարումը՝ հատկապես ասինխրոն գործողությունների դեպքում։
 
+---
+   
+   #### Ինչ է Call Stack-ը?
+   
+   **Call Stack**-ը մեխանիզմ է, որը հետևում է ակտիվ ֆունկցիաների կանչերին։ Այն JavaScript-ի **լինեար** (linear) կառուցվածքն է, որտեղ ֆունկցիաները ավելացվում և հանվում են ֆունկցիաների կոդի կատարման ժամանակ։
+   
+   - **Push:** Ֆունկցիան ավելացվում է Call Stack-ի վրա, երբ այն կանչվում է։
+   - **Pop:** Ֆունկցիան հանվում է Call Stack-ից, երբ այն ավարտում է իր կատարման գործընթացը։
+   
+   #### Օրինակ
+   ```javascript
+   function first() {
+     second();
+   }
+   
+   function second() {
+     console.log('Hello, Event Loop!');
+   }
+   
+   first();
+   ```
+   
+   **Call Stack-ի քայլերը:**
+   1. `first()` ֆունկցիան ավելացվում է Stack-ին։
+   2. `second()` ֆունկցիան ավելացվում է Stack-ին։
+   3. `console.log()`-ը կատարվում է և հանվում Stack-ից։
+   4. `second()` հանվում է Stack-ից։
+   5. `first()` հանվում է Stack-ից։
+
+   ---
+   
+   #### Ինչ է Event Loop-ը?
+   
+   **Event Loop**-ը JavaScript-ի հիմնական մեխանիզմն է, որը կառավարում է ասինխրոն գործողությունների կատարման հերթականությունը։ Այն ապահովում է, որ Call Stack-ը մաքրվի, և կոդի մնացած ասինխրոն գործողությունները կատարվեն ճիշտ հերթականությամբ։
+   
+   #### Event Loop-ի քայլերը
+   1. Ստուգում է՝ արդյոք Call Stack-ը դատարկ է։
+   2. Եթե դատարկ է, Event Loop-ը հերթից (Queue) տեղափոխում է միկրոգործողությունները (Microtasks) և մակրոգործողությունները (Macrotasks) Call Stack։
+   3. Կրկնում է գործընթացը։
+
+   ---
+   
+   #### Call Stack-ի և Event Loop-ի Համագործակցությունը
+   
+   #### 1. Սինխրոն գործողություններ
+   Սկզբնական կոդի կատարման ժամանակ բոլոր սինխրոն գործողությունները կատարում են Call Stack-ը։
+   
+   ```javascript
+   console.log('First');
+   console.log('Second');
+   ```
+   **Output:**
+   ```
+   First
+   Second
+   ```
+   
+   **Պարզապես Call Stack է օգտագործվում։**
+   
+   #### 2. Ասինխրոն գործողություններ
+   
+   Ասինխրոն գործողությունները (օրինակ՝ `setTimeout`, `fetch`) նախ ուղարկվում են Web API-ներին, և դրանց արդյունքը պահվում է Task Queue-ում կամ Microtask Queue-ում։ Event Loop-ը ստուգում է Call Stack-ը և դատարկության դեպքում ավելացնում դրանք Stack-ում։
+   
+   #### Օրինակ
+   ```javascript
+   console.log('Start');
+   
+   setTimeout(() => {
+     console.log('Timeout');
+   }, 0);
+   
+   console.log('End');
+   ```
+   
+   **Output:**
+   ```
+   Start
+   End
+   Timeout
+   ```
+   
+   **Քայլերի բացատրություն:**
+   1. `console.log('Start')` կատարվում է անմիջապես։
+   2. `setTimeout`-ը ուղարկվում է Web API-ին։
+   3. `console.log('End')` կատարվում է անմիջապես։
+   4. Event Loop-ը տեղադրում է `Timeout` callback-ը Call Stack-ում։
+
+   ---
+   
+   #### Microtasks vs Macrotasks
+   
+   Event Loop-ը կառավարում է միկրոգործողություններն ու մակրոգործողությունները տարբեր հերթերում։
+   
+   - **Microtasks (Միկրոգործողություններ):**
+      - Promise callbacks, `queueMicrotask()`
+      - Ավելի բարձր առաջնահերթություն ունեն։
+   
+   - **Macrotasks (Մակրոգործողություններ):**
+      - `setTimeout`, `setInterval`, `setImmediate` (Node.js)
+   
+   #### Օրինակ
+   ```javascript
+   console.log('Start');
+   
+   setTimeout(() => {
+     console.log('Macrotask');
+   }, 0);
+   
+   Promise.resolve().then(() => {
+     console.log('Microtask');
+   });
+   
+   console.log('End');
+   ```
+   
+   **Output:**
+   ```
+   Start
+   End
+   Microtask
+   Macrotask
+   ```
+   
+   **Քայլերի բացատրություն:**
+   1. `Start` և `End` սինխրոն գործողություններն անմիջապես կատարվում են։
+   2. Promise-ը (Microtask) կատարվում է նախ, նույնիսկ եթե `setTimeout`-ը (Macrotask) ժամանակը 0 է։
+   3. `setTimeout` callback-ը կատարվում է վերջում։
+   
+   ---
+   
+   #### Կապ Call Stack-ի և Event Loop-ի միջև
+   
+   - Call Stack-ը կառավարում է JavaScript-ի սինխրոն գործողությունները։
+   - Event Loop-ը ապահովում է, որ ասինխրոն գործողությունները ճիշտ պահին ավելացվեն Stack-ում։
+   
+   Այս համագործակցությունը թույլ է տալիս JavaScript-ին իրականացնել սինխրոն և ասինխրոն գործողությունները մեկ հոսքով, դարձնելով այն հզոր գործիք վեբ հավելվածների համար։
 
    ---
 
@@ -8975,6 +9350,109 @@
    ---
 70. ### Ինչ է Nullish Coalescing Operator-ը JavaScript-ում?
 
+   
+   **Nullish Coalescing Operator**-ը (??) JavaScript-ում տրամաբանային օպերատոր է, որը վերադարձնում է առաջին ոչ-null կամ ոչ-undefined արժեքը։ Այն ներկայացվել է ECMAScript 2020 (ES11)-ում և թույլ է տալիս անվտանգորեն սահմանել լռելյայն արժեքներ՝ առանց սխալ արդյունքների, որոնք կարող են առաջանալ "falsey" արժեքների (օրինակ՝ 0, "", false) օգտագործման դեպքում։
+
+---
+   
+   #### Սինտաքս
+   ```javascript
+   let result = value1 ?? value2;
+   ```
+   - **`value1`**: Առաջին արժեքը։
+   - **`value2`**: Երկրորդ արժեքը, որը վերադարձվում է, եթե `value1`-ը null կամ undefined է։
+
+---
+   
+   #### Ինչպես է աշխատում
+   
+   Nullish Coalescing Operator-ը ստուգում է, թե արդյոք առաջին արժեքը (left-hand operand) **null** կամ **undefined** է։
+   - Եթե այն **null** կամ **undefined** է, վերադարձնում է երկրորդ արժեքը։
+     - Եթե ոչ, վերադարձնում է առաջին արժեքը։
+   
+   #### Օրինակներ
+   #### Հիմնական Օրինակ
+   ```javascript
+   let value = null;
+   let defaultValue = 'Default';
+   
+   let result = value ?? defaultValue;
+   console.log(result); // Output: "Default"
+   ```
+   
+   #### Երբ առաջին արժեքը "falsey", բայց ոչ null/undefined է
+   ```javascript
+   let value = 0;
+   let defaultValue = 100;
+   
+   let result = value ?? defaultValue;
+   console.log(result); // Output: 0
+   ```
+   
+   > **Նշում**: `0`-ն "falsey" է, բայց այն չի համարվում null կամ undefined։
+   
+   #### Համեմատություն `||` Օպերատորի Հետ
+   ```javascript
+   let value = 0;
+   let defaultValue = 100;
+   
+   let result1 = value || defaultValue; // `||` օգտագործումը
+   let result2 = value ?? defaultValue; // `??` օգտագործումը
+   
+   console.log(result1); // Output: 100
+   console.log(result2); // Output: 0
+   ```
+   - `||` օպերատորը ստուգում է "falsey" արժեքներ (օրինակ՝ 0, "", false):
+   - `??` օպերատորը ստուգում է միայն null և undefined:
+   
+   ---
+   
+   #### Օգտագործման Դեպքեր
+   
+   #### 1. **Լռելյայն Արժեքների Սահմանում**
+   Երբ ցանկանում եք սահմանել լռելյայն արժեք՝ խուսափելով null/undefined-ից։
+   
+   ```javascript
+   function greet(name) {
+     let userName = name ?? 'Guest';
+     console.log(`Hello, ${userName}!`);
+   }
+   
+   greet(); // Output: Hello, Guest!
+   greet('Alice'); // Output: Hello, Alice!
+   ```
+   
+   #### 2. **Կոնֆիգուրացիոն Օբյեկտների Համար**
+   ```javascript
+   const config = {
+     timeout: undefined,
+     retries: 3
+   };
+   
+   const timeout = config.timeout ?? 5000;
+   console.log(timeout); // Output: 5000
+   ```
+   
+   #### 3. **Հեշտ Կարդացվող Կոդ**
+   ```javascript
+   const userInput = null;
+   const processedInput = userInput ?? 'Default Input';
+   console.log(processedInput); // Output: "Default Input"
+   ```
+
+   ---
+   
+   #### Նշումներ և Սահմանափակումներ
+   
+   1. **Խառը Օգտագործում `||` և `??` Օպերատորների Հետ**
+      - `||`-ն և `??`-ը չեն կարող օգտագործվել առանց փակագծերի, քանի որ դա առաջացնում է սինտաքսային սխալ։
+      ```javascript
+      let result = null || undefined ?? 'Default'; // SyntaxError
+      let result = (null || undefined) ?? 'Default'; // Correct
+      ```
+   
+   2. **Համատեղելիություն**
+      - Nullish Coalescing Operator-ը հասանելի է ECMAScript 2020-ից սկսած, ինչը նշանակում է, որ այն չի աշխատի հին բրաուզերներում։
 
    ---
 
