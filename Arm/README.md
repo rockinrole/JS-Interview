@@ -5,108 +5,108 @@
 
 ## Բովանդակություն
 
-| No. | Հարցեր                                                                                           |
-|-----|--------------------------------------------------------------------------------------------------|
-| 1   | [Որոնք են JavaScript լեզվում Primitive տիպերը?](#որոնք-են-javascript-լեզվում-primitive-տիպերը)     |
-| 2   | [Ինչ է undefined և undeclared?](#ինչ-է-undefined-և-undeclared)                                   |
-| 3   | [Ինչի համար է typeof օպերատորը?](#ինչի-համար-է-typeof-օպերատորը)                                  |
-| 4   | [Ինչ է NAN և ինչպես կարող ենք հասկանալ, որ արժեքը NAN է?](#ինչ-է-nan-և-ինչպես-կարող-ենք-հասկանալ-որ-արժեքը-nan-է) |
-| 5   | [Ինչ է toString և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-tostring-և-ինչպես-կարող-ենք-այն-օգտագործել) |
-| 6   | [Ինչ է toNumber և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-tonumber-և-ինչպես-կարող-ենք-այն-օգտագործել) |
-| 7   | [Ինչ է toBoolean և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-toboolean-և-ինչպես-կարող-ենք-այն-օգտագործել) |
-| 8   | [Ինչ է Coercion և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-coercion-և-ինչպես-կարող-ենք-այն-օգտագործել) |
-| 9   | [Ինչ է boxing-ը?](#ինչ-է-boxing-ը)                                                               |
-| 10  | [Ինչ են double equal (==) և triple equal (===) օպերատորները?](#ինչ-են-double-equal--և-triple-equal--օպերատորները) |
-| 11  | [Ինչ է hoisting-ը JavaScript-ում?](#ինչ-է-hoisting-ը-javascript-ում)                              |
-| 12  | [Ինչ տարբերություն կա let, const և var միջև?](#ինչ-տարբերություն-կա-let-const-և-var-միջև)           |
-| 13  | [Ինչ է closure-ը JavaScript-ում?](#ինչ-է-closure-ը-javascript-ում)                                |
-| 14  | [Ինչպես է աշխատում "this" բանալի բառը JavaScript-ում?](#ինչպես-է-աշխատում-this-բանալի-բառը-javascript-ում) |
-| 15  | [Ինչ է Event Loop-ը JavaScript-ում?](#ինչ-է-event-loop-ը-javascript-ում)                          |
-| 16  | [Ինչ է debounce-ը և throttle-ը JavaScript-ում?](#ինչ-է-debounce-ը-և-throttle-ը-javascript-ում)    |
-| 17  | [Ինչ է `Promise`-ը և ինչպես է այն աշխատում?](#ինչ-է-promise-ը-և-ինչպես-է-այն-աշխատում)            |
-| 18  | [Ինչպես է աշխատում async/await-ը JavaScript-ում?](#ինչպես-է-աշխատում-asyncawait-ը-javascript-ում) |
-| 19  | [Ինչ է DOM-ը և ինչ տարբերություն կա HTML-ի և DOM-ի միջև?](#ինչ-է-dom-ը-և-ինչ-տարբերություն-կա-html-ի-և-dom-ի-միջև) |
-| 20  | [Ինչ է ES6 մոդուլը և ինչպես է այն աշխատում?](#ինչ-է-es6-մոդուլը-և-ինչպես-է-այն-աշխատում)           |
-| 21  | [Ինչ է JavaScript-ում call, apply, bind մեթոդները?](#ինչ-է-javascript-ում-call-apply-bind-մեթոդները) |
-| 22  | [Ինչ է `map`, `filter` և `reduce` մեթոդները JavaScript-ում?](#ինչ-է-map-filter-և-reduce-մեթոդները-javascript-ում) |
-| 23  | [Ինչ է տարբերություն shallow copy-ի և deep copy-ի միջև?](#ինչ-է-տարբերություն-shallow-copy-ի-և-deep-copy-ի-միջև) |
-| 24  | [Ինչ է `prototype`-ը JavaScript-ում?](#ինչ-է-prototype-ը-javascript-ում)                         |
-| 25  | [Ինչ է JavaScript-ում event bubbling-ը և event capturing-ը?](#ինչ-է-javascript-ում-event-bubbling-ը-և-event-capturing-ը) |
-| 26  | [Ինչ է IIFE (Immediately Invoked Function Expression)?](#ինչ-է-iife-immediately-invoked-function-expression) |
-| 27  | [Ինչ է JavaScript-ում WeakMap-ը և WeakSet-ը?](#ինչ-է-javascript-ում-weakmap-ը-և-weakset-ը)         |
-| 28  | [Ինչ է Execution Context-ը JavaScript-ում?](#ինչ-է-execution-context-ը-javascript-ում)           |
-| 29  | [Ինչ է Scope-ը և Scope Chain-ը JavaScript-ում?](#ինչ-է-scope-ը-և-scope-chain-ը-javascript-ում)   |
-| 30  | [Ինչ է JavaScript-ի strict mode-ը?](#ինչ-է-javascript-ի-strict-mode-ը)                           |
-| 31  | [Ինչ է CORS-ը և ինչու է այն կարևոր?](#ինչ-է-cors-ը-և-ինչու-է-այն-կարևոր)                         |
-| 32  | [Ինչ է Module Pattern-ը JavaScript-ում?](#ինչ-է-module-pattern-ը-javascript-ում)                 |
-| 33  | [Ինչ տարբերություն կա mutable և immutable օբյեկտների միջև?](#ինչ-տարբերություն-կա-mutable-և-immutable-օբյեկտների-միջև) |
-| 34  | [Ինչպես են աշխատում setters և getters JavaScript-ում?](#ինչպես-են-աշխատում-setters-և-getters-javascript-ում) |
-| 35  | [Ինչ է տարբերություն function declaration-ի և function expression-ի միջև?](#ինչ-է-տարբերություն-function-declaration-ի-և-function-expression-ի-միջև) |
-| 36  | [Ինչ է Higher Order Function-ը JavaScript-ում?](#ինչ-է-higher-order-function-ը-javascript-ում)   |
-| 37  | [Ինչ է Currying-ը JavaScript-ում?](#ինչ-է-currying-ը-javascript-ում)                             |
-| 38  | [Ինչ է JavaScript-ի Task Queue-ը?](#ինչ-է-javascript-ի-task-queue-ը)                             |
+| No. | Հարցեր                                                                                                                                                                           |
+|-----|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | [Որոնք են JavaScript լեզվում Primitive տիպերը?](#որոնք-են-javascript-լեզվում-primitive-տիպերը)                                                                                   |
+| 2   | [Ինչ է undefined և undeclared?](#ինչ-է-undefined-և-undeclared)                                                                                                                   |
+| 3   | [Ինչի համար է typeof օպերատորը?](#ինչի-համար-է-typeof-օպերատորը)                                                                                                                 |
+| 4   | [Ինչ է NAN և ինչպես կարող ենք հասկանալ, որ արժեքը NAN է?](#ինչ-է-nan-և-ինչպես-կարող-ենք-հասկանալ-որ-արժեքը-nan-է)                                                                |
+| 5   | [Ինչ է toString և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-tostring-և-ինչպես-կարող-ենք-այն-օգտագործել)                                                                           |
+| 6   | [Ինչ է toNumber և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-tonumber-և-ինչպես-կարող-ենք-այն-օգտագործել)                                                                           |
+| 7   | [Ինչ է toBoolean և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-toboolean-և-ինչպես-կարող-ենք-այն-օգտագործել)                                                                         |
+| 8   | [Ինչ է Coercion և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-coercion-և-ինչպես-կարող-ենք-այն-օգտագործել)                                                                           |
+| 9   | [Ինչ է boxing-ը?](#ինչ-է-boxing-ը)                                                                                                                                               |
+| 10  | [Ինչ են double equal (==) և triple equal (===) օպերատորները?](#ինչ-են-double-equal--և-triple-equal--օպերատորները)                                                                |
+| 11  | [Ինչ է hoisting-ը JavaScript-ում?](#ինչ-է-hoisting-ը-javascript-ում)                                                                                                             |
+| 12  | [Ինչ տարբերություն կա let, const և var միջև?](#ինչ-տարբերություն-կա-let-const-և-var-միջև)                                                                                        |
+| 13  | [Ինչ է closure-ը JavaScript-ում?](#ինչ-է-closure-ը-javascript-ում)                                                                                                               |
+| 14  | [Ինչպես է աշխատում "this" բանալի բառը JavaScript-ում?](#ինչպես-է-աշխատում-this-բանալի-բառը-javascript-ում)                                                                       |
+| 15  | [Ինչ է Event Loop-ը JavaScript-ում?](#ինչ-է-event-loop-ը-javascript-ում)                                                                                                         |
+| 16  | [Ինչ է debounce-ը և throttle-ը JavaScript-ում?](#ինչ-է-debounce-ը-և-throttle-ը-javascript-ում)                                                                                   |
+| 17  | [Ինչ է `Promise`-ը և ինչպես է այն աշխատում?](#ինչ-է-promise-ը-և-ինչպես-է-այն-աշխատում)                                                                                           |
+| 18  | [Ինչպես է աշխատում async/await-ը JavaScript-ում?](#ինչպես-է-աշխատում-asyncawait-ը-javascript-ում)                                                                                |
+| 19  | [Ինչ է DOM-ը և ինչ տարբերություն կա HTML-ի և DOM-ի միջև?](#ինչ-է-dom-ը-և-ինչ-տարբերություն-կա-html-ի-և-dom-ի-միջև)                                                               |
+| 20  | [Ինչ է ES6 մոդուլը և ինչպես է այն աշխատում?](#ինչ-է-es6-մոդուլը-և-ինչպես-է-այն-աշխատում)                                                                                         |
+| 21  | [Ինչ է JavaScript-ում call, apply, bind մեթոդները?](#ինչ-է-javascript-ում-call-apply-bind-մեթոդները)                                                                             |
+| 22  | [Ինչ է `map`, `filter` և `reduce` մեթոդները JavaScript-ում?](#ինչ-է-map-filter-և-reduce-մեթոդները-javascript-ում)                                                                |
+| 23  | [Ինչ է տարբերություն shallow copy-ի և deep copy-ի միջև?](#ինչ-է-տարբերություն-shallow-copy-ի-և-deep-copy-ի-միջև)                                                                 |
+| 24  | [Ինչ է `prototype`-ը JavaScript-ում?](#ինչ-է-prototype-ը-javascript-ում)                                                                                                         |
+| 25  | [Ինչ է JavaScript-ում event bubbling-ը և event capturing-ը?](#ինչ-է-javascript-ում-event-bubbling-ը-և-event-capturing-ը)                                                         |
+| 26  | [Ինչ է IIFE (Immediately Invoked Function Expression)?](#ինչ-է-iife-immediately-invoked-function-expression)                                                                     |
+| 27  | [Ինչ է JavaScript-ում WeakMap-ը և WeakSet-ը?](#ինչ-է-javascript-ում-weakmap-ը-և-weakset-ը)                                                                                       |
+| 28  | [Ինչ է Execution Context-ը JavaScript-ում?](#ինչ-է-execution-context-ը-javascript-ում)                                                                                           |
+| 29  | [Ինչ է Scope-ը և Scope Chain-ը JavaScript-ում?](#ինչ-է-scope-ը-և-scope-chain-ը-javascript-ում)                                                                                   |
+| 30  | [Ինչ է JavaScript-ի strict mode-ը?](#ինչ-է-javascript-ի-strict-mode-ը)                                                                                                           |
+| 31  | [Ինչ է CORS-ը և ինչու է այն կարևոր?](#ինչ-է-cors-ը-և-ինչու-է-այն-կարևոր)                                                                                                         |
+| 32  | [Ինչ է Module Pattern-ը JavaScript-ում?](#ինչ-է-module-pattern-ը-javascript-ում)                                                                                                 |
+| 33  | [Ինչ տարբերություն կա mutable և immutable օբյեկտների միջև?](#ինչ-տարբերություն-կա-mutable-և-immutable-օբյեկտների-միջև)                                                           |
+| 34  | [Ինչպես են աշխատում setters և getters JavaScript-ում?](#ինչպես-են-աշխատում-setters-և-getters-javascript-ում)                                                                     |
+| 35  | [Ինչ է տարբերություն function declaration-ի և function expression-ի միջև?](#ինչ-է-տարբերություն-function-declaration-ի-և-function-expression-ի-միջև)                             |
+| 36  | [Ինչ է Higher Order Function-ը JavaScript-ում?](#ինչ-է-higher-order-function-ը-javascript-ում)                                                                                   |
+| 37  | [Ինչ է Currying-ը JavaScript-ում?](#ինչ-է-currying-ը-javascript-ում)                                                                                                             |
+| 38  | [Ինչ է JavaScript-ի Task Queue-ը?](#ինչ-է-javascript-ի-task-queue-ը)                                                                                                             |
 | 39  | [Ինչ է JavaScript-ում տարբեր սխալների տեսակները (SyntaxError, ReferenceError, TypeError)?](#ինչ-է-javascript-ում-տարբեր-սխալների-տեսակները-syntaxerror-referenceerror-typeerror) |
-| 40  | [Ինչ է JavaScript-ի Garbage Collection-ը?](#ինչ-է-javascript-ի-garbage-collection-ը)            |
-| 41  | [Ինչ է Promise Chaining-ը JavaScript-ում?](#ինչ-է-promise-chaining-ը-javascript-ում)             |
-| 42  | [Ինչ է Microtasks-ը JavaScript-ում?](#ինչ-է-microtasks-ը-javascript-ում)                         |
-| 43  | [Ինչ է Callback Hell-ը և ինչպես կարող ենք այն խուսափել?](#ինչ-է-callback-hell-ը-և-ինչպես-կարող-ենք-այն-խուսափել) |
-| 44  | [Ինչ տարբերություն կա `setTimeout`, `setInterval` և `requestAnimationFrame` միջև?](#ինչ-տարբերություն-կա-settimeout-setinterval-և-requestanimationframe-միջև) |
-| 45  | [Ինչ է Service Worker-ը JavaScript-ում?](#ինչ-է-service-worker-ը-javascript-ում)                 |
-| 46  | [Ինչ է տարբեր եղանակներ զանգվածի միջոցով անցնելու համար JavaScript-ում?](#ինչ-է-տարբեր-եղանակներ-զանգվածի-միջոցով-անցնելու-համար-javascript-ում) |
-| 47  | [Ինչ է Web Storage-ը (localStorage և sessionStorage)?](#ինչ-է-web-storage-ը-localstorage-և-sessionstorage) |
-| 48  | [Ինչ է Proxy-ը և Reflect-ը JavaScript-ում?](#ինչ-է-proxy-ը-և-reflect-ը-javascript-ում)           |
-| 49  | [Ինչ է JavaScript-ում generators-ը?](#ինչ-է-javascript-ում-generators-ը)                         |
-| 50  | [Ինչ է Iterables և Iterators-ը JavaScript-ում?](#ինչ-է-iterables-և-iterators-ը-javascript-ում)   |
-| 51  | [Ինչ է Destructuring-ը JavaScript-ում?](#ինչ-է-destructuring-ը-javascript-ում)                   |
-| 52  | [Ինչ է Template Literals-ը և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-template-literals-ը-և-ինչպես-կարող-ենք-այն-օգտագործել) |
-| 53  | [Ինչ է Tagged Templates-ը JavaScript-ում?](#ինչ-է-tagged-templates-ը-javascript-ում)             |
-| 54  | [Ինչ է Set-ը և Map-ը JavaScript-ում?](#ինչ-է-set-ը-և-map-ը-javascript-ում)                       |
-| 55  | [Ինչ է JavaScript-ի Event Delegation-ը?](#ինչ-է-javascript-ի-event-delegation-ը)                 |
-| 56  | [Ինչ է Factory Function-ը JavaScript-ում?](#ինչ-է-factory-function-ը-javascript-ում)             |
-| 57  | [Ինչ է Class-ը JavaScript-ում?](#ինչ-է-class-ը-javascript-ում)                                   |
-| 58  | [Ինչ է object cloning-ի տարբեր եղանակներ JavaScript-ում?](#ինչ-է-object-cloning-ի-տարբեր-եղանակներ-javascript-ում) |
-| 59  | [Ինչ է JSON-ը և ինչու է այն կարևոր JavaScript-ում?](#ինչ-է-json-ը-և-ինչու-է-այն-կարևոր-javascript-ում) |
-| 60  | [Ինչ է AJAX-ը JavaScript-ում?](#ինչ-է-ajax-ը-javascript-ում)                                     |
-| 61  | [Ինչ է Fetch API-ը և ինչպես է այն աշխատում?](#ինչ-է-fetch-api-ը-և-ինչպես-է-այն-աշխատում)         |
-| 62  | [Ինչ է Axios-ը և ինչ է տարբերությունը Fetch API-ի հետ?](#ինչ-է-axios-ը-և-ինչ-է-տարբերությունը-fetch-api-ի-հետ) |
-| 63  | [Ինչ է JavaScript-ում Modules-ը?](#ինչ-է-javascript-ում-modules-ը)                               |
-| 64  | [Ինչ է WebSockets-ը JavaScript-ում?](#ինչ-է-websockets-ը-javascript-ում)                         |
-| 65  | [Ինչ է DOM Traversing-ը JavaScript-ում?](#ինչ-է-dom-traversing-ը-javascript-ում)                 |
-| 66  | [Ինչ է Custom Events-ը JavaScript-ում?](#ինչ-է-custom-events-ը-javascript-ում)                   |
-| 67  | [Ինչ է Shadow DOM-ը JavaScript-ում?](#ինչ-է-shadow-dom-ը-javascript-ում)                         |
-| 68  | [Ինչ է JavaScript-ում polyfill-ը?](#ինչ-է-javascript-ում-polyfill-ը)                             |
-| 69  | [Ինչ է Event Loop-ի և Call Stack-ի միջև կապը JavaScript-ում?](#ինչ-է-event-loop-ի-և-call-stack-ի-միջև-կապը-javascript-ում) |
-| 70  | [Ինչ է Nullish Coalescing Operator-ը JavaScript-ում?](#ինչ-է-nullish-coalescing-operator-ը-javascript-ում) |
-| 71  | [Ինչ է Optional Chaining-ը JavaScript-ում?](#ինչ-է-optional-chaining-ը-javascript-ում)           |
-| 72  | [Ինչ է ES5 և ES6 տարբերությունները JavaScript-ում?](#ինչ-է-es5-և-es6-տարբերությունները-javascript-ում) |
-| 73  | [Ինչ է JavaScript Engine-ը և ինչ տարբերություն կա V8-ի և SpiderMonkey-ի միջև?](#ինչ-է-javascript-engine-ը-և-ինչ-տարբերություն-կա-v8-ի-և-spidermonkey-ի-միջև) |
-| 74  | [Ինչ է Node.js-ը և ինչու է այն կարևոր JavaScript-ի համար?](#ինչ-է-nodejs-ը-և-ինչու-է-այն-կարևոր-javascript-ի-համար) |
-| 75  | [Ինչ է JavaScript-ում streams-ը?](#ինչ-է-javascript-ում-streams-ը)                               |
-| 76  | [Ինչ է JavaScript-ի տարբեր տվյալների կառուցվածքները (Data Structures)?](#ինչ-է-javascript-ի-տարբեր-տվյալների-կառուցվածքները-data-structures) |
-| 77  | [Ինչ է JavaScript-ում WeakRef-ը?](#ինչ-է-javascript-ում-weakref-ը)                               |
-| 78  | [Ինչ է Web APIs-ը JavaScript-ում?](#ինչ-է-web-apis-ը-javascript-ում)                             |
-| 79  | [Ինչ է JavaScript-ի Performance Optimization-ը?](#ինչ-է-javascript-ի-performance-optimization-ը) |
-| 80  | [Ինչ է JavaScript-ում Event Listeners-ը?](#ինչ-է-javascript-ում-event-listeners-ը)               |
-| 81  | [Ինչ է JavaScript-ում debounce-ի timeout-ի կիրառությունը?](#ինչ-է-javascript-ում-debounce-ի-timeout-ի-կիրառությունը) |
-| 82  | [Ինչ է JavaScript-ում singleton pattern-ը?](#ինչ-է-javascript-ում-singleton-pattern-ը)           |
-| 83  | [Ինչ է JavaScript-ում memory leak-ը և ինչպես կարող ենք խուսափել?](#ինչ-է-javascript-ում-memory-leak-ը-և-ինչպես-կարող-ենք-խուսափել) |
-| 84  | [Ինչ է JavaScript-ում Data Binding-ը?](#ինչ-է-javascript-ում-data-binding-ը)                     |
-| 85  | [Ինչ է JavaScript-ում async generator-ը?](#ինչ-է-javascript-ում-async-generator-ը)               |
-| 86  | [Ինչ է Intersection Observer API-ը JavaScript-ում?](#ինչ-է-intersection-observer-api-ը-javascript-ում) |
-| 87  | [Ինչ է JavaScript-ում DOM Events-ը?](#ինչ-է-javascript-ում-dom-events-ը)                         |
-| 88  | [Ինչ է JavaScript-ում class inheritance-ը?](#ինչ-է-javascript-ում-class-inheritance-ը)           |
-| 89  | [Ինչ է JavaScript-ում different states of a Promise-ը?](#ինչ-է-javascript-ում-different-states-of-a-promise-ը) |
-| 90  | [Ինչ է JavaScript-ում Event Target-ը?](#ինչ-է-javascript-ում-event-target-ը)                     |
-| 91  | [Ինչ է JavaScript-ում Module Federation-ը?](#ինչ-է-javascript-ում-module-federation-ը)           |
-| 92  | [Ինչ է JavaScript-ում array-ի մանիպուլյացիայի տարբեր եղանակներ?](#ինչ-է-javascript-ում-array-ի-մանիպուլյացիայի-տարբեր-եղանակներ) |
-| 93  | [Ինչ է JavaScript-ում dynamic imports-ը?](#ինչ-է-javascript-ում-dynamic-imports-ը)               |
-| 94  | [Ինչ է JavaScript-ում Proxy Pattern-ը?](#ինչ-է-javascript-ում-proxy-pattern-ը)                   |
-| 95  | [Ինչ է JavaScript-ում Function Overloading-ը?](#ինչ-է-javascript-ում-function-overloading-ը)     |
-| 96  | [Ինչ է JavaScript-ում Symbol()-ի տարբեր կիրառությունները?](#ինչ-է-javascript-ում-symbol-ի-տարբեր-կիրառությունները) |
-| 97  | [Ինչ է JavaScript-ում Virtual DOM-ը?](#ինչ-է-javascript-ում-virtual-dom-ը)                       |
-| 98  | [Ինչ է JavaScript-ում `Object.freeze()`-ը?](#ինչ-է-javascript-ում-objectfreeze-ը)                |
-| 99  | [Ինչ է JavaScript-ում `Object.seal()`-ը?](#ինչ-է-javascript-ում-objectseal-ը)                    |
-| 100 | [Ինչ է JavaScript-ում Function Composition-ը?](#ինչ-է-javascript-ում-function-composition-ը)    |
+| 40  | [Ինչ է JavaScript-ի Garbage Collection-ը?](#ինչ-է-javascript-ի-garbage-collection-ը)                                                                                             |
+| 41  | [Ինչ է Promise Chaining-ը JavaScript-ում?](#ինչ-է-promise-chaining-ը-javascript-ում)                                                                                             |
+| 42  | [Ինչ է Microtasks-ը JavaScript-ում?](#ինչ-է-microtasks-ը-javascript-ում)                                                                                                         |
+| 43  | [Ինչ է Callback Hell-ը և ինչպես կարող ենք այն խուսափել?](#ինչ-է-callback-hell-ը-և-ինչպես-կարող-ենք-այն-խուսափել)                                                                 |
+| 44  | [Ինչ տարբերություն կա `setTimeout`, `setInterval` և `requestAnimationFrame` միջև?](#ինչ-տարբերություն-կա-settimeout-setinterval-և-requestanimationframe-միջև)                    |
+| 45  | [Ինչ է Service Worker-ը JavaScript-ում?](#ինչ-է-service-worker-ը-javascript-ում)                                                                                                 |
+| 46  | [Ինչ է տարբեր եղանակներ զանգվածի միջոցով անցնելու համար JavaScript-ում?](#ինչ-է-տարբեր-եղանակներ-զանգվածի-միջոցով-անցնելու-համար-javascript-ում)                                 |
+| 47  | [Ինչ է Web Storage-ը (localStorage և sessionStorage)?](#ինչ-է-web-storage-ը-localstorage-և-sessionstorage)                                                                       |
+| 48  | [Ինչ է Proxy-ը և Reflect-ը JavaScript-ում?](#ինչ-է-proxy-ը-և-reflect-ը-javascript-ում)                                                                                           |
+| 49  | [Ինչ է JavaScript-ում generators-ը?](#ինչ-է-javascript-ում-generators-ը)                                                                                                         |
+| 50  | [Ինչ է Iterables և Iterators-ը JavaScript-ում?](#ինչ-է-iterables-և-iterators-ը-javascript-ում)                                                                                   |
+| 51  | [Ինչ է Destructuring-ը JavaScript-ում?](#ինչ-է-destructuring-ը-javascript-ում)                                                                                                   |
+| 52  | [Ինչ է Template Literals-ը և ինչպես կարող ենք այն օգտագործել?](#ինչ-է-template-literals-ը-և-ինչպես-կարող-ենք-այն-օգտագործել)                                                     |
+| 53  | [Ինչ է Tagged Templates-ը JavaScript-ում?](#ինչ-է-tagged-templates-ը-javascript-ում)                                                                                             |
+| 54  | [Ինչ է Set-ը և Map-ը JavaScript-ում?](#ինչ-է-set-ը-և-map-ը-javascript-ում)                                                                                                       |
+| 55  | [Ինչ է JavaScript-ի Event Delegation-ը?](#ինչ-է-javascript-ի-event-delegation-ը)                                                                                                 |
+| 56  | [Ինչ է Factory Function-ը JavaScript-ում?](#ինչ-է-factory-function-ը-javascript-ում)                                                                                             |
+| 57  | [Ինչ է Class-ը JavaScript-ում?](#ինչ-է-class-ը-javascript-ում)                                                                                                                   |
+| 58  | [Ինչ է object cloning-ի տարբեր եղանակներ JavaScript-ում?](#ինչ-է-object-cloning-ի-տարբեր-եղանակներ-javascript-ում)                                                               |
+| 59  | [Ինչ է JSON-ը և ինչու է այն կարևոր JavaScript-ում?](#ինչ-է-json-ը-և-ինչու-է-այն-կարևոր-javascript-ում)                                                                           |
+| 60  | [Ինչ է AJAX-ը JavaScript-ում?](#ինչ-է-ajax-ը-javascript-ում)                                                                                                                     |
+| 61  | [Ինչ է Fetch API-ը և ինչպես է այն աշխատում?](#ինչ-է-fetch-api-ը-և-ինչպես-է-այն-աշխատում)                                                                                         |
+| 62  | [Ինչ է Axios-ը և ինչ է տարբերությունը Fetch API-ի հետ?](#ինչ-է-axios-ը-և-ինչ-է-տարբերությունը-fetch-api-ի-հետ)                                                                   |
+| 63  | [Ինչ է JavaScript-ում Modules-ը?](#ինչ-է-javascript-ում-modules-ը)                                                                                                               |
+| 64  | [Ինչ է WebSockets-ը JavaScript-ում?](#ինչ-է-websockets-ը-javascript-ում)                                                                                                         |
+| 65  | [Ինչ է DOM Traversing-ը JavaScript-ում?](#ինչ-է-dom-traversing-ը-javascript-ում)                                                                                                 |
+| 66  | [Ինչ է Custom Events-ը JavaScript-ում?](#ինչ-է-custom-events-ը-javascript-ում)                                                                                                   |
+| 67  | [Ինչ է Shadow DOM-ը JavaScript-ում?](#ինչ-է-shadow-dom-ը-javascript-ում)                                                                                                         |
+| 68  | [Ինչ է JavaScript-ում polyfill-ը?](#ինչ-է-javascript-ում-polyfill-ը)                                                                                                             |
+| 69  | [Ինչ է Event Loop-ի և Call Stack-ի միջև կապը JavaScript-ում?](#ինչ-է-event-loop-ի-և-call-stack-ի-միջև-կապը-javascript-ում)                                                       |
+| 70  | [Ինչ է Nullish Coalescing Operator-ը JavaScript-ում?](#ինչ-է-nullish-coalescing-operator-ը-javascript-ում)                                                                       |
+| 71  | [Ինչ է Optional Chaining-ը JavaScript-ում?](#ինչ-է-optional-chaining-ը-javascript-ում)                                                                                           |
+| 72  | [Ինչ է ES5 և ES6 տարբերությունները JavaScript-ում?](#ինչ-է-es5-և-es6-տարբերությունները-javascript-ում)                                                                           |
+| 73  | [Ինչ է JavaScript Engine-ը և ինչ տարբերություն կա V8-ի և SpiderMonkey-ի միջև?](#ինչ-է-javascript-engine-ը-և-ինչ-տարբերություն-կա-v8-ի-և-spidermonkey-ի-միջև)                     |
+| 74  | [Ինչ է Node.js-ը և ինչու է այն կարևոր JavaScript-ի համար?](#ինչ-է-nodejs-ը-և-ինչու-է-այն-կարևոր-javascript-ի-համար)                                                              |
+| 75  | [Ինչ է JavaScript-ում streams-ը?](#ինչ-է-javascript-ում-streams-ը)                                                                                                               |
+| 76  | [Ինչ է JavaScript-ի տարբեր տվյալների կառուցվածքները (Data Structures)?](#ինչ-է-javascript-ի-տարբեր-տվյալների-կառուցվածքները-data-structures)                                     |
+| 77  | [Ինչ է JavaScript-ում WeakRef-ը?](#ինչ-է-javascript-ում-weakref-ը)                                                                                                               |
+| 78  | [Ինչ է Web APIs-ը JavaScript-ում?](#ինչ-է-web-apis-ը-javascript-ում)                                                                                                             |
+| 79  | [Ինչ է JavaScript-ի Performance Optimization-ը?](#ինչ-է-javascript-ի-performance-optimization-ը)                                                                                 |
+| 80  | [Ինչ է JavaScript-ում Event Listeners-ը?](#ինչ-է-javascript-ում-event-listeners-ը)                                                                                               |
+| 81  | [Ինչ է JavaScript-ում debounce-ի timeout-ի կիրառությունը?](#ինչ-է-javascript-ում-debounce-ի-timeout-ի-կիրառությունը)                                                             |
+| 82  | [Ինչ է JavaScript-ում singleton pattern-ը?](#ինչ-է-javascript-ում-singleton-pattern-ը)                                                                                           |
+| 83  | [Ինչ է JavaScript-ում memory leak-ը և ինչպես կարող ենք խուսափել?](#ինչ-է-javascript-ում-memory-leak-ը-և-ինչպես-կարող-ենք-խուսափել)                                               |
+| 84  | [Ինչ է JavaScript-ում Data Binding-ը?](#ինչ-է-javascript-ում-data-binding-ը)                                                                                                     |
+| 85  | [Ինչ է JavaScript-ում async generator-ը?](#ինչ-է-javascript-ում-async-generator-ը)                                                                                               |
+| 86  | [Ինչ է Intersection Observer API-ը JavaScript-ում?](#ինչ-է-intersection-observer-api-ը-javascript-ում)                                                                           |
+| 87  | [Ինչ է JavaScript-ում DOM Events-ը?](#ինչ-է-javascript-ում-dom-events-ը)                                                                                                         |
+| 88  | [Ինչ է JavaScript-ում class inheritance-ը?](#ինչ-է-javascript-ում-class-inheritance-ը)                                                                                           |
+| 89  | [Ինչ է JavaScript-ում different states of a Promise-ը?](#ինչ-է-javascript-ում-different-states-of-a-promise-ը)                                                                   |
+| 90  | [Ինչ է JavaScript-ում Event Target-ը?](#ինչ-է-javascript-ում-event-target-ը)                                                                                                     |
+| 91  | [Ինչ է JavaScript-ում Module Federation-ը?](#ինչ-է-javascript-ում-module-federation-ը)                                                                                           |
+| 92  | [Որոնք են JavaScript-ում array-ի մանիպուլյացիայի տարբեր եղանակներ?](#որոնք-են-javascript-ում-array-ի-մանիպուլյացիայի-տարբեր-եղանակներ)                                           |
+| 93  | [Ինչ է JavaScript-ում dynamic imports-ը?](#ինչ-է-javascript-ում-dynamic-imports-ը)                                                                                               |
+| 94  | [Ինչ է JavaScript-ում Proxy Pattern-ը?](#ինչ-է-javascript-ում-proxy-pattern-ը)                                                                                                   |
+| 95  | [Ինչ է JavaScript-ում Function Overloading-ը?](#ինչ-է-javascript-ում-function-overloading-ը)                                                                                     |
+| 96  | [Ինչ է JavaScript-ում Symbol()-ի տարբեր կիրառությունները?](#ինչ-է-javascript-ում-symbol-ի-տարբեր-կիրառությունները)                                                               |
+| 97  | [Ինչ է JavaScript-ում Virtual DOM-ը?](#ինչ-է-javascript-ում-virtual-dom-ը)                                                                                                       |
+| 98  | [Ինչ է JavaScript-ում `Object.freeze()`-ը?](#ինչ-է-javascript-ում-objectfreeze-ը)                                                                                                |
+| 99  | [Ինչ է JavaScript-ում `Object.seal()`-ը?](#ինչ-է-javascript-ում-objectseal-ը)                                                                                                    |
+| 100 | [Ինչ է JavaScript-ում Function Composition-ը?](#ինչ-է-javascript-ում-function-composition-ը)                                                                                     |
 
 
 ---
@@ -12290,6 +12290,713 @@
 
 
    ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+
+91. ### Ինչ է JavaScript-ում Module Federation-ը?
+   
+   **Module Federation**-ը JavaScript-ում մեխանիզմ է, որը ներդրվել է Webpack 5-ում, և այն թույլ է տալիս բազմաբաղադրիչ (micro-frontend) համակարգերում փոխանակել մոդուլներ (modules) ծրագրերի միջև։ Այն ապահովում է անկախ ծրագրերի համատեղ աշխատանքը՝ առանց կրկնօրինակելու նույն կոդը տարբեր հավելվածներում։
+   
+   ---
+   
+   #### Ինչպես է աշխատում Module Federation-ը
+   
+   Module Federation-ը թույլ է տալիս երկու կամ ավելի հավելվածների:
+   
+   1. **Expose (Հանրայնացնել):**
+      - Հավելվածներից մեկը կարող է իր որոշ մոդուլները հրապարակել, որպեսզի մյուսները կարողանան օգտագործել։
+   
+   2. **Consume (Օգտագործել):**
+      - Այլ հավելվածը կարող է օգտվել առաջինի հրապարակած մոդուլներից՝ դրանք ներմուծելով իր միջավայրում։
+   
+   Այս մեխանիզմը կարող է աշխատել նաև runtime-ի ժամանակ՝ դինամիկ կերպով բեռնելով մոդուլները։
+   
+   ---
+   
+   #### Ինչու է Module Federation-ը Կարևոր
+   
+   1. **Կոդի Վերաօգտագործում:**
+      - Կոդը պետք չէ կրկնօրինակել տարբեր նախագծերում։
+   
+   2. **Անկախ Արդիականացում:**
+      - Յուրաքանչյուր միկրոհավելված կարող է թարմացվել անկախ մյուսներից։
+   
+   3. **Կատարողականության Բարելավում:**
+      - Նվազեցնում է բեռնումի ժամանակը՝ կիրառելով դինամիկ բեռնում։
+   
+   4. **Տեխնոլոգիական Անկախություն:**
+      - Թույլ է տալիս միավորել տարբեր տեխնոլոգիաներով ստեղծված հավելվածներ։
+
+   ---
+   
+   #### Module Federation-ի Հիմնական Կոնցեպտները
+   
+   #### 1. Expose (Հանրայնացնել)
+   Expose-ը թույլ է տալիս մի հավելվածին հրապարակել իր մոդուլները, որոնք կարող են օգտագործվել այլ հավելվածներում։
+   
+   **Օրինակ `webpack.config.js` ֆայլում:**
+   ```javascript
+   module.exports = {
+     plugins: [
+       new ModuleFederationPlugin({
+         name: 'app1',
+         filename: 'remoteEntry.js',
+         exposes: {
+           './Button': './src/components/Button',
+         },
+       }),
+     ],
+   };
+   ```
+   
+   #### 2. Consume (Օգտագործել)
+   Consume-ը թույլ է տալիս ներմուծել մեկ այլ հավելվածի կողմից հրապարակված մոդուլը։
+   
+   **Օրինակ `webpack.config.js` ֆայլում:**
+   ```javascript
+   module.exports = {
+     plugins: [
+       new ModuleFederationPlugin({
+         name: 'app2',
+         remotes: {
+           app1: 'app1@http://localhost:3001/remoteEntry.js',
+         },
+       }),
+     ],
+   };
+   ```
+   
+   #### 3. Shared Dependencies (Ընդհանուր Կախվածություններ)
+   Shared Dependencies-ն թույլ է տալիս մի քանի հավելվածների կիսել նույն գրադարանները (օր.`React`, `lodash`):
+   
+   ```javascript
+   module.exports = {
+     plugins: [
+       new ModuleFederationPlugin({
+         shared: {
+           react: { singleton: true, eager: true, requiredVersion: '17.0.0' },
+           'react-dom': { singleton: true, eager: true, requiredVersion: '17.0.0' },
+         },
+       }),
+     ],
+   };
+   ```
+
+   ---
+   
+   #### Module Federation-ի Օրինակ
+   
+   #### Հավելված 1: `app1`
+   ```javascript
+   // Button.js
+   export default function Button() {
+     return '<button>Click Me</button>';
+   }
+   
+   // webpack.config.js
+   module.exports = {
+     plugins: [
+       new ModuleFederationPlugin({
+         name: 'app1',
+         filename: 'remoteEntry.js',
+         exposes: {
+           './Button': './src/Button',
+         },
+       }),
+     ],
+   };
+   ```
+   
+   #### Հավելված 2: `app2`
+   ```javascript
+   // webpack.config.js
+   module.exports = {
+     plugins: [
+       new ModuleFederationPlugin({
+         name: 'app2',
+         remotes: {
+           app1: 'app1@http://localhost:3001/remoteEntry.js',
+         },
+       }),
+     ],
+   };
+   
+   // main.js
+   import Button from 'app1/Button';
+   
+   document.body.innerHTML = Button();
+   ```
+
+   ---
+   
+   #### Module Federation-ի Առավելություններ
+   
+   1. **Ստանդարտացված Կոդի Կիսում:**
+      - Թույլ է տալիս տարբեր հավելվածներին կիսել մոդուլները։
+   
+   2. **Անկախ Թիմերի Աշխատանք:**
+      - Թիմերը կարող են աշխատել տարբեր միկրոհավելվածների վրա անկախ միմյանցից։
+   
+   3. **Արագ Նորարարություն:**
+      - Թույլ է տալիս ներդնել նոր ֆունկցիաներ առանց ամբողջ համակարգը թարմացնելու։
+   
+
+  ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+92. ### Որոնք են JavaScript-ում array-ի մանիպուլյացիայի տարբեր եղանակներ?
+
+   
+   JavaScript-ում զանգվածների (arrays) մանիպուլյացիաները ներառում են մեթոդներ և գործիքներ, որոնք թույլ են տալիս փոխել, ձևափոխել կամ կարգավորել զանգվածները։
+
+---
+   
+   #### Զանգվածների Մանիպուլյացիայի Հիմնական Մեթոդներ
+   
+   #### 1. **Ավելացնել կամ Հեռացնել տարրեր**
+   
+   #### **`push` և `pop`**
+   - **`push`**: Ավելացնում է տարր(եր) զանգվածի վերջում։
+   - **`pop`**: Հեռացնում է և վերադարձնում է վերջին տարրը։
+   
+   ```javascript
+   let arr = [1, 2, 3];
+   arr.push(4); // [1, 2, 3, 4]
+   arr.pop();  // [1, 2, 3]
+   ```
+   
+   #### **`unshift` և `shift`**
+   - **`unshift`**: Ավելացնում է տարր(եր) զանգվածի սկզբում։
+   - **`shift`**: Հեռացնում է և վերադարձնում է առաջին տարրը։
+   
+   ```javascript
+   arr.unshift(0); // [0, 1, 2, 3]
+   arr.shift();   // [1, 2, 3]
+   ```
+   
+   #### **`splice`**
+   - Ավելացնում, հեռացնում կամ փոխարինում է տարրերը։
+   
+   ```javascript
+   let fruits = ['apple', 'banana', 'cherry'];
+   fruits.splice(1, 1, 'orange'); // ['apple', 'orange', 'cherry']
+   ```
+   
+---
+   
+   #### 2. **Տարբերակել Տարրերը**
+   
+   #### **`slice`**
+   - Վերադարձնում է զանգվածի ենթաբաժին։
+   
+   ```javascript
+   let numbers = [1, 2, 3, 4, 5];
+   let sliced = numbers.slice(1, 3); // [2, 3]
+   ```
+   
+   #### **`concat`**
+   - Միացնում է երկու կամ ավելի զանգվածներ։
+   
+   ```javascript
+   let arr1 = [1, 2];
+   let arr2 = [3, 4];
+   let combined = arr1.concat(arr2); // [1, 2, 3, 4]
+   ```
+
+---
+   
+   #### 3. **Կարգավորել Տարրերը**
+   
+   #### **`sort`**
+   - Կարգավորում է զանգվածի տարրերը։
+   
+   ```javascript
+   let arr = [3, 1, 4, 2];
+   arr.sort((a, b) => a - b); // [1, 2, 3, 4]
+   ```
+   
+   #### **`reverse`**
+   - Հակադարձում է զանգվածի տարրերի կարգը։
+   
+   ```javascript
+   arr.reverse(); // [4, 3, 2, 1]
+   ```
+   
+---
+   
+   #### 4. **Փոխակերպել Տարրերը**
+   
+   #### **`map`**
+   - Վերադարձնում է նոր զանգված՝ կիրառելով ֆունկցիա յուրաքանչյուր տարրի վրա։
+   
+   ```javascript
+   let nums = [1, 2, 3];
+   let squared = nums.map(x => x ** 2); // [1, 4, 9]
+   ```
+   
+   #### **`filter`**
+   - Վերադարձնում է նոր զանգված՝ հիմվելով պայմանների վրա։
+   
+   ```javascript
+   let even = nums.filter(x => x % 2 === 0); // [2]
+   ```
+   
+   #### **`reduce`**
+   - Հաշվարկում է զանգվածի արժեքը քայլ առ քայլ։
+   
+   ```javascript
+   let sum = nums.reduce((acc, x) => acc + x, 0); // 6
+   ```
+   
+---
+   
+   #### 5. **Տեղեկություններ Ստանալ**
+   
+   #### **`find` և `findIndex`**
+   - **`find`**: Վերադարձնում է առաջին տարրը, որը բավարարում է պայմանին։
+   - **`findIndex`**: Վերադարձնում է առաջին տարրի ինդեքսը։
+   
+   ```javascript
+   let people = [
+     { name: 'Alice', age: 25 },
+     { name: 'Bob', age: 30 }
+   ];
+   
+   let found = people.find(person => person.age > 25); // { name: 'Bob', age: 30 }
+   let index = people.findIndex(person => person.age > 25); // 1
+   ```
+   
+   #### **`includes`**
+   - Ստուգում է՝ արդյոք տարրը կա զանգվածում։
+   
+   ```javascript
+   let arr = [1, 2, 3];
+   arr.includes(2); // true
+   ```
+
+---
+   
+   #### 6. **Հատուկ Մեթոդներ**
+   
+   #### **`flat` և `flatMap`**
+   - **`flat`**: Տարրերի մակարդակազրկում։
+   - **`flatMap`**: Հավաքում է տարրերը և կիրառում ֆունկցիա։
+   
+   ```javascript
+   let nested = [1, [2, [3]]];
+   nested.flat(2); // [1, 2, 3]
+   
+   let nums = [1, 2, 3];
+   nums.flatMap(x => [x, x * 2]); // [1, 2, 2, 4, 3, 6]
+   ```
+   
+---
+   
+   #### 7. **Հաշվել Զանգվածի Դասավորությունը**
+   
+   #### **`every` և `some`**
+   - **`every`**: Վերադարձնում է `true`, եթե բոլոր տարրերը բավարարում են պայմանին։
+   - **`some`**: Վերադարձնում է `true`, եթե գոնե մեկ տարր բավարարում է պայմանին։
+   
+   ```javascript
+   let nums = [1, 2, 3];
+   nums.every(x => x > 0); // true
+   nums.some(x => x > 2); // true
+   ```
+
+  ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+93. ### Ինչ է JavaScript-ում dynamic imports-ը?
+
+   
+   **Dynamic Imports**-ը JavaScript-ում թույլ է տալիս դինամիկ կերպով բեռնել մոդուլներ՝ կոդը ավելի արդյունավետ կառավարելու և կատարողականությունը բարելավելու համար։
+   
+   Դրանք օգտագործվում են `import()` ֆունկցիայի միջոցով, որը վերադարձնում է **Promise**, և այս մեթոդը թույլ է տալիս մոդուլները բեռնել runtime-ի ժամանակ՝ խուսափելով նախապես բեռնված բոլոր կախվածություններից։
+   
+---
+   
+   #### Սինտաքս
+   
+   ```javascript
+   import(modulePath)
+     .then(module => {
+       // Օգտագործում ենք բեռնված մոդուլը
+     })
+     .catch(error => {
+       // Կառավարում ենք սխալները
+     });
+   ```
+   
+   #### Օրինակ
+   ```javascript
+   const loadModule = async () => {
+     try {
+       const module = await import('./math.js');
+       console.log(module.add(2, 3)); // 5
+     } catch (error) {
+       console.error('Failed to load the module', error);
+     }
+   };
+   
+   loadModule();
+   ```
+
+---
+   
+   #### Առավելություններ
+   
+   1. **Կոդի Մասսայական Բաժանում (Code Splitting):**
+      - Թույլ է տալիս բեռնել միայն այն մոդուլները, որոնք տվյալ պահին անհրաժեշտ են։
+   
+   2. **Կատարողականության Բարելավում:**
+      - Նվազեցնում է նախնական բեռնումի ծավալը։
+   
+   3. **Ասինխրոն Կառավարում:**
+      - Թույլ է տալիս դինամիկ կերպով բեռնել մոդուլները՝ օգտագործելով Promise-ներ կամ `async/await`։
+   
+   4. **Պահանջով Բեռնում (Lazy Loading):**
+      - Օգտագործվում է մեծ ծրագրերում, որտեղ որոշ մոդուլներ հազվադեպ են պահանջվում։
+   
+---
+   
+   #### Օգտագործման Դեպքեր
+   
+   #### 1. **Պահանջով Բեռնում (Lazy Loading)**
+   
+   ```javascript
+   const button = document.getElementById('loadButton');
+   
+   button.addEventListener('click', async () => {
+     const module = await import('./modal.js');
+     module.showModal();
+   });
+   ```
+   
+   #### 2. **Ուղղությունների Հիման վրա Մոդուլների Բեռնում**
+   
+   ```javascript
+   const loadPage = async (page) => {
+     const module = await import(`./pages/${page}.js`);
+     module.render();
+   };
+   
+   loadPage('home');
+   ```
+   
+   #### 3. **Կախվածությունների Կրճատում (Dependency Reduction)**
+   
+   ```javascript
+   if (condition) {
+     import('./feature.js').then(module => {
+       module.enableFeature();
+     });
+   }
+   ```
+   
+---
+   
+   #### Սահմանափակումներ
+   
+   1. **Մուտքի Սխալների Կառավարում:**
+      - Եթե մոդուլը չի գտնվել կամ սխալ է բեռնված, պետք է կառավարել սխալները։
+   
+   2. **Ոչ Համատեղելի Բրաուզերներ:**
+      - Հին բրաուզերները չեն աջակցում dynamic imports (օրինակ՝ IE11):
+   
+   3. **Ապահովության Խնդիրներ:**
+      - Եթե մոդուլների ուղիներ ստացվում են արտաքին աղբյուրներից, պետք է հետևել անվտանգության լավագույն պրակտիկաներին։
+   
+---
+   
+   #### Dynamic Imports-ի Համեմատ Static Imports-ի Հետ
+   
+   | **Հատկանիշ**            | **Static Imports**                  | **Dynamic Imports**                 |
+   |--------------------------|--------------------------------------|--------------------------------------|
+   | **Բեռնում**              | Նախապես բեռնվում է                 | Բեռնվում է runtime-ի ժամանակ         |
+   | **Կատարողականություն**   | Նախնական բեռնումի ծավալն ավելի մեծ է| Նվազեցնում է նախնական բեռնումի ծավալը |
+   | **Օգտագործում**          | Ստատիկ, պարզ կառուցվածքի համար     | Ասինխրոն, դինամիկ բեռնումի համար     |
+   | **Սինտաքս**              | `import ... from`                   | `import()`                          |
+
+
+  ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+94. ### Ինչ է JavaScript-ում Proxy Pattern-ը?
+
+   **Proxy Pattern**-ը JavaScript-ում դիզայնի նախշ է (design pattern), որն ապահովում է միջնորդական օբյեկտի ստեղծում՝ սկզբնական օբյեկտի վրա գործողությունների վերահսկման համար։ Proxy-ն թույլ է տալիս վերահսկել կամ ձևափոխել օբյեկտի հատկություններին և մեթոդներին մուտքը՝ առանց փոփոխելու սկզբնական օբյեկտը։
+   
+   JavaScript-ում Proxy-ն իրականացվում է `Proxy` կոնստրուկտորի միջոցով, որը թույլ է տալիս թիրախ օբյեկտի համար սահմանել "trap"-ներ՝ վերահսկելով տարբեր գործողություններ։
+   
+---
+   
+   #### Ինչպես է աշխատում Proxy Pattern-ը
+   
+   Proxy-ն աշխատում է հետևյալ բաղադրիչների միջոցով՝
+   
+   1. **Target (Թիրախ Օբյեկտ):**
+      - Սկզբնական օբյեկտը, որի վրա կկիրառվեն Proxy-ի կանոնները։
+   
+   2. **Handler (Հանձնարարիչ):**
+      - Օբյեկտ, որը պարունակում է "trap"-ներ՝ ֆունկցիաներ, որոնք սահմանում են Proxy-ի վարքագիծը։
+   
+   3. **Trap (Թակարդներ):**
+      - Հատուկ մեթոդներ, որոնք թույլ են տալիս վերահսկել օբյեկտի հատկությունների մուտքը, փոփոխությունը, հեռացումը և այլ գործողություններ։
+   
+---
+   
+   #### Սինտաքս
+   
+   ```javascript
+   const proxy = new Proxy(target, handler);
+   ```
+   
+   - **`target`**: Թիրախ օբյեկտը, որը Proxy-ն վերահսկում է։
+   - **`handler`**: Օբյեկտ, որը պարունակում է trap-ներ։
+   
+---
+   
+   #### Օրինակներ
+   
+   #### 1. Հիմնական Օրինակ
+   
+   ```javascript
+   const target = {
+     message: 'Hello, World!'
+   };
+   
+   const handler = {
+     get(target, property) {
+       return property in target
+         ? target[property]
+         : `Property ${property} does not exist.`;
+     }
+   };
+   
+   const proxy = new Proxy(target, handler);
+   
+   console.log(proxy.message); // "Hello, World!"
+   console.log(proxy.nonExistent); // "Property nonExistent does not exist."
+   ```
+   
+---
+   
+   #### 2. Հատկությունների Փոփոխության Վերահսկում
+   
+   ```javascript
+   const target = {
+     age: 25
+   };
+   
+   const handler = {
+     set(target, property, value) {
+       if (property === 'age' && typeof value !== 'number') {
+         throw new TypeError('Age must be a number');
+       }
+       target[property] = value;
+       return true;
+     }
+   };
+   
+   const proxy = new Proxy(target, handler);
+   
+   proxy.age = 30; // OK
+   console.log(proxy.age); // 30
+   
+   proxy.age = 'thirty'; // Throws TypeError: Age must be a number
+   ```
+   
+---
+   
+   #### 3. Ֆունկցիաների Վերահսկում
+   
+   ```javascript
+   const target = function (name) {
+     return `Hello, ${name}!`;
+   };
+   
+   const handler = {
+     apply(target, thisArg, args) {
+       return target(...args).toUpperCase();
+     }
+   };
+   
+   const proxy = new Proxy(target, handler);
+   
+   console.log(proxy('Alice')); // "HELLO, ALICE!"
+   ```
+   
+---
+   
+   #### Proxy-ի Օգտագործման Դեպքեր
+   
+   1. **Հատկությունների Վավերացում:**
+      - Վերահսկել օբյեկտի հատկությունների արժեքները կամ դրանք սահմանելու կանոնները։
+   
+   2. **Լոգավորում:**
+      - Լոգ գրել ցանկացած գործողության՝ օբյեկտի վրա։
+   
+   3. **Հատկությունների Մուտք Բացել Կամ Փակել:**
+      - Սահմանափակել մուտքը որոշակի հատկությունների վրա։
+   
+   4. **API-ների Կառավարում:**
+      - Կիրառել Proxy՝ API հարցումների վերահսկման համար։
+   
+---
+   
+   #### Proxy-ի Հիմնական Trap-ներ
+   
+   | **Trap**         | **Նկարագրություն**                                                       |
+   |------------------|-------------------------------------------------------------------------|
+   | `get`           | Կիրառվում է հատկությունների արժեքները ստանալու համար։                      |
+   | `set`           | Կիրառվում է հատկությունների արժեքները սահմանելու համար։                   |
+   | `apply`         | Կիրառվում է ֆունկցիաների կանչման ժամանակ։                                |
+   | `construct`     | Կիրառվում է `new` օպերատորի կանչման ժամանակ։                            |
+   | `deleteProperty`| Կիրառվում է հատկությունները հեռացնելու համար։                              |
+   | `has`           | Կիրառվում է `in` օպերատորի ժամանակ։                                     |
+   
+---
+   
+   #### Առավելություններ
+   
+   1. **Ֆլեքսիբիլություն:**
+      - Թույլ է տալիս օբյեկտի վարքագիծը ձևափոխել առանց սկզբնական օբյեկտը փոփոխելու։
+   
+   2. **Վավերացում և Լոգավորում:**
+      - Վերահսկում է հատկությունների մուտքն ու փոփոխությունները։
+   
+   3. **Custom API-ներ:**
+      - Կարող եք ստեղծել հարմարեցված միջնորդ համակարգեր։
+   
+---
+   
+   #### Թերություններ
+   
+   1. **Կատարողականություն:**
+      - Proxy-ի օգտագործումը կարող է լինել ավելի դանդաղ, քան ուղղակի օբյեկտի մուտքը։
+   
+   2. **Կոդի Բարդացում:**
+      - Կոդը կարող է դառնալ բարդ, եթե Proxy-ները չարաշահվում են։
+
+
+  ---
+
+**[⬆ Back to Top](#բովանդակություն)**
+
+   ---
+
+95. ### Ինչ է JavaScript-ում Function Overloading-ը?
+
+   
+   **Function Overloading**-ը ծրագրավորման լեզուներում նշանակում է, որ նույն անունով ֆունկցիաներ կարող են ունենալ տարբեր պարամետրեր։ Սա թույլ է տալիս մեկ անուն օգտագործել տարբեր գործողությունների համար՝ կախված պարամետրերի քանակից կամ տիպերից։
+   
+   JavaScript-ը չի աջակցում ֆունկցիաների ստատիկ overloading-ին, ինչպես օրինակ՝ C++ կամ Java-ում։ Այնուամենայնիվ, JavaScript-ում հնարավոր է իրականացնել function overloading դինամիկ մեթոդներով՝ օգտագործելով լոգիկա `arguments` օբյեկտի, կամ նախնական արժեքների (`default parameters`) միջոցով։
+   
+---
+   
+   #### Ինչպես Իրականացնել Function Overloading-ը JavaScript-ում
+   
+   #### 1. Օգտագործելով `arguments` Օբյեկտը
+   `arguments` օբյեկտը պարունակում է ֆունկցիային փոխանցված բոլոր փաստարկները։ Այս մեթոդը թույլ է տալիս ստուգել փաստարկների քանակը և դրանց վրա հիմնվելով՝ իրականացնել տարբեր գործողություններ։
+   
+   ```javascript
+   function greet() {
+     if (arguments.length === 1) {
+       console.log(`Hello, ${arguments[0]}!`);
+     } else if (arguments.length === 2) {
+       console.log(`Hello, ${arguments[0]} and ${arguments[1]}!`);
+     } else {
+       console.log('Hello, everyone!');
+     }
+   }
+   
+   greet('Alice'); // "Hello, Alice!"
+   greet('Alice', 'Bob'); // "Hello, Alice and Bob!"
+   greet(); // "Hello, everyone!"
+   ```
+   
+   #### 2. Օգտագործելով Պարամետրերի Նախնական Արժեքներ
+   JavaScript-ում կարող եք սահմանել պարամետրերի նախնական արժեքներ, որոնք թույլ են տալիս ֆունկցիաների պարզ overloading։
+   
+   ```javascript
+   function calculateArea(width, height = width) {
+     return width * height;
+   }
+   
+   console.log(calculateArea(5)); // 25 (քառակուսի)
+   console.log(calculateArea(5, 10)); // 50 (ուղղանկյուն)
+   ```
+   
+   #### 3. Օգտագործելով Օբյեկտներ որպես Պարամետրեր
+   Ֆունկցիայի բեռնվածության կազմակերպման մեկ այլ մեթոդ է՝ օբյեկտի փոխանցումը, որը կարող է պարունակել տարբեր հատկություններ։
+   
+   ```javascript
+   function createUser(options) {
+     const { name, age, role = 'user' } = options;
+     console.log(`Name: ${name}, Age: ${age}, Role: ${role}`);
+   }
+   
+   createUser({ name: 'Alice', age: 25 });
+   createUser({ name: 'Bob', age: 30, role: 'admin' });
+   ```
+   
+   #### 4. Օգտագործելով Ֆունկցիայի Մեթոդներ
+   Այս մեթոդը ներառում է ֆունկցիայի տարբեր մեթոդների օգտագործումը՝ որպես overloading-ի տարբերակ։
+   
+   ```javascript
+   function greet() {}
+   
+   // Հիմնական greet մեթոդ
+   greet.basic = function () {
+     console.log('Hello!');
+   };
+   
+   // greet՝ անունով
+   greet.withName = function (name) {
+     console.log(`Hello, ${name}!`);
+   };
+   
+   greet.basic(); // "Hello!"
+   greet.withName('Alice'); // "Hello, Alice!"
+   ```
+   
+---
+   
+   #### Function Overloading-ի Հատկություններ JavaScript-ում
+   
+   1. **Դինամիկ Բնույթ:**
+      - Function Overloading-ը իրականացվում է runtime-ի ժամանակ՝ օգտագործելով լոգիկական ստուգումներ։
+   
+   2. **Բազմակողմանի Օգտագործում:**
+      - Թույլ է տալիս նույն անունով ֆունկցիան իրականացնել տարբեր պարամետրերի համար։
+   
+   3. **Կոդի Կազմակերպվածություն:**
+      - Կրճատում է ֆունկցիաների անվանումների բազմազանությունը, ինչը նպաստում է կոդի ընթեռնելիությանը։
+   
+---
+   
+   #### Թերություններ
+   
+   1. **Բարդություն:**
+      - Եթե ֆունկցիան բարդ լոգիկա ունի, overloading-ը կարող է ավելացնել կոդի բարդությունը։
+   
+   2. **Կատարողականություն:**
+      - Overloading-ի ավելորդ ստուգումները կարող են դանդաղեցնել ֆունկցիայի կատարումը մեծածավալ ծրագրերում։
+
+
+  ---
 
 **[⬆ Back to Top](#բովանդակություն)**
 
